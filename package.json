@@ -15,11 +15,18 @@
     "prepare": "husky install"
   },
   "lint-staged": {
+    "*.{js,ts,vue}": "eslint --cache",
+    "*.{css,scss,sass,html,vue}": "stylelint",
+    "*.**": "prettier --check --ignore-unknown",
     "*.{css,scss,stylus,sass,html,vue}": "stylelint"
   },
   "dependencies": {
+    "@nuxtjs/style-resources": "^1.2.1",
+    "@nuxtjs/svg-sprite": "^0.5.2",
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
+    "stylus": "0.54.8",
+    "stylus-loader": "3.0.2",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10"
@@ -32,7 +39,6 @@
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^11.0.0",
     "@nuxtjs/eslint-module": "^3.1.0",
-    "@nuxtjs/style-resources": "^1.2.1",
     "@nuxtjs/stylelint-module": "^4.1.0",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
