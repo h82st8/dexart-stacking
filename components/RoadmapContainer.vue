@@ -1,0 +1,229 @@
+<template>
+  <div class="roadmapContainer">
+    <img class="roadmapContainer__starsBg" :src="require('assets/images/stars-roadmap-bg.png')">
+    <div class="roadmapContainer__titleBox">
+      <h3 class="roadmapContainer__titlePrimary">Roadmap</h3>
+      <h3 class="roadmapContainer__titleSecond">DEXART</h3>
+    </div>
+    <div class="roadmapContainer__arrowsBox">
+      <div class="roadmapContainer__arrowWrapper" @click="leftArrowClick">
+        <img class="aboutStaking__arrow" :src="require('assets/images/arrow-left-icon.png')">
+      </div>
+      <div class="roadmapContainer__arrowWrapper" @click="rightArrowClick">
+        <img class="aboutStaking__arrow" :src="require('assets/images/arrow-right-icon.png')">
+      </div>
+    </div>
+    <div class="roadmapContainer__sliderBox">
+      <div class="roadmapContainer__line">
+      </div>
+      <div class="wrapper">
+        <div class="roadmapContainer__itemsBox" :style="roadmapItemsBox">
+          <div
+            v-for="item in roadmap"
+            :key="item.id"
+            class="roadmapContainer__item"
+          >
+            <svg-icon
+              class="roadmapContainer__icon"
+              name="active-icon"
+            />
+            <div class="roadmapContainer__textBox">
+              <div class="roadmapContainer__textBoxTitle">{{ item.title }}</div>
+              <ul v-for="(elem, i) in item.textList" :key="i" class="roadmapContainer__textBoxList">
+                <li class="roadmapContainer__listItem">{{ elem }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import {  computed, ref, reactive, } from 'vue';
+
+export default ({
+  name: 'RoadmapContainer',
+  setup() {
+  const roadmap = [
+      {
+        id: 1,
+        title: 'Q4 2022',
+        textList: [
+          'Cтарт продаж токена',
+          'Запуск стейкинга',
+        ],
+      },
+      {
+        id: 2,
+        title: 'Q1 2023',
+        textList: [
+          'Старт продаж лутбоксов',
+          'Запуск квестов на карте мира DEXART',
+          'Запуск игры DEX Farm - plant&earn',
+          'Запуск маркетплейса',
+        ],
+      },
+      {
+        id: 3,
+        title: 'Q2 2023',
+        textList: [
+          'Запуск игровых механик в районе GAMBLING – казино DEXART',
+          'Запуск функционала по аренде участков и пространств',
+        ],
+      },
+      {
+        id: 4,
+        title: 'Q3 2023',
+        textList: [
+          'Выплаты авторских вознаграждений',
+          'Проведение ивентов в мире',
+          'Размещение рекламы в мире',
+        ],
+      },
+      {
+        id: 5,
+        title: '2023-2024',
+        textList: [
+          'Открытие 3d мира DexArt',
+        ],
+      },
+    ];
+
+    const formData = reactive({
+      countRight: roadmap.length,
+      countLeft: 0,
+    });
+
+    const roadmapItemsBox = ref<any>();
+
+    const rightArrowClick = () => {
+      if (formData.countRight - 3 !== 0) {
+        roadmapItemsBox.value = computed(() => {
+            return {
+              'transform': `translate(${-450*(roadmap.length - formData.countRight)}px)`,
+            };
+        })
+        --formData.countRight;
+        formData.countLeft++;
+      }
+    };
+
+    const leftArrowClick = () => {
+      if (formData.countLeft !== 0) {
+        roadmapItemsBox.value = computed(() => {
+            return {
+              'transform': `translate(${-450*(1 + (roadmap.length - formData.countRight))+450}px)`,
+            };
+        })
+        formData.countLeft--;
+        formData.countRight++;
+      }
+    }
+
+    return {
+      roadmap,
+      roadmapItemsBox,
+      rightArrowClick,
+      leftArrowClick,
+    };
+  },
+});
+</script>
+
+<style lang="stylus" scoped>
+.roadmapContainer {
+  background: linear-gradient(180deg, #370863 0%, #000000 100%);
+  padding: 64px 0 50px 253px;
+  overflow: hidden;
+  position: relative;
+  &__starsBg {
+    position: absolute;
+    top: 53px;
+    left: 0;
+  }
+  &__titleBox {
+    margin-bottom: 32px;
+  }
+  &__titlePrimary {
+    background: linear-gradient(89.99deg, #BF81FF 1.88%, #D17558 18.37%, #F84FE7 77.86%);;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  &__titleSecond {
+    color: $colorBrand;
+  }
+  &__arrowsBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 104px;
+  }
+  &__arrowWrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    cursor: pointer;
+    &:hover {
+      background: $colorGradientForButton;
+    }
+    &:active .aboutStaking__arrow,
+    &:active {
+      width: 42px;
+      height: 42px;
+    }
+  }
+  &__sliderBox {
+    margin-top: 121px;
+  }
+  &__line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: radial-gradient(50% 50% at 50% 50%, #EE40FF 0%, rgba(238, 64, 255, 0) 100%);
+  }
+  &__itemsBox {
+    display: flex;
+    position: relative;
+    left: -253px;
+    transition: transform .7s;
+  }
+  &__item {
+    width: 450px;
+    min-width: 450px;
+    transform: translate(253px);
+    position: relative;
+    top: -46px;
+  }
+  &__icon {
+    width 96px;
+    height 96px;
+    position: relative;
+    left: -32px;
+  }
+  &__textBoxTitle {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    color: $colorBrand;
+    margin-bottom: 16px;
+  }
+  &__listItem {
+    position: relative;
+    padding-left: 20px;
+    &::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 10px;
+      position: absolute;
+      left: 0;
+      top: 6px;
+      background: $colorFontBase;
+    }
+    margin-top: 5px;
+  }
+}
+</style>

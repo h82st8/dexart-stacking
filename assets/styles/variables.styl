@@ -1,0 +1,274 @@
+$colorFontBase = #D7B2FF;
+$colorBase = #fff;
+$colorPurple = #BF81FF;
+$colorViolet = #57198A;
+$colorGrey = #CED4DA;
+$colorSearchFont = #6C757D;
+$colorLink = #2B67F6;
+$colorWarning = #F2D01C;
+$colorGrey2 = #E8EEFB;
+$colorDanger = #F86132;
+$colorFilterSwitcherActive = #56D88B;
+$colorGradient = linear-gradient(96.43deg, #ED3FFE 30.37%, #7D1ED4 94.57%);
+$colorTitle = linear-gradient(89.99deg, #BF81FF 1.88%, #D17558 51.37%, #F84FE7 97.86%);
+$colorBackground = linear-gradient(180deg, #130B1A 0%, #140C1B 100%);
+$colorBackgroundFade = linear-gradient(180deg, #19082B 1.55%, rgba(49, 22, 77, 0) 56.46%);
+$colorSecondTitle = #F3E7FF;
+$colorBrand = #FAF5FF;
+$colorBgPackage = linear-gradient(156deg, #7C1DD3 13%, #250C3D 88.07%);
+$colorGradientForButton = linear-gradient(90deg, #7C1DD3 2.02%, #912EEF 49.93%, #EE40FF 96.86%);
+$colorGradientForHoverButton = linear-gradient(90deg, #7C1DD3 2.02%, #BB73FF 49.93%, #EE40FF 96.86%);
+$colorForShadow = #ECE7FA;
+
+$mediaSizes = {
+  phoneS: 375px,
+  phone: 428px,
+  tablet: 768px,
+  desktopS: 1024px,
+  desktopM: 1165px,
+  desktop: 1280px,
+  large: 1440px,
+  extraLarge: 1920px,
+};
+
+$headerHeight = 64px;
+
+* {
+  color: $colorFontBase
+}
+
+commonLink() {
+  text-decoration: underline;
+  color: $colorLink;
+}
+
+hidden() {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+
+.filterCheckbox__checkboxIcon, .modal-nearpay-close-icon, .demoModal__close, .referral-role__img-decoration {
+  color: unset
+  &>use {
+    color: unset
+  }
+}
+
+getMedia(fromSize, toSize = false) {
+  if (toSize) {
+    @media (min-width: fromSize) and (max-width: toSize) {
+      {block};
+    }
+  } else {
+    @media (min-width: fromSize) {
+      {block};
+    }
+  }
+}
+
+mediaPhone() {
+  +getMedia($mediaSizes.phone) {
+    {block};
+  }
+}
+
+mediaPhoneS() {
+  +getMedia($mediaSizes.phoneS) {
+    {block};
+  }
+}
+
+mediaTablet() {
+  +getMedia($mediaSizes.tablet) {
+    {block};
+  }
+}
+
+mediaDesktopS() {
+  +getMedia($mediaSizes.desktopS) {
+    {block};
+  }
+}
+
+mediaDesktopM() {
+  +getMedia($mediaSizes.desktopM) {
+    {block};
+  }
+}
+
+mediaDesktop() {
+  +getMedia($mediaSizes.desktop) {
+    {block};
+  }
+}
+
+mediaLarge() {
+  +getMedia($mediaSizes.large) {
+    {block};
+  }
+}
+
+mediaExtraLarge() {
+  +getMedia($mediaSizes.extraLarge) {
+    {block};
+  }
+}
+
+$fontSizes = {
+  mobileXl: {
+    h1: {
+      fontSize: 36px,
+      lineHeight: 44px
+    },
+    navMenuItem: {
+      fontSize: 32px,
+      lineHeight: 40px
+    },
+    buyBtn: {
+      fontSize: 24px,
+      lineHeight: 30px
+    },
+    faqQuestion: {
+      fontSize: 24px,
+      lineHeight: 30px
+    },
+    headerbtn: {
+      fontSize: 18px,
+      lineHeight: 22px
+    },
+    filterCheckbox: {
+      fontSize: 16px,
+      lineHeight: 24px
+    },
+    mediumText: {
+      fontSize: 16px,
+      lineHeight: 20px
+    },
+    faqAnswer: {
+      fontSize: 16px,
+      lineHeight: 24px
+    },
+    headerBtnLink: {
+      fontSize: 14px,
+      lineHeight: 18px
+    },
+    searchInput: {
+      fontSize: 12px,
+      lineHeight: 14px
+    },
+    audioPlayerLang: {
+      fontSize: 10px,
+      lineHeight: 12px
+    },
+  },
+  mobile: {
+    h1: {
+      fontSize: 24px,
+      lineHeight: 30px
+    },
+    navMenuItem: {
+      fontSize: 32px,
+      lineHeight: 40px
+    },
+    buyBtn: {
+      fontSize: 24px,
+      lineHeight: 30px
+    },
+    faqQuestion: {
+      fontSize: 20px,
+      lineHeight: 24px
+    },
+    headerbtn: {
+      fontSize: 18px,
+      lineHeight: 22px
+    },
+    filterCheckbox: {
+      fontSize: 16px,
+      lineHeight: 24px
+    },
+    mediumText: {
+      fontSize: 16px,
+      lineHeight: 20px
+    },
+    faqAnswer: {
+      fontSize: 14px,
+      lineHeight: 20px
+    },
+    headerBtnLink: {
+      fontSize: 14px,
+      lineHeight: 18px
+    },
+    searchInput: {
+      fontSize: 12px,
+      lineHeight: 14px
+    },
+    audioPlayerLang: {
+      fontSize: 10px,
+      lineHeight: 12px
+    },
+  }
+};
+
+getFont(name = 'text') {
+  font-size: $fontSizes.mobile[name].fontSize;
+  line-height: $fontSizes.mobile[name].lineHeight;
+
+  +mediaPhone() {
+    font-size: $fontSizes.mobileXl[name].fontSize;
+    line-height: $fontSizes.mobileXl[name].lineHeight;
+  }
+}
+
+getFontH1() {
+  getFont('h1');
+}
+
+getFontBuyBtn() {
+  getFont('buyBtn');
+}
+
+getFontHeaderBtn() {
+  getFont('headerbtn');
+  color: $colorFontBase;
+}
+
+getFontHeaderBtnLink() {
+  getFont('headerBtnLink');
+}
+
+getFontSearchInput() {
+  getFont('searchInput');
+}
+
+getFontFilterCheckbox() {
+  getFont('filterCheckbox');
+}
+
+getFontMediumText() {
+  getFont('mediumText');
+}
+
+getFontNavMenuItem() {
+  getFont('navMenuItem');
+}
+
+getFontFaqQuestion() {
+  getFont('faqQuestion');
+}
+
+getFontFaqAnswer() {
+  getFont('faqAnswer');
+}
+
+getFontAudioPlayerLang() {
+  getFont('audioPlayerLang');
+}

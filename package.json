@@ -20,8 +20,12 @@
     "*.**": "prettier --check --ignore-unknown"
   },
   "dependencies": {
+    "@nuxtjs/style-resources": "^1.2.1",
+    "@nuxtjs/svg-sprite": "^0.5.2",
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
+    "stylus": "0.54.8",
+    "stylus-loader": "3.0.2",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10"
