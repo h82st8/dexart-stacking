@@ -1,6 +1,8 @@
 <template>
   <div :class="['pointsContainer', {pointsContainerInIndex: isIndexPage}]">
+    <div :class="{wrap: isStackingPage}"></div>
     <img v-if="isIndexPage" class="pointsContainer__coinBottom" :src="require('assets/images/coin-bottom-icon.png')">
+    <img v-if="isStackingPage" class="pointsContainer__coinBottomStacking" :src="require('assets/images/coin-bottom-stacking-icon.png')">
     <div class="buyDxaContainer">
       <div class="buyDxaContainer__titleBox">
         <h1 class="buyDxaContainer__title">
@@ -50,6 +52,10 @@ export default ({
   components: { CommonButton },
   props: {
     isIndexPage: {
+      type: Boolean,
+      required: false,
+    },
+    isStackingPage: {
       type: Boolean,
       required: false,
     },
@@ -125,12 +131,22 @@ export default ({
 </script>
 
 <style lang="stylus" scoped>
+.wrap {
+  position: absolute;
+  background: $colorBackground;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
 .pointsContainerInIndex {
   height: 765px;
   z-index: 1000;
 }
 .pointsContainer {
   width: 100%;
+  height: 765px;
   position: relative;
   overflow hidden;
   background: $colorBackgroundFade;
@@ -139,6 +155,11 @@ export default ({
     top: 0;
     left: 50%;
     margin-left: -225px;
+  }
+  &__coinBottomStacking {
+    position: absolute;
+    top: 0;
+    left: 36px;
   }
 }
 
@@ -153,6 +174,7 @@ export default ({
     align-items: center;
     width: 100%;
     margin-bottom: 50px;
+    z-index: 1;
   }
   &__selectedText {
     background: $colorTitle;
@@ -179,6 +201,7 @@ export default ({
     position: absolute;
     right: 0;
     top: calc(100% + 50px);
+    z-index: 2;
   }
   &__coinIcon1 {
     position: absolute;
@@ -194,7 +217,6 @@ export default ({
     position: absolute;
     top: -14px;
     left: -122px;
-    z-index: -1;
   }
   &__gradientBg {
     position: absolute;
@@ -219,6 +241,7 @@ export default ({
     &:not(:last-child) {
       margin-right: 20px;
     }
+    z-index: 1;
   }
   &__dxaPrice {
     font-weight: 700;

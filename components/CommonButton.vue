@@ -1,5 +1,5 @@
 <template>
-  <button class="primaryButton" @click="click">
+  <button :class="['primaryButton', {'disabledButton': isDisabled}]" @click="click">
     <span class="primaryButton__content">
       <slot />
     </span>
@@ -11,10 +11,18 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'CommonButtonPrimary',
+  props: {
+    isDisabled: {
+      type: Boolean,
+      required: false,
+    },
+  },
   emits: ['click'],
   methods: {
     click(e: any) {
-      this.$emit('click', e);
+      if (!this.isDisabled) {
+        this.$emit('click', e);
+      }
     },
   },
 });
@@ -35,6 +43,18 @@ export default defineComponent({
   &:hover {
     opacity: 1;
     background: $colorGradientForHoverButton;
+  }
+}
+.disabledButton {
+  box-shadow: none;
+  background: transparent;
+  border: 1px solid #E9D4FF;
+  color: #E9D4FF;
+  opacity: .2;
+  &:hover {
+    cursor: default;
+    opacity: .2;
+    background: transparent;
   }
 }
 </style>
