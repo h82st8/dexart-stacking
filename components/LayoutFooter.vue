@@ -9,7 +9,7 @@
       </div>
       <div class="footerContainer__socialLinksBoxInfo">Dexart (c) 2022</div>
       <div class="footerContainer__socialLinks">
-        <a v-for="item in [1, 2, 3, 4, 5, 6]" href="#" :key="item" class="footerContainer__socialLinkItem">
+        <a v-for="item in [1, 2, 3, 4, 5, 6]" :key="item" href="#" class="footerContainer__socialLinkItem">
           <svg-icon
             class="footerContainer__icon"
             :name="`social-icon-${item}`"
