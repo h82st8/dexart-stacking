@@ -145,26 +145,31 @@ export default ({
   }
   &__titleBox {
     margin-bottom: 32px;
+    z-index: 1;
   }
   &__titlePrimary {
     background: linear-gradient(89.99deg, #BF81FF 1.88%, #D17558 18.37%, #F84FE7 77.86%);;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    z-index: 1;
   }
   &__titleSecond {
     color: $colorBrand;
+    z-index: 1;
   }
   &__arrowsBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 104px;
+    z-index: 100;
   }
   &__arrowWrapper {
     width: 48px;
     height: 48px;
     border-radius: 8px;
     cursor: pointer;
+    z-index: 1;
     &:hover {
       background: $colorGradientForButton;
     }
@@ -176,6 +181,7 @@ export default ({
   }
   &__sliderBox {
     margin-top: 121px;
+    z-index: 1;
   }
   &__line {
     position: absolute;
