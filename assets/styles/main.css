@@ -34,7 +34,6 @@
 }
 
 a {
-  color: #000;
   text-decoration: none;
 }
 
@@ -48,6 +47,7 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  user-select: none;
 }
 
 @media (min-width: 768px) {
@@ -83,6 +83,10 @@ h3 {
 
 p {
   margin: 0;
+}
+
+img {
+  pointer-events: none;
 }
 
 .faqItem__answer_opened a {

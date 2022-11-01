@@ -169,6 +169,7 @@ export default ({
     height: 48px;
     border-radius: 8px;
     cursor: pointer;
+    user-select: none;
     z-index: 1;
     &:hover {
       background: $colorGradientForButton;

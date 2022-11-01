@@ -331,6 +331,7 @@ export default ({
     border: 1px solid rgba(250, 245, 255, 0.2);
     border-radius: 32px;
     cursor: pointer;
+    user-select: none;
     &:hover {
       background: $colorGradientForButton;
     }
@@ -415,6 +416,7 @@ export default ({
     border: 2px solid #BF81FF;
     border-radius: 10px;
     cursor: pointer;
+    user-select: none;
     &:after {
       content: '';
       width: 15px;
@@ -487,6 +489,7 @@ export default ({
     border: 1px solid $colorPurple;
     border-radius: 32px;
     cursor: pointer;
+    user-select: none;
     &:hover {
       background: linear-gradient(180deg, rgba(238, 64, 255, 0.2) 0%, rgba(145, 46, 239, 0.2) 50.52%, rgba(124, 29, 211, 0.2) 100%);
     }

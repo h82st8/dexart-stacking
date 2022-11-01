@@ -34,13 +34,15 @@
   }
   &__buttonBox {
     margin-left: 105px;
-    cursor: pointer;
-    &:hover .headerContainer__buttonWallet{
-      display: none;
-    }
-    &:hover .headerContainer__buttonWalletHover {
-      display: block;
-    }
+    opacity: .6;
+    // cursor: pointer;
+    user-select: none;
+    // &:hover .headerContainer__buttonWallet{
+    //   display: none;
+    // }
+    // &:hover .headerContainer__buttonWalletHover {
+    //   display: block;
+    // }
   }
 }
 </style>

@@ -50,8 +50,8 @@
               <span :class="['yourChoice__stackingInfoNoneChoice', {yourChoice__stackingInfoChoice: packet.priceInDollar}]">{{ `$${dividingIntoDigits(packet.priceInDollar)}` }}</span>
             </div>
             <div class="">
-              <span class="yourChoice__stackingInfoTitle">Бонусов:</span>
-              <span :class="['yourChoice__stackingInfoNoneChoice', {yourChoice__stackingInfoChoice: packet.bonuses}]">{{ `+${dividingIntoDigits(packet.bonuses)} DXA` }}</span>
+              <span class="yourChoice__stackingInfoTitle yourChoice__bonusesTitle">Бонусов:</span>
+              <span :class="['yourChoice__stackingInfoNoneChoice', 'yourChoice__bonuses', {yourChoice__stackingInfoChoice: packet.bonuses}]">{{ `+${dividingIntoDigits(packet.bonuses)} DXA` }}</span>
             </div>
           </div>
           <CommonButton class="buyDxaContainer__button" :is-disabled="!packet.priceInDollar" @click="$emit('openBuyTokensModal')">Купить</CommonButton>
@@ -261,6 +261,7 @@ export default ({
     width: 22px;
     height: 22px;
     cursor: pointer;
+    user-select: none;
 
     &:hover .packagesBox__minusHover,
     &:hover .packagesBox__plusHover, {
@@ -283,11 +284,13 @@ export default ({
 
 .yourChoice {
   margin-top: 50px;
+  z-index: 2;
   &__titleBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 26px;
+    z-index: 2;
   }
   &__title {
     font-style: normal;
@@ -307,6 +310,7 @@ export default ({
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 2;
   }
   &__stackingInfo {
     display: grid;
@@ -326,6 +330,10 @@ export default ({
   }
   &__stackingInfoChoice {
     opacity: 1;
+  }
+  &__bonusesTitle,
+  &__bonuses {
+    color: $colorPurple;
   }
 }
 .inactiveMinus {

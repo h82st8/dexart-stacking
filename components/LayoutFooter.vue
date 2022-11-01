@@ -9,10 +9,10 @@
       </div>
       <div class="footerContainer__socialLinksBoxInfo">Dexart (c) 2022</div>
       <div class="footerContainer__socialLinks">
-        <a v-for="item in [1, 2, 3, 4, 5, 6]" :key="item" href="#" class="footerContainer__socialLinkItem">
+        <a v-for="(item, i) in socials" :key="i" :href="item || '#'" target="_blank" class="footerContainer__socialLinkItem">
           <svg-icon
             class="footerContainer__icon"
-            :name="`social-icon-${item}`"
+            :name="`social-icon-${i + 1}`"
           />
           <div class="footerContainer__socialLinksWrapper"></div>
         </a>
@@ -22,7 +22,7 @@
       <h4 class="footerContainer__title">Info</h4>
       <div class="footerContainer__itemsBox">
         <div v-for="(item, i) in info" :key="i" class="footerContainer__item">
-          <a :href="item.href" class="footerContainer__itemLink">{{ item.title }}</a>
+          <a :href="item.href" target="_blank" class="footerContainer__itemLink" rel="noopener">{{ item.title }}</a>
         </div>
       </div>
     </div>
@@ -49,18 +49,26 @@
 export default ({
   name: 'FooterContainer',
   setup() {
+    const socials = [
+      'https://instagram.com/dexartmetaverse',
+      'https://twitter.com/dexartmetaverse',
+      'https://www.youtube.com/channel/UC13PPy2YX2d6rIbjkdveP7g/',
+      'https://t.me/dexartchannelru',
+      'https://medium.com/@dexartmetaverse',
+      'https://www.reddit.com/r/dexart/',
+    ]
     const info = [
       {
         title: 'Privacy Policy',
-        href: '',
+        href: '/docs/PrivacyPolicy_26.10.22.pdf',
       },
       {
         title: 'Cookies Policy',
-        href: '',
+        href: '/docs/CookiesPolicy.pdf',
       },
       {
         title: 'Term of service',
-        href: '',
+        href: '/docs/TermsAndConditions_26.10.22.pdf',
       },
       {
         title: 'Legal information',
@@ -98,6 +106,7 @@ export default ({
     return {
       info,
       sitemap,
+      socials,
     };
   },
 })

@@ -37,7 +37,7 @@
         <div class="buttonContainer__itemBoxWrapper">
           <input type="email" class="buttonContainer__itemBox" placeholder="Ваш email">
         </div>
-        <div class="qwe">
+        <div class="paymentMethodPicker">
           <div :class="['buttonContainer__itemBoxWrapper', {'buttonContainer__itemBoxWrapperOpenList': showDropdown}]">
             <div :class="['buttonContainer__itemBox', 'buttonContainer__paymentMethod', {'buttonContainer__paymentMethodOpenList': showDropdown}]" @click="showDropdown = !showDropdown">
               {{ chosenMethod ? chosenMethod : 'Выберите метод оплаты' }}
@@ -55,6 +55,22 @@
           </div>
           <div v-if="showDropdown" class="buttonContainer__choosePaymentMethod">
             <div v-for="(item, i) in paymentMethods" :key="i" class="buttonContainer__chosenMethod" @click="changeChosenMethod(item)">{{ item }}</div>
+          </div>
+        </div>
+        <div class="buttonContainer__accessTermsAndConditions">
+          <input
+            id="termAndConditionCheckbox"
+            v-model="acceptTermsAndConditions"
+            type="checkbox"
+            name="termAndCondition"
+            class="buttonContainer__checkbox"
+          >
+          <div style="position: relative">
+            <label for="termAndConditionCheckbox" class="buttonContainer__label">
+            </label>
+          </div>
+          <div class="buttonContainer__textBox">
+            <span class='buttonContainer__text'>I have read and agree to the</span> <a href="/docs/TermsAndConditions_26.10.22.pdf" target="_blank" class="buttonContainer__link">Terms & Conditions</a>
           </div>
         </div>
         <CommonButton style="width: 300px;">Купить</CommonButton>
@@ -88,6 +104,7 @@ export default {
   setup() {
     const showDropdown = ref<boolean>(false);
     const chosenMethod = ref<string>('');
+    const acceptTermsAndConditions = ref<boolean>(false);
 
     const paymentMethods = [
       'Банковской картой',
@@ -105,6 +122,7 @@ export default {
       showDropdown,
       chosenMethod,
       paymentMethods,
+      acceptTermsAndConditions,
       changeChosenMethod,
       dividingIntoDigits,
     };
@@ -113,11 +131,12 @@ export default {
 </script>
 
 <style lang="stylus">
-.qwe {
+.paymentMethodPicker {
   width: 300px;
   height: 63px;
   position: relative;
   margin-bottom: 11px;
+  z-index: 1;
 }
 .hr {
   width: 300px;
@@ -192,6 +211,7 @@ export default {
     width: 300px;
     height: 63px;
     margin-bottom: 11px;
+    z-index: 10;
     &::before {
       height: 63px;
       content: "";
@@ -238,6 +258,7 @@ export default {
   }
   &__paymentMethod {
     cursor: pointer;
+    user-select: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -267,17 +288,82 @@ export default {
   }
   &__chosenMethod {
     cursor: pointer;
+    user-select: none;
     width: 100%;
     height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10;
     &:hover {
       background: #57198A;
       color: $colorBrand;
     }
     &:nth-child(2) {
       border-radius: 0 0 32px 32px;
+    }
+  }
+  &__accessTermsAndConditions {
+    z-index: -1;
+    margin-bottom: 10px;
+  }
+  &__label {
+    position: absolute;
+    left: 17px;
+    top: 5px;
+    width: 23px;
+    height: 23px;
+    border: 2px solid #BF81FF;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    &:after {
+      content: '';
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      background: linear-gradient(90deg, #7C1DD3 2.02%, #912EEF 49.93%, #EE40FF 96.86%);
+      border-radius: 10px;
+      display: none;
+    }
+    &:hover {
+      &:after {
+        display: block;
+        opacity: .4;
+      }
+    }
+  }
+  &__checkbox {
+    display: none;
+    &:checked + div .buttonContainer__label {
+      &:after {
+        display: block;
+        opacity: 1;
+      }
+    }
+  }
+  &__textBox {
+    width: 205px;
+    position: relative;
+    left: calc(50% - 102.5px);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+  }
+  &__text {
+    color: $colorSecondTitle;
+    opacity: .6;
+  }
+  &__link {
+    text-decoration: underline;
+    color: $colorSecondTitle;
+    opacity: .6;
+    &:hover {
+      text-decoration: underline;
+      color: $colorSecondTitle;
+      opacity: .4;
     }
   }
 }
