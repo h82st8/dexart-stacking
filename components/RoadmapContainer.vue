@@ -194,7 +194,7 @@ export default ({
     display: flex;
     position: relative;
     left: -253px;
-    transition: transform .7s;
+    transition: transform .3s;
   }
   &__item {
     width: 450px;

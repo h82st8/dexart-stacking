@@ -17,15 +17,16 @@
       <div class="packagesBox">
         <div v-for="item in packages" :key="item.id" class="packagesBox__elem">
           <div class="packagesBox__dxaPrice">{{ dividingIntoDigits(item.dxaPrice) }} DXA</div>
+          <div class="packagesBox__bonuses">{{ item.bonuses ? `+ ${dividingIntoDigits(item.bonuses)} (${item.percent}%)` : '' }}</div>
           <div class="packagesBox__priceInDollar">${{ item.priceInDollar }}</div>
           <div class="packagesBox__countBox">
-            <div :class="[{'packagesBox__plusMinus': item.count, inactiveMinus: !item.count}]" @click="reduceCountPackages(item.id, item.count)">
+            <div :class="[{'packagesBox__plusMinus': item.count, inactiveMinus: !item.count}]" @click="$emit('reduceCountPackages', item.id, item.count)">
               <img class="packagesBox__minusDefault" :src="require('assets/images/minus-icon.png')">
               <img class="packagesBox__minusHover" :src="require('assets/images/minus-hover-icon.png')">
               <img class="packagesBox__minusPush" :src="require('assets/images/minus-push-icon.png')">
             </div>
             <div class="packagesBox__count">{{ item.count }}</div>
-            <div class="packagesBox__plusMinus" @click="increaseCountPackages(item.id)">
+            <div class="packagesBox__plusMinus" @click="$emit('increaseCountPackages', item.id)">
               <img class="packagesBox__plusDefault" :src="require('assets/images/plus-icon.png')">
               <img class="packagesBox__plusHover" :src="require('assets/images/plus-hover-icon.png')">
               <img class="packagesBox__plusPush" :src="require('assets/images/plus-push-icon.png')">
@@ -33,7 +34,29 @@
           </div>
         </div>
       </div>
-      <CommonButton class="buyDxaContainer__button">Купить</CommonButton>
+      <div class="yourChoice">
+        <div class="yourChoice__titleBox">
+          <h4 class="yourChoice__title">Ваш выбор:</h4>
+          <div class="yourChoice__line"></div>
+        </div>
+        <div class="yourChoice__mainBlock">
+          <div class="yourChoice__stackingInfo">
+            <div class="">
+              <span class="yourChoice__stackingInfoTitle">Всего токенов:</span>
+              <span :class="['yourChoice__stackingInfoNoneChoice', {yourChoice__stackingInfoChoice: packet.totalTokens}]">{{ `${dividingIntoDigits(packet.totalTokens)} DXA` }}</span>
+            </div>
+            <div class="">
+              <span class="yourChoice__stackingInfoTitle">Стоимость:</span>
+              <span :class="['yourChoice__stackingInfoNoneChoice', {yourChoice__stackingInfoChoice: packet.priceInDollar}]">{{ `$${dividingIntoDigits(packet.priceInDollar)}` }}</span>
+            </div>
+            <div class="">
+              <span class="yourChoice__stackingInfoTitle">Бонусов:</span>
+              <span :class="['yourChoice__stackingInfoNoneChoice', {yourChoice__stackingInfoChoice: packet.bonuses}]">{{ `+${dividingIntoDigits(packet.bonuses)} DXA` }}</span>
+            </div>
+          </div>
+          <CommonButton class="buyDxaContainer__button" :is-disabled="!packet.priceInDollar" @click="$emit('openBuyTokensModal')">Купить</CommonButton>
+        </div>
+      </div>
 
       <img class="buyDxaContainer__coinIcon1" :src="require('assets/images/coin-icon-1.png')">
       <img class="buyDxaContainer__coinIcon2" :src="require('assets/images/coin-icon-2.png')">
@@ -44,8 +67,11 @@
 </template>
 
 <script lang="ts">
-import { reactive, computed, } from 'vue';
+import {
+  PropType,
+} from 'vue';
 import CommonButton from './CommonButton.vue';
+import { packetInterface } from '@/interfaces/packagesTypes';
 
 export default ({
   name: "PackagesContainer",
@@ -59,72 +85,21 @@ export default ({
       type: Boolean,
       required: false,
     },
+    packages: {
+      type: Array as PropType<packetInterface[]>,
+      required: true,
+    },
+    packet: {
+      type: Object,
+      required: true,
+    },
   },
   setup() {
-    const formData = reactive({
-      packet1Count: 0,
-      packet2Count: 0,
-      packet3Count: 0,
-      packet4Count: 0,
-      packet5Count: 0,
-    });
-
-    const packages = computed(() => [
-      {
-        id: 1,
-        dxaPrice: 5000,
-        priceInDollar: 5,
-        count: formData.packet1Count,
-      },
-      {
-        id: 2,
-        dxaPrice: 50000,
-        priceInDollar: 50,
-        count: formData.packet2Count,
-      },
-      {
-        id: 3,
-        dxaPrice: 100000,
-        priceInDollar: 100,
-        count: formData.packet3Count,
-      },
-      {
-        id: 4,
-        dxaPrice: 500000,
-        priceInDollar: 500,
-        count: formData.packet4Count,
-      },
-      {
-        id: 5,
-        dxaPrice: 1000000,
-        priceInDollar: 1000,
-        count: formData.packet5Count,
-      },
-    ]);
-
-    const increaseCountPackages = (id: number) => {
-      if (id === 1) formData.packet1Count++;
-      if (id === 2) formData.packet2Count++;
-      if (id === 3) formData.packet3Count++;
-      if (id === 4) formData.packet4Count++;
-      if (id === 5) formData.packet5Count++;
-    }
-    const reduceCountPackages = (id: number, count: number) => {
-      if (id === 1 && count) formData.packet1Count--;
-      if (id === 2 && count) formData.packet2Count--;
-      if (id === 3 && count) formData.packet3Count--;
-      if (id === 4 && count) formData.packet4Count--;
-      if (id === 5 && count) formData.packet5Count--;
-    }
 
     const dividingIntoDigits = (count: number | string) => String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
 
     return {
-      packages,
       dividingIntoDigits,
-      formData,
-      increaseCountPackages,
-      reduceCountPackages,
     }
   },
 })
@@ -198,9 +173,6 @@ export default ({
     color: $colorSecondTitle;
   }
   &__button {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 50px);
     z-index: 2;
   }
   &__coinIcon1 {
@@ -231,6 +203,7 @@ export default ({
   z-index: 2;
   &__elem {
     width: 224px;
+    height: 221px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -242,6 +215,10 @@ export default ({
       margin-right: 20px;
     }
     z-index: 1;
+  }
+  &__bonuses {
+    margin-top: 2px;
+    opacity: .8;
   }
   &__dxaPrice {
     font-weight: 700;
@@ -301,6 +278,54 @@ export default ({
     &:active .packagesBox__plusPush, {
       display: block;
     }
+  }
+}
+
+.yourChoice {
+  margin-top: 50px;
+  &__titleBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 26px;
+  }
+  &__title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    margin: 0;
+    color: $colorBase;
+    opacity: .4;
+  }
+  &__line {
+    height: 1px;
+    opacity: 0.2;
+    background: $colorBase;
+    width: 88%;
+  }
+  &__mainBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__stackingInfo {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 5px 32px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+  }
+  &__stackingInfoTitle {
+    color: $colorBase;
+    opacity: .4;
+  }
+  &__stackingInfoNoneChoice {
+    color: $colorBase;
+    opacity: .4;
+  }
+  &__stackingInfoChoice {
+    opacity: 1;
   }
 }
 .inactiveMinus {
