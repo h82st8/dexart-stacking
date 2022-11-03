@@ -1,12 +1,24 @@
 import { isEmpty } from 'rambda'
-import { FULFILLED, INIT, PENDING, REJECTED } from '~/lib/constants'
+import {
+  FULFILLED,
+  INIT,
+  PENDING,
+  REJECTED,
+  STACKING_API_URL
+} from '~/lib/constants'
 
 const initState = {
   packetsOfDxaTokensData: [],
   packetsOfDxaTokensState: INIT,
 
   country: '',
-  countryState: INIT
+  countryState: INIT,
+
+  buyState: INIT
+}
+
+const openMerchant = (response) => {
+  window.location.assign(response.data.link)
 }
 
 export const state = () => ({
@@ -46,6 +58,10 @@ export const mutations = {
 
   SET_COUNTRY_STATE(state, value) {
     state.countryState = value
+  },
+
+  SET_BUY_STATE(state, value) {
+    state.buyState = value
   }
 }
 
@@ -55,65 +71,54 @@ export const actions = {
       return
     }
 
-    // TODO: hack
-    await this.$axios.$get('https://ipapi.co/json/')
     try {
       commit('SET_PACKETS_STATE', { state: PENDING })
 
-      // const response = await this.$axios.$get('/api/packages');
+      const response = await this.$axios.$get(
+        STACKING_API_URL + '/api/packages'
+      )
 
-      const response = {
-        data: {
-          data: [
-            {
-              id: 1,
-              price: 5,
-              amount: 5000,
-              bonus_rate: '0.0%',
-              bonus: 0
-            },
-            {
-              id: 2,
-              price: 50,
-              amount: 50000,
-              bonus_rate: '2.0%',
-              bonus: 1000
-            },
-            {
-              id: 3,
-              price: 100,
-              amount: 100000,
-              bonus_rate: '2.5%',
-              bonus: 2500
-            },
-            {
-              id: 4,
-              price: 500,
-              amount: 500000,
-              bonus_rate: '3.0%',
-              bonus: 15000
-            },
-            {
-              id: 5,
-              price: 1000,
-              amount: 1000000,
-              bonus_rate: '3.5%',
-              bonus: 35000
-            }
-          ]
-        }
-      }
-
-      if (response.data.data) {
+      if (response.data) {
         commit('SET_PACKETS_STATE', {
           state: FULFILLED,
-          data: response.data.data
+          data: response.data
         })
       } else {
         commit('SET_PACKETS_STATE', { state: REJECTED })
       }
     } catch (e) {
       commit('SET_PACKETS_STATE', { state: REJECTED })
+      console.error(e)
+    }
+  },
+
+  async buyPackets({ commit, state }, payload) {
+    if (state.buyState === PENDING) {
+      return
+    }
+
+    try {
+      commit('SET_BUY_STATE', PENDING)
+
+      const headers = {}
+
+      if (state.country === 'Russia') {
+        headers['x-price-ru'] = true
+      }
+
+      const response = await this.$axios.$post(
+        `${STACKING_API_URL}/api/orders`,
+        payload,
+        { headers }
+      )
+
+      if (response.data) {
+        openMerchant(response)
+      } else {
+        commit('SET_BUY_STATE', REJECTED)
+      }
+    } catch (e) {
+      commit('SET_BUY_STATE', REJECTED)
       console.error(e)
     }
   },

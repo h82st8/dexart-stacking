@@ -9,36 +9,41 @@
       @reduceCountPackages="reduceCountPackages"
       @increaseCountPackages="increaseCountPackages"
     />
-    <ModalBuyTokens v-model="formData.buyTokensModalIsOpen" :packet="packet" :filtered-packages="filteredPackages" :buy-tokens-modal-is-open="formData.buyTokensModalIsOpen" />
+    <ModalBuyTokens
+      v-model="formData.buyTokensModalIsOpen"
+      :packet="packet"
+      :filtered-packages="filteredPackages"
+      :buy-tokens-modal-is-open="formData.buyTokensModalIsOpen"
+    />
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue, { reactive, computed } from 'vue'
-import AddTokensContainer from '~/components/AddTokensContainer.vue';
-import ModalBuyTokens from '~/components/ModalBuyTokens.vue';
-import PackagesContainer from '~/components/PackagesContainer.vue';
+import AddTokensContainer from '~/components/AddTokensContainer.vue'
+import ModalBuyTokens from '~/components/ModalBuyTokens.vue'
+import PackagesContainer from '~/components/PackagesContainer.vue'
 
 export default Vue.extend({
-    name: "StackingPage",
-    components: { PackagesContainer, AddTokensContainer, ModalBuyTokens },
-    layout: 'base',
-    setup() {
+  name: 'StackingPage',
+  components: { PackagesContainer, AddTokensContainer, ModalBuyTokens },
+  layout: 'base',
+  setup() {
     const formData = reactive({
       buyTokensModalIsOpen: false,
       packet1Count: 0,
       packet2Count: 0,
       packet3Count: 0,
       packet4Count: 0,
-      packet5Count: 0,
-    });
+      packet5Count: 0
+    })
 
     const packages = computed(() => [
       {
         id: 1,
         dxaPrice: 5000,
         priceInDollar: 5,
-        count: formData.packet1Count,
+        count: formData.packet1Count
       },
       {
         id: 2,
@@ -46,7 +51,7 @@ export default Vue.extend({
         priceInDollar: 50,
         count: formData.packet2Count,
         bonuses: 1000,
-        percent: 2,
+        percent: 2
       },
       {
         id: 3,
@@ -54,7 +59,7 @@ export default Vue.extend({
         priceInDollar: 100,
         count: formData.packet3Count,
         bonuses: 2500,
-        percent: 2.5,
+        percent: 2.5
       },
       {
         id: 4,
@@ -62,7 +67,7 @@ export default Vue.extend({
         priceInDollar: 500,
         count: formData.packet4Count,
         bonuses: 15000,
-        percent: 3,
+        percent: 3
       },
       {
         id: 5,
@@ -70,37 +75,48 @@ export default Vue.extend({
         priceInDollar: 1000,
         count: formData.packet5Count,
         bonuses: 35000,
-        percent: 3.5,
-      },
-    ]);
+        percent: 3.5
+      }
+    ])
 
     const packet = computed(() => {
       return {
-        priceInDollar: packages.value.reduce((sum, item) => sum + (item.priceInDollar * item.count), 0),
-        totalTokens: packages.value.reduce((sum, item) => sum + (item.dxaPrice * item.count), 0),
-        bonuses: packages.value.reduce((sum, item) => sum + ((item.bonuses || 0) * item.count), 0),
+        priceInDollar: packages.value.reduce(
+          (sum, item) => sum + item.priceInDollar * item.count,
+          0
+        ),
+        totalTokens: packages.value.reduce(
+          (sum, item) => sum + item.dxaPrice * item.count,
+          0
+        ),
+        bonuses: packages.value.reduce(
+          (sum, item) => sum + (item.bonuses || 0) * item.count,
+          0
+        )
       }
-    });
+    })
 
-    const filteredPackages = computed(() => packages.value.filter((item: any) => item.count > 0));
+    const filteredPackages = computed(() =>
+      packages.value.filter((item) => item.count > 0)
+    )
 
-    const reduceCountPackages = (id: number, count: number) => {
-      if (id === 1 && count) formData.packet1Count--;
-      if (id === 2 && count) formData.packet2Count--;
-      if (id === 3 && count) formData.packet3Count--;
-      if (id === 4 && count) formData.packet4Count--;
-      if (id === 5 && count) formData.packet5Count--;
+    const reduceCountPackages = (id, count) => {
+      if (id === 1 && count) formData.packet1Count--
+      if (id === 2 && count) formData.packet2Count--
+      if (id === 3 && count) formData.packet3Count--
+      if (id === 4 && count) formData.packet4Count--
+      if (id === 5 && count) formData.packet5Count--
     }
-    const increaseCountPackages = (id: number) => {
-      if (id === 1) formData.packet1Count++;
-      if (id === 2) formData.packet2Count++;
-      if (id === 3) formData.packet3Count++;
-      if (id === 4) formData.packet4Count++;
-      if (id === 5) formData.packet5Count++;
+    const increaseCountPackages = (id) => {
+      if (id === 1) formData.packet1Count++
+      if (id === 2) formData.packet2Count++
+      if (id === 3) formData.packet3Count++
+      if (id === 4) formData.packet4Count++
+      if (id === 5) formData.packet5Count++
     }
 
     const openBuyTokensModal = () => {
-      formData.buyTokensModalIsOpen = true;
+      formData.buyTokensModalIsOpen = true
     }
 
     return {
@@ -110,9 +126,9 @@ export default Vue.extend({
       formData,
       packages,
       filteredPackages,
-      packet,
-    };
-  },
+      packet
+    }
+  }
 })
 </script>
 
