@@ -42,11 +42,11 @@
             <div
               :class="[
                 {
-                  packagesBox__plusMinus: item.count,
-                  inactiveMinus: !item.count
+                  packagesBox__plusMinus: packets[item.id] || 0,
+                  inactiveMinus: !(packets[item.id] || 0)
                 }
               ]"
-              @click="$emit('reduceCountPackages', item.id, item.count)"
+              @click="$emit('reduceCountPackages', item.id)"
             >
               <img
                 class="packagesBox__minusDefault"
@@ -61,7 +61,7 @@
                 :src="require('assets/images/minus-push-icon.png')"
               />
             </div>
-            <div class="packagesBox__count">{{ item.count }}</div>
+            <div class="packagesBox__count">{{ packets[item.id] || 0 }}</div>
             <div
               class="packagesBox__plusMinus"
               @click="$emit('increaseCountPackages', item.id)"
@@ -179,6 +179,10 @@ export default {
       required: true
     },
     packet: {
+      type: Object,
+      required: true
+    },
+    packets: {
       type: Object,
       required: true
     }
