@@ -127,7 +127,7 @@
             >
           </div>
         </div>
-        <CommonButton style="width: 300px">{{ $t('Купить') }}</CommonButton>
+        <CommonButton style="width: 280px">{{ $t('Купить') }}</CommonButton>
       </div>
     </div>
   </vue-final-modal>
@@ -185,14 +185,14 @@ export default {
 <style lang="stylus">
 
 .paymentMethodPicker {
-  width: 300px;
+  width: 280px;
   height: 63px;
   position: relative;
   margin-bottom: 11px;
   z-index: 1;
 }
 .hr {
-  width: 300px;
+  width: 280px;
   height: 1px;
   background: $colorBrand;
   opacity: .4;
@@ -201,9 +201,12 @@ export default {
 .title {
   font-style: normal;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 18px;
   color: $colorBrand;
   margin-bottom: 7px;
+  +mediaDesktopM() {
+    font-size: 22px;
+  }
 }
 .modalBuyTokens {
   max-width: 400px;
@@ -220,7 +223,7 @@ export default {
     align-items: center;
   }
   &__yourChoiceInfoBox {
-    width: 300px;
+    width: 280px;
   }
   &__flexBox {
     display: flex;
@@ -233,7 +236,7 @@ export default {
   &__yourChoiceInfoTitle {
     font-style: normal;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 16px;
     color: $colorSecondTitle;
     opacity: .8;
   }
@@ -243,16 +246,24 @@ export default {
   &__yourChoiceInfo {
     font-style: normal;
     font-weight: 700;
-    font-size: 19px;
+    font-size: 17px;
     color: $colorBrand;
   }
   &__bonusInfo {
     color: #BF81FF;
   }
+  +mediaDesktopM() {
+    &__yourChoiceInfoTitle {
+      font-size: 18px;
+    }
+    &__yourChoiceInfo {
+      font-size: 19px;
+    }
+  }
 }
 .buttonContainer {
   &__priceBox {
-    width: 300px;
+    width: 280px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -261,7 +272,7 @@ export default {
   &__itemBoxWrapper {
     position: relative;
     background: transparent;
-    width: 300px;
+    width: 280px;
     height: 63px;
     margin-bottom: 11px;
     z-index: 10;
@@ -291,7 +302,7 @@ export default {
     position: relative;
     top: 1px;
     left: 1px;
-    width: 298px;
+    width: 278px;
     height: 63px;
     padding: 20px;
     border: none;
@@ -300,7 +311,7 @@ export default {
     background: transparent;
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 12px;
     color: $colorBrand;
     &::placeholder {
       color: $colorBrand;
@@ -334,7 +345,7 @@ export default {
     align-items: center;
     top: 64px;
     left: 1px;
-    width: 298px
+    width: 278px
     height: 87px;
     background: #7C1DD3;
     border-radius: 0 0 32px 32px;
@@ -400,10 +411,10 @@ export default {
   &__textBox {
     width: 205px;
     position: relative;
-    left: calc(50% - 102.5px);
+    left: calc(50% - 92.5px);
     font-style: normal;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 12px;
   }
   &__text {
     color: $colorSecondTitle;
@@ -417,6 +428,12 @@ export default {
       text-decoration: underline;
       color: $colorSecondTitle;
       opacity: .4;
+    }
+  }
+  +mediaDesktopM() {
+    &__itemBox,
+    &__textBox {
+      font-size: 16px;
     }
   }
 }

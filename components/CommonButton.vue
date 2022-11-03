@@ -30,19 +30,25 @@ export default defineComponent({
 
 <style lang="stylus" scoped>
 .primaryButton {
-  padding: 20px 73px;
+  padding: 15px 43px;
   background: $colorGradientForButton;
   box-shadow: inset -1px 2px 8px $colorForShadow;
   border-radius: 50px;
   &__content {
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 16px;
     color: $colorBrand;
   }
   &:hover {
     opacity: 1;
     background: $colorGradientForHoverButton;
+  }
+  +mediaDesktopM() {
+    padding: 20px 73px;
+    &__content {
+      font-size: 20px;
+    }
   }
 }
 .disabledButton {

@@ -8,6 +8,7 @@
     <div class="headerContainer__buttonBox">
       <img class="headerContainer__buttonWallet" :src="require('assets/images/buttonWallet.png')" alt="wallet connection button">
       <img class="headerContainer__buttonWalletHover" :src="require('assets/images/buttonWalletHover.png')" alt="wallet connection button">
+      <LangSwitch />
     </div>
   </div>
 </template>
@@ -29,14 +30,15 @@
   }
   &__logo {
     position: relative;
-    top: -11px;
+    top: -15px;
     left: 40px;
     width: 122px;
     +mediaTablet() {
       top: -32px;
     }
     +mediaDesktopS() {
-      position: static;
+      top: -5px;
+      left: 0;
       margin-left: 20px;
     }
     +mediaDesktop() {
@@ -51,7 +53,7 @@
     }
   }
   &__buttonWallet {
-    width: 200px;
+    width: 170px;
     +mediaDesktop() {
       width: auto;
     }
@@ -60,11 +62,16 @@
     display: none;
   }
   &__buttonBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 270px;
     position: relative;
     top: -20px;
-    left: calc(50% - 100px);
+    left: calc(50% - 145px);
     +mediaTabletS() {
       top: -80px;
+      left: 160px;
     }
     +mediaTablet() {
       top: -20px;
@@ -72,6 +79,7 @@
     }
     +mediaDesktopS() {
       position: static;
+      width: 350px
     }
     margin-left: 3vw;
     opacity: .6;
