@@ -44,10 +44,10 @@ export default {
         title: 'Купить токен',
         href: '',
       },
-      {
-        title: 'Стейкинг',
-        href: '/stacking',
-      },
+      // {
+      //   title: 'Стейкинг',
+      //   href: '/stacking',
+      // },
       {
         title: 'Дорожная карта',
         href: '',
