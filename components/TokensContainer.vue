@@ -99,6 +99,8 @@ export default ({
     position: relative;
   }
   &__img {
+    display: none;
+    width: 35vw;
     position: relative;
     top: 50px;
     z-index: 1;
@@ -113,22 +115,21 @@ export default ({
     left: calc(50% - 153px);
   }
   &__infoBox {
-    position: relative;
-    top: 98px;
-    left: 94px;
+    width: 80%;
+    margin: auto;
     z-index: 1;
   }
   &__title {
-    margin-bottom: 60px;
+    font-size: 34px;
+    margin-bottom: 40px;
     background: $colorTitle;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   &__info {
-    max-width: 517px;
     font-style: normal;
     font-weight: 300;
-    font-size: 20px;
+    font-size: 16px;
     &:not(:first-child) {
       margin-top: 40px;
     }
@@ -141,6 +142,37 @@ export default ({
     top: 0;
     left: -20px;
   }
+  +mediaTablet() {
+    &__img {
+      display: block;
+    }
+    &__infoBox {
+      position: relative;
+      width: 45%;
+      top: 98px;
+      left: 94px;
+      z-index: 1;
+      margin: 0;
+    }
+  }
+  +mediaDesktopM() {
+    &__infoBox {
+      width: auto;
+    }
+    &__title {
+      font-size: 48px;
+      margin-bottom: 60px;
+    }
+    &__info {
+      font-size: 20px;
+      max-width: 517px;
+    }
+  }
+  +mediaLarge() {
+    &__img {
+      width: 749px;
+    }
+  }
 }
 
 .aboutToken {
@@ -149,52 +181,54 @@ export default ({
   margin-top: 132px;
   position: relative;
   &__title {
+    font-size: 34px;
     margin-bottom: 30px;
     background: $colorTitle;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     z-index: 1;
+    text-align: center;
   }
   &__text {
     max-width: 581px;
     font-family: 'Didact Gothic';
     font-style: normal;
     font-weight: 400;
-    font-size: 28px;
+    font-size: 20px;
     color: $colorSecondTitle;
     opacity: .8;
     z-index: 1;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 0 10px;
   }
   &__infoBox {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin-top: 109px;
-    position: relative;
+    justify-content: center;
+    gap: 20px 0;
     z-index: 1;
   }
   &__info1 {
-    width: 431px;
-    position: relative;
-    left: 55px;
+    width: 80vw;
   }
   &__info2 {
-    width: 539px;
-    position: relative;
-    top: -90px;
-    left: 65px;
+    width: 80vw;
   }
   &__info3 {
-    width: 569px;
+    width: 80vw;
   }
   &__info4 {
-    width: 325px;
     position: relative;
-    left: 100px;
+    width: 40vw;
+    left: calc(50% - 20vw);
   }
   &__coinIcon {
+    display: none;
+    width: 25vw;
     position: absolute;
     top: -30px;
-    left: calc(50% - 174px);
+    left: calc(50% - 12.5vw);
   }
   &__stars {
     position: absolute;
@@ -207,8 +241,76 @@ export default ({
     text-align: center;
     font-style: normal;
     font-weight: 300;
-    font-size: 20px;
+    font-size: 16px;
     color: $colorBrand;
+  }
+  +mediaTablet() {
+    &__info1 {
+      width: 30vw;
+      position: relative;
+      left: 55px;
+    }
+    &__info2 {
+      width: 35vw;
+      position: relative;
+      top: -90px;
+      left: 90px;
+    }
+    &__info3 {
+      width: 40vw;
+    }
+    &__info4 {
+      width: 25vw;
+      left: 100px;
+    }
+    &__infoBox {
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 109px;
+      position: relative;
+      z-index: 1;
+      gap: 0;
+    }
+    &__coinIcon {
+      display: block;
+    }
+  }
+  +mediaDesktopM() {
+    &__title {
+      font-size: 48px;
+    }
+    &__text {
+      font-size: 28px;
+    }
+    &__linkBox {
+      font-size: 20px;
+    }
+  }
+  +mediaDesktop() {
+    &__title {
+      text-align: left;
+    }
+    &__text {
+      text-align: left;
+      margin: 0;
+      padding: 0;
+    }
+    &__info1 {
+      width: 431px;
+    }
+    &__info2 {
+      width: 539px;
+      left: 65px;
+    }
+    &__info3 {
+      width: 569px;
+    }
+    &__info4 {
+      width: 325px;
+    }
+    &__coinIcon {
+      width: auto;
+      left: calc(50% - 174px);
+    }
   }
 }
 .link {

@@ -115,7 +115,8 @@ export default ({
 <style lang="stylus" scoped>
 .footerContainer {
   display: flex;
-  padding: 84px 128px 63px;
+  flex-wrap: wrap;
+  padding: 74px 50px 63px;
   background: linear-gradient(180deg, #160D1F -4.22%, #140C1B 100%);
   &__socialLinksBox {
     margin-right: 72px;
@@ -126,10 +127,11 @@ export default ({
     margin-bottom: 17px;
   }
   &__socialLinksBoxInfo {
+    margin-top: 10px;
     margin-bottom: 28px;
     font-style: normal;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 14px;
     color: $colorBase;
     opacity: .6;
   }
@@ -169,15 +171,17 @@ export default ({
     height: 25px;
   }
   &__infoBox {
+    margin-top: 10px;
     margin-right: 65px;
   }
   &__sitemapBox {
+    margin-top: 10px;
     margin-right: 32px;
   }
   &__title {
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 16px;
     color: $colorBase;
     margin: 0;
     margin-bottom: 29px;
@@ -191,17 +195,20 @@ export default ({
   &__itemLink {
     font-style: normal;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 14px;
     color: $colorBase;
     opacity: .6;
     &:hover {
       opacity: 1;
     }
   }
+  &__followBox {
+    margin-top: 10px;
+  }
   &__followInfo {
     font-style: normal;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 14px;
     color: $colorBase;
     position: relative;
     top: -20px;
@@ -215,7 +222,7 @@ export default ({
     border-radius: 16px 0px 0px 16px;
     font-style: normal;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 14px;
     outline: 0;
     border: 0;
     color: $colorBase;
@@ -234,6 +241,19 @@ export default ({
     &:hover {
       background: $colorGradientForHoverButton;
       opacity: 1;
+    }
+  }
+  +mediaDesktopM() {
+    display: flex;
+    padding: 84px 128px 63px;
+    &__socialLinksBoxInfo,
+    &__itemLink,
+    &__followInfo,
+    &__input {
+      font-size: 18px;
+    }
+    &__title {
+      font-size: 20px;
     }
   }
 }

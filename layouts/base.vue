@@ -20,7 +20,10 @@ export default {
 
 <style lang="stylus" scoped>
 .cabinet {
+  overflow: hidden;
+  position: relative;
   display: flex;
   flex-direction: column;
+  z-index: 3;
 }
 </style>

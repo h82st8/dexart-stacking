@@ -25,6 +25,7 @@ $colorForShadow = #ECE7FA;
 $mediaSizes = {
   phoneS: 375px,
   phone: 428px,
+  tabletS: 560px,
   tablet: 768px,
   desktopS: 1024px,
   desktopM: 1165px,
@@ -85,6 +86,12 @@ mediaPhone() {
 
 mediaPhoneS() {
   +getMedia($mediaSizes.phoneS) {
+    {block};
+  }
+}
+
+mediaTabletS() {
+  +getMedia($mediaSizes.tabletS) {
     {block};
   }
 }
