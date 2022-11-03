@@ -1,8 +1,13 @@
 <template>
   <div class="headerMenu">
     <div v-for="(item, i) in headerMenuList" :key="i" class="headerMenu__elem">
-      <router-link v-if="item.title === 'Стейкинг'" :to="item.href" class="headerMenu__link">{{ item.title }}</router-link>
-      <a v-else href="#" class="headerMenu__link">{{ item.title }}</a>
+      <router-link
+        v-if="item.title === 'Стейкинг'"
+        :to="item.href"
+        class="headerMenu__link"
+        >{{ $t(item.title) }}</router-link
+      >
+      <a v-else href="#" class="headerMenu__link">{{ $t(item.title) }}</a>
     </div>
   </div>
 </template>
@@ -11,54 +16,53 @@
 export default {
   name: 'LayoutHeaderMenu',
   setup() {
-
     const headerMenuList = [
       {
         title: 'DEXART Metaverse',
-        href: '',
+        href: ''
       },
       {
         title: 'Купить токен',
-        href: '',
+        href: ''
       },
       {
         title: 'Стейкинг',
-        href: '/stacking',
+        href: '/stacking'
       },
       {
         title: 'Дорожная карта',
-        href: '',
-      },
-    ];
+        href: ''
+      }
+    ]
 
     return {
-      headerMenuList,
-    };
-  },
+      headerMenuList
+    }
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
-  .headerMenu {
-    display: flex;
-    color: $colorFontBase;
-    &__elem {
-      font-size: 18px;
-      font-weight: 300;
-      &:not(:last-child) {
-        margin-right: 64px;
-      }
-    }
-    &__link {
-      &:hover {
-        color: #912EEF;
-      }
-      &.nuxt-link-active {
-        color: $colorBrand;
-      }
+.headerMenu {
+  display: flex;
+  color: $colorFontBase;
+  &__elem {
+    font-size: 18px;
+    font-weight: 300;
+    &:not(:last-child) {
+      margin-right: 64px;
     }
   }
-  .x {
-    color: red;
+  &__link {
+    &:hover {
+      color: #912EEF;
+    }
+    &.nuxt-link-active {
+      color: $colorBrand;
+    }
   }
+}
+.x {
+  color: red;
+}
 </style>

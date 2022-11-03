@@ -1,20 +1,36 @@
 <template>
   <div class="introContainer">
-    <img class="introContainer__backgroundImg" :src="require('assets/images/tokens-bg.jpg')" alt="intro background">
+    <img
+      class="introContainer__backgroundImg"
+      :src="require('assets/images/tokens-bg.jpg')"
+      alt="intro background"
+    />
     <div class="introContainer__introTitle">
-      <h1 class="introContainer__firstTitle">
-        Зарабатывайте <br>
-        на стейкинге с DEXART <br>
-        <span class="introContainer__selectedText">до 24% годовых</span>
-      </h1>
-      <img class="introContainer__titleFade" :src="require('assets/images/title-fade-img.png')">
+      <h1 class="introContainer__firstTitle" v-html="$t(`mainTitle`)"></h1>
+      <img
+        class="introContainer__titleFade"
+        :src="require('assets/images/title-fade-img.png')"
+      />
       <h2 class="introContainer__secondTitle">
-        Выбирайте пакеты токенов, чтобы получить максимальную выгоду, зарабатывать и поддерживать эко-систему DEXART Metaverse
+        {{
+          $t(
+            'Выбирайте пакеты токенов, чтобы получить максимальную выгоду, зарабатывать и поддерживать эко-систему DEXART Metaverse'
+          )
+        }}
       </h2>
-      <img class="introContainer__secondTitleFade" :src="require('assets/images/second-title-fade-img.png')">
+      <img
+        class="introContainer__secondTitleFade"
+        :src="require('assets/images/second-title-fade-img.png')"
+      />
     </div>
-    <img class="introContainer__introFade" :src="require('assets/images/intro-fade-img.png')">
-    <img class="introContainer__coinTop" :src="require('assets/images/coin-top-icon.png')">
+    <img
+      class="introContainer__introFade"
+      :src="require('assets/images/intro-fade-img.png')"
+    />
+    <img
+      class="introContainer__coinTop"
+      :src="require('assets/images/coin-top-icon.png')"
+    />
   </div>
 </template>
 

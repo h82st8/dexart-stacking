@@ -6,7 +6,7 @@ export default {
   head: {
     title: 'dexart-stacking',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
@@ -18,19 +18,26 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
-      { rel: 'manifest', href: '/site.webmanifest' },
-    ],
+      {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/apple-touch-icon.png'
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon-32x32.png'
+      },
+      { rel: 'manifest', href: '/site.webmanifest' }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/styles/normalize.css', '~/assets/styles/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~/plugins/vue-final-modal.js',
-  ],
+  plugins: ['~/plugins/vue-final-modal.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -42,7 +49,7 @@ export default {
     // https://go.nuxtjs.dev/stylelint
     // '@nuxtjs/stylelint-module',
     '@nuxtjs/style-resources',
-    '@nuxtjs/svg-sprite',
+    '@nuxtjs/svg-sprite'
   ],
 
   styleResources: {
@@ -50,10 +57,23 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxtjs/i18n'],
 
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+      messages: {
+        en: {
+          mainTitle:
+            'Earn <br> on stacking with DEXART <br> <span class="introContainer__selectedText">up to 24% per annum</span>'
+        }
+      }
+    }
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ['vue-final-modal'],
-  },
+    transpile: ['vue-final-modal']
+  }
 }

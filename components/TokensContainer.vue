@@ -2,86 +2,107 @@
   <div class="tokensContainer">
     <div class="aboutStaking">
       <div class="aboutStaking__imgBox">
-        <img class="aboutStaking__img" :src="require('assets/images/coins-img.png')">
+        <img
+          class="aboutStaking__img"
+          :src="require('assets/images/coins-img.png')"
+        />
         <div class="aboutStaking__gradientBg" />
       </div>
       <div class="aboutStaking__infoBox">
-        <h3 class="aboutStaking__title">Стейкинг</h3>
-        <div class="aboutStaking__info">После покупки пакетов токенов вам нужно активировать стейкинг.</div>
-        <div class="aboutStaking__info">Это более экологичная альтернатива майнингу. Вы зарабатываете на хранение своих криптоактивов — токенов DXA.</div>
-        <div class="aboutStaking__info">Доходность от этой инвестиции может составить до 24% в год. Чем дольше период стейкинга, тем выше вознаграждение, которое вы получаете.</div>
-        <CommonButton class="aboutStaking__button">Стейкинг</CommonButton>
+        <h3 class="aboutStaking__title">{{ $t('Стейкинг') }}</h3>
+        <div class="aboutStaking__info">{{ $t('stacking-info-1') }}</div>
+        <div class="aboutStaking__info">{{ $t('stacking-info-2') }}</div>
+        <div class="aboutStaking__info">{{ $t('stacking-info-3') }}</div>
+        <CommonButton class="aboutStaking__button">{{
+          $t('Стейкинг')
+        }}</CommonButton>
       </div>
-      <img class="aboutStaking__stars" :src="require('assets/images/stars-staking-bg.png')">
+      <img
+        class="aboutStaking__stars"
+        :src="require('assets/images/stars-staking-bg.png')"
+      />
     </div>
     <div class="aboutToken">
-      <h3 class="aboutToken__title">О токене</h3>
-      <div class="aboutToken__text">DXA — это внутренний платёжный токен, который используется для совершения сделок в метавселенной DEXART.</div>
+      <h3 class="aboutToken__title">{{ $t('О токене') }}</h3>
+      <div class="aboutToken__text">
+        {{
+          $t(
+            'DXA — это внутренний платёжный токен, который используется для совершения сделок в метавселенной DEXART.'
+          )
+        }}
+      </div>
       <div class="aboutToken__infoBox">
         <div v-for="item in [1, 2, 3, 4]" :key="item" class="aboutToken__info">
-          <img :class="`aboutToken__info${item}`" :src="require(`assets/images/about-token-${item}.png`)">
+          <img
+            :class="`aboutToken__info${item}`"
+            :src="require(`assets/images/about-token-${item}.png`)"
+          />
         </div>
-        <img :class="`aboutToken__coinIcon`" :src="require(`assets/images/coin-icon.png`)">
+        <img
+          :class="`aboutToken__coinIcon`"
+          :src="require(`assets/images/coin-icon.png`)"
+        />
       </div>
-      <img class="aboutToken__stars" :src="require('assets/images/stars-tokens-bg.png')">
-      <div class="aboutToken__linkBox">C полной презентацией токеномики DXA можно ознакомиться <a href='#' class="link">здесь</a></div>
+      <img
+        class="aboutToken__stars"
+        :src="require('assets/images/stars-tokens-bg.png')"
+      />
+      <div class="aboutToken__linkBox" v-html="$t('dxa-tokens-about')"></div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-
-export default ({
+export default {
   name: 'TokensContainer',
   setup() {
     const aboutTokenInfo = [
       {
         id: 1,
-        title: 'Как выпускается DXA?',
+        title: 'about-token-info-title-1',
         text: [
-          'В процессе стейкинга',
-          'В игровых квестах',
-          'В игровых лутбоксах',
-          'В игре DEX Farm - plant&earn',
+          'about-token-info-1-content-1',
+          'about-token-info-1-content-2',
+          'about-token-info-1-content-3',
+          'about-token-info-1-content-4'
         ]
       },
+
       {
         id: 2,
-        title: 'Как потратить DXA?',
+        title: 'about-token-info-title-2',
         text: [
-          'Покупки NFT-предметов в мире',
-          'В прохождении daily-квестов',
-          'На аренду земельных участков',
-          'За размещение объектов на своем участке',
-          'Кампании по лидогенерации для брендов',
-          'На улучшения игровых аккаунтов',
+          'about-token-info-2-content-1',
+          'about-token-info-2-content-2',
+          'about-token-info-2-content-3',
+          'about-token-info-2-content-4',
+          'about-token-info-2-content-5',
+          'about-token-info-2-content-6'
         ]
       },
       {
         id: 3,
-        title: 'Как формируется DXA? ',
+        title: 'about-token-info-title-3',
         text: [
-          'Выплаты по реферальной программе DEXART',
-          'Выплаты в кросс-промо квестах с брендами',
-          'Выплаты за прохождение daily-квестов',
-          'Размещение рекламы',
-          'Выплаты арендной платы',
+          'about-token-info-3-content-1',
+          'about-token-info-3-content-2',
+          'about-token-info-3-content-3',
+          'about-token-info-3-content-4',
+          'about-token-info-3-content-5'
         ]
       },
       {
         id: 4,
-        title: 'Как сжигается DXA?',
-        text: [
-          'На комиссиях',
-        ]
-      },
+        title: 'about-token-info-title-4',
+        text: ['about-token-info-4-content-1']
+      }
     ]
 
     return {
-      aboutTokenInfo,
-    };
-  },
-});
+      aboutTokenInfo
+    }
+  }
+}
 </script>
 
 <style lang="stylus" scoped>

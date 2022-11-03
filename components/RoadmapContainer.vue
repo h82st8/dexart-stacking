@@ -1,21 +1,29 @@
 <template>
   <div class="roadmapContainer">
-    <img class="roadmapContainer__starsBg" :src="require('assets/images/stars-roadmap-bg.png')">
+    <img
+      class="roadmapContainer__starsBg"
+      :src="require('assets/images/stars-roadmap-bg.png')"
+    />
     <div class="roadmapContainer__titleBox">
       <h3 class="roadmapContainer__titlePrimary">Roadmap</h3>
       <h3 class="roadmapContainer__titleSecond">DEXART</h3>
     </div>
     <div class="roadmapContainer__arrowsBox">
       <div class="roadmapContainer__arrowWrapper" @click="leftArrowClick">
-        <img class="aboutStaking__arrow" :src="require('assets/images/arrow-left-icon.png')">
+        <img
+          class="aboutStaking__arrow"
+          :src="require('assets/images/arrow-left-icon.png')"
+        />
       </div>
       <div class="roadmapContainer__arrowWrapper" @click="rightArrowClick">
-        <img class="aboutStaking__arrow" :src="require('assets/images/arrow-right-icon.png')">
+        <img
+          class="aboutStaking__arrow"
+          :src="require('assets/images/arrow-right-icon.png')"
+        />
       </div>
     </div>
     <div class="roadmapContainer__sliderBox">
-      <div class="roadmapContainer__line">
-      </div>
+      <div class="roadmapContainer__line"></div>
       <div class="wrapper">
         <div class="roadmapContainer__itemsBox" :style="roadmapItemsBox">
           <div
@@ -23,14 +31,15 @@
             :key="item.id"
             class="roadmapContainer__item"
           >
-            <svg-icon
-              class="roadmapContainer__icon"
-              name="active-icon"
-            />
+            <svg-icon class="roadmapContainer__icon" name="active-icon" />
             <div class="roadmapContainer__textBox">
               <div class="roadmapContainer__textBoxTitle">{{ item.title }}</div>
-              <ul v-for="(elem, i) in item.textList" :key="i" class="roadmapContainer__textBoxList">
-                <li class="roadmapContainer__listItem">{{ elem }}</li>
+              <ul
+                v-for="(elem, i) in item.textList"
+                :key="i"
+                class="roadmapContainer__textBoxList"
+              >
+                <li class="roadmapContainer__listItem">{{ $t(elem) }}</li>
               </ul>
             </div>
           </div>
@@ -41,84 +50,76 @@
 </template>
 
 <script lang="ts">
-import {  computed, ref, reactive, } from 'vue';
+import { computed, ref, reactive } from 'vue'
 
-export default ({
+export default {
   name: 'RoadmapContainer',
   setup() {
-  const roadmap = [
+    const roadmap = [
       {
         id: 1,
         title: 'Q4 2022',
-        textList: [
-          'Cтарт продаж токена',
-          'Запуск стейкинга',
-        ],
+        textList: ['rodmap-text-1-1', 'rodmap-text-1-2']
       },
       {
         id: 2,
         title: 'Q1 2023',
         textList: [
-          'Старт продаж лутбоксов',
-          'Запуск квестов на карте мира DEXART',
-          'Запуск игры DEX Farm - plant&earn',
-          'Запуск маркетплейса',
-        ],
+          'rodmap-text-2-1',
+          'rodmap-text-2-2',
+          'rodmap-text-2-3',
+          'rodmap-text-2-4'
+        ]
       },
       {
         id: 3,
         title: 'Q2 2023',
-        textList: [
-          'Запуск игровых механик в районе GAMBLING – казино DEXART',
-          'Запуск функционала по аренде участков и пространств',
-        ],
+        textList: ['rodmap-text-3-1', 'rodmap-text-3-2']
       },
       {
         id: 4,
         title: 'Q3 2023',
-        textList: [
-          'Выплаты авторских вознаграждений',
-          'Проведение ивентов в мире',
-          'Размещение рекламы в мире',
-        ],
+        textList: ['rodmap-text-4-1', 'rodmap-text-4-2', 'rodmap-text-4-3']
       },
       {
         id: 5,
         title: '2023-2024',
-        textList: [
-          'Открытие 3d мира DexArt',
-        ],
-      },
-    ];
+        textList: ['rodmap-text-5-1']
+      }
+    ]
 
     const formData = reactive({
       countRight: roadmap.length,
-      countLeft: 0,
-    });
+      countLeft: 0
+    })
 
-    const roadmapItemsBox = ref<any>();
+    const roadmapItemsBox = ref<any>()
 
     const rightArrowClick = () => {
       if (formData.countRight - 3 !== 0) {
         roadmapItemsBox.value = computed(() => {
-            return {
-              'transform': `translate(${-450*(roadmap.length - formData.countRight)}px)`,
-            };
+          return {
+            transform: `translate(${
+              -450 * (roadmap.length - formData.countRight)
+            }px)`
+          }
         })
-        --formData.countRight;
-        formData.countLeft++;
+        --formData.countRight
+        formData.countLeft++
       }
-    };
+    }
 
     const leftArrowClick = () => {
       if (formData.countLeft !== 0) {
         roadmapItemsBox.value = computed(() => {
-            return {
-              'transform': `translate(${-450*(1 + (roadmap.length - formData.countRight))+450}px)`,
-            };
+          return {
+            transform: `translate(${
+              -450 * (1 + (roadmap.length - formData.countRight)) + 450
+            }px)`
+          }
         })
-        formData.countLeft--;
-        formData.countRight++;
+        formData.countLeft--
+        formData.countRight++
       }
     }
 
@@ -126,10 +127,10 @@ export default ({
       roadmap,
       roadmapItemsBox,
       rightArrowClick,
-      leftArrowClick,
-    };
-  },
-});
+      leftArrowClick
+    }
+  }
+}
 </script>
 
 <style lang="stylus" scoped>
