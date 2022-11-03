@@ -183,6 +183,7 @@ export default {
 </script>
 
 <style lang="stylus">
+
 .paymentMethodPicker {
   width: 300px;
   height: 63px;

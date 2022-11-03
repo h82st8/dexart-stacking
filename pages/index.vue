@@ -4,6 +4,7 @@
     <IntroContainer />
     <PackagesContainer
       :is-index-page="true"
+      :packets="packets"
       :packages="packages"
       :packet="packet"
       @openBuyTokensModal="openBuyTokensModal"
@@ -13,23 +14,24 @@
     <TokensContainer />
     <RoadmapContainer />
     <ModalBuyTokens
-      v-model="formData.buyTokensModalIsOpen"
+      v-model="buyTokensModalIsOpen"
       :packet="packet"
       :filtered-packages="filteredPackages"
-      :buy-tokens-modal-is-open="formData.buyTokensModalIsOpen"
+      :buy-tokens-modal-is-open="buyTokensModalIsOpen"
     />
   </div>
 </template>
 
-<script lang="ts">
-import Vue, { reactive, computed } from 'vue'
+<script>
+import { mapGetters } from 'vuex'
+import { omit } from 'rambda'
 import TokensContainer from '~/components/TokensContainer.vue'
 import IntroContainer from '~/components/IntroContainer.vue'
 import PackagesContainer from '~/components/PackagesContainer.vue'
 import RoadmapContainer from '~/components/RoadmapContainer.vue'
 import ModalBuyTokens from '~/components/ModalBuyTokens.vue'
 
-export default Vue.extend({
+export default {
   name: 'IndexPage',
   components: {
     IntroContainer,
@@ -39,108 +41,86 @@ export default Vue.extend({
     ModalBuyTokens
   },
   layout: 'base',
-  setup() {
-    const formData = reactive({
+
+  data() {
+    return {
       buyTokensModalIsOpen: false,
-      packet1Count: 0,
-      packet2Count: 0,
-      packet3Count: 0,
-      packet4Count: 0,
-      packet5Count: 0
-    })
+      packets: {}
+    }
+  },
 
-    const packages = computed(() => [
-      {
-        id: 1,
-        dxaPrice: 5000,
-        priceInDollar: 5,
-        count: formData.packet1Count
-      },
-      {
-        id: 2,
-        dxaPrice: 50000,
-        priceInDollar: 50,
-        count: formData.packet2Count,
-        bonuses: 1000,
-        percent: 2
-      },
-      {
-        id: 3,
-        dxaPrice: 100000,
-        priceInDollar: 100,
-        count: formData.packet3Count,
-        bonuses: 2500,
-        percent: 2.5
-      },
-      {
-        id: 4,
-        dxaPrice: 500000,
-        priceInDollar: 500,
-        count: formData.packet4Count,
-        bonuses: 15000,
-        percent: 3
-      },
-      {
-        id: 5,
-        dxaPrice: 1000000,
-        priceInDollar: 1000,
-        count: formData.packet5Count,
-        bonuses: 35000,
-        percent: 3.5
-      }
-    ])
+  computed: {
+    ...mapGetters({ packages: 'packetsOfDxaTokensData' }),
 
-    const packet = computed(() => {
+    packetsOfDxaTokensState() {
+      return this.$store.state.packetsOfDxaTokensState
+    },
+
+    packet() {
+      const { packages } = this
+
       return {
-        priceInDollar: packages.value.reduce(
-          (sum, item) => sum + item.priceInDollar * item.count,
+        priceInDollar: packages.reduce(
+          (sum, item) =>
+            sum + item.priceInDollar * this.getCountPackage(item.id),
           0
         ),
-        totalTokens: packages.value.reduce(
-          (sum, item) => sum + item.dxaPrice * item.count,
+        totalTokens: packages.reduce(
+          (sum, item) => sum + item.dxaPrice * this.getCountPackage(item.id),
           0
         ),
-        bonuses: packages.value.reduce(
-          (sum, item) => sum + (item.bonuses || 0) * item.count,
+        bonuses: packages.reduce(
+          (sum, item) =>
+            sum + (item.bonuses || 0) * this.getCountPackage(item.id),
           0
         )
       }
-    })
+    },
+    filteredPackages() {
+      const includesPackages = Object.keys(this.packets).filter(
+        (item) => +item > 0
+      )
 
-    const filteredPackages = computed(() =>
-      packages.value.filter((item: any) => item.count > 0)
-    )
-
-    const reduceCountPackages = (id: number, count: number) => {
-      if (id === 1 && count) formData.packet1Count--
-      if (id === 2 && count) formData.packet2Count--
-      if (id === 3 && count) formData.packet3Count--
-      if (id === 4 && count) formData.packet4Count--
-      if (id === 5 && count) formData.packet5Count--
+      return this.packages.filter((item) => includesPackages.includes(item.id))
     }
-    const increaseCountPackages = (id: number) => {
-      if (id === 1) formData.packet1Count++
-      if (id === 2) formData.packet2Count++
-      if (id === 3) formData.packet3Count++
-      if (id === 4) formData.packet4Count++
-      if (id === 5) formData.packet5Count++
-    }
+  },
 
-    const openBuyTokensModal = () => {
-      formData.buyTokensModalIsOpen = true
-    }
+  mounted() {
+    this.$store.dispatch('fetchPacketsList')
+    this.$store.dispatch('fetchCountry')
+  },
 
-    return {
-      openBuyTokensModal,
-      reduceCountPackages,
-      increaseCountPackages,
-      formData,
-      packages,
-      filteredPackages,
-      packet
+  methods: {
+    getCountPackage(id) {
+      return this.packets?.[id] || 0
+    },
+    reduceCountPackages(id) {
+      const currentValue = this.getCountPackage(id)
+
+      if (currentValue > 1) {
+        this.packets = {
+          ...this.packets,
+          [id]: currentValue - 1
+        }
+      } else {
+        this.packets = omit([id], this.packets)
+      }
+    },
+
+    increaseCountPackages(id) {
+      const currentValue = this.getCountPackage(id)
+
+      this.packets = {
+        ...this.packets,
+        [id]: currentValue + 1
+      }
+    },
+
+    openBuyTokensModal() {
+      this.buyTokensModalIsOpen = true
     }
   }
-})
+}
 </script>
 
 <style lang="stylus" scoped>
@@ -167,6 +147,10 @@ export default Vue.extend({
   justify-content: center;
   align-items: center;
   overflow: auto;
+}
+::v-deep .modal-tokens-container {
+  align-items: start;
+  padding-top: 34px
 }
 
 ::v-deep .modal-tokens-content {
