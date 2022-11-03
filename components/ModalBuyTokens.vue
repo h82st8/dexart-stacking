@@ -10,37 +10,73 @@
   >
     <div class="modalBuyTokens">
       <div class="modalBuyTokens__yourChoice">
-        <h3 class="title">
-          Ваш выбор:
-        </h3>
+        <h3 class="title">{{ $t('Ваш выбор') }}:</h3>
         <div class="modalBuyTokens__yourChoiceInfoBox">
-          <div v-for="(item, i) in filteredPackages" :key="i" class="modalBuyTokens__flexBox">
-            <div class="modalBuyTokens__yourChoiceInfoTitle">{{ `Пакет ${dividingIntoDigits(item.dxaPrice)} DXA:` }}</div>
+          <div
+            v-for="(item, i) in filteredPackages"
+            :key="i"
+            class="modalBuyTokens__flexBox"
+          >
+            <div class="modalBuyTokens__yourChoiceInfoTitle">
+              {{ $t('Пакет') }} {{ dividingIntoDigits(item.dxaPrice) }} DXA:
+            </div>
             <div class="modalBuyTokens__yourChoiceInfo">{{ item.count }}</div>
           </div>
           <div class="modalBuyTokens__flexBox">
-            <div class="modalBuyTokens__yourChoiceInfoTitle">Всего токенов:</div>
-            <div class="modalBuyTokens__yourChoiceInfo">{{ `${dividingIntoDigits(packet.totalTokens)} DXA` }}</div>
+            <div class="modalBuyTokens__yourChoiceInfoTitle">
+              {{ $t('Всего токенов') }}:
+            </div>
+            <div class="modalBuyTokens__yourChoiceInfo">
+              {{ `${dividingIntoDigits(packet.totalTokens)} DXA` }}
+            </div>
           </div>
           <div class="modalBuyTokens__flexBox">
-            <div class="modalBuyTokens__yourChoiceInfoTitle modalBuyTokens__bonusTitle">Бонусов:</div>
-            <div class="modalBuyTokens__yourChoiceInfo modalBuyTokens__bonusInfo">{{ dividingIntoDigits(packet.bonuses) }}</div>
+            <div
+              class="modalBuyTokens__yourChoiceInfoTitle modalBuyTokens__bonusTitle"
+            >
+              {{ $t('Бонусов') }}:
+            </div>
+            <div
+              class="modalBuyTokens__yourChoiceInfo modalBuyTokens__bonusInfo"
+            >
+              {{ dividingIntoDigits(packet.bonuses) }}
+            </div>
           </div>
         </div>
       </div>
       <div class="hr" />
       <div class="buttonContainer">
         <div class="buttonContainer__priceBox">
-          <h3 class="title">Стоимость:</h3>
-          <h3 class="title">{{ `$${dividingIntoDigits(packet.priceInDollar)}` }}</h3>
+          <h3 class="title">{{ $t('Стоимость') }}:</h3>
+          <h3 class="title">
+            {{ `$${dividingIntoDigits(packet.priceInDollar)}` }}
+          </h3>
         </div>
         <div class="buttonContainer__itemBoxWrapper">
-          <input type="email" class="buttonContainer__itemBox" placeholder="Ваш email">
+          <input
+            type="email"
+            class="buttonContainer__itemBox"
+            :placeholder="$t('Ваш email')"
+          />
         </div>
         <div class="paymentMethodPicker">
-          <div :class="['buttonContainer__itemBoxWrapper', {'buttonContainer__itemBoxWrapperOpenList': showDropdown}]">
-            <div :class="['buttonContainer__itemBox', 'buttonContainer__paymentMethod', {'buttonContainer__paymentMethodOpenList': showDropdown}]" @click="showDropdown = !showDropdown">
-              {{ chosenMethod ? chosenMethod : 'Выберите метод оплаты' }}
+          <div
+            :class="[
+              'buttonContainer__itemBoxWrapper',
+              { buttonContainer__itemBoxWrapperOpenList: showDropdown }
+            ]"
+          >
+            <div
+              :class="[
+                'buttonContainer__itemBox',
+                'buttonContainer__paymentMethod',
+                { buttonContainer__paymentMethodOpenList: showDropdown }
+              ]"
+              @click="showDropdown = !showDropdown"
+            >
+              {{
+                chosenMethod ? $t(chosenMethod) : $t('Выберите метод оплаты')
+              }}
               <svg-icon
                 v-if="!showDropdown"
                 class="buttonContainer__arrow"
@@ -54,7 +90,14 @@
             </div>
           </div>
           <div v-if="showDropdown" class="buttonContainer__choosePaymentMethod">
-            <div v-for="(item, i) in paymentMethods" :key="i" class="buttonContainer__chosenMethod" @click="changeChosenMethod(item)">{{ item }}</div>
+            <div
+              v-for="(item, i) in paymentMethods"
+              :key="i"
+              class="buttonContainer__chosenMethod"
+              @click="changeChosenMethod(item)"
+            >
+              {{ $t(item) }}
+            </div>
           </div>
         </div>
         <div class="buttonContainer__accessTermsAndConditions">
@@ -64,16 +107,27 @@
             type="checkbox"
             name="termAndCondition"
             class="buttonContainer__checkbox"
-          >
+          />
           <div style="position: relative">
-            <label for="termAndConditionCheckbox" class="buttonContainer__label">
+            <label
+              for="termAndConditionCheckbox"
+              class="buttonContainer__label"
+            >
             </label>
           </div>
           <div class="buttonContainer__textBox">
-            <span class='buttonContainer__text'>I have read and agree to the</span> <a href="/docs/TermsAndConditions_26.10.22.pdf" target="_blank" class="buttonContainer__link">Terms & Conditions</a>
+            <span class="buttonContainer__text">{{
+              $t('I have read and agree to the')
+            }}</span>
+            <a
+              href="/docs/TermsAndConditions_26.10.22.pdf"
+              target="_blank"
+              class="buttonContainer__link"
+              >{{ $t('Terms & Conditions') }}</a
+            >
           </div>
         </div>
-        <CommonButton style="width: 300px;">Купить</CommonButton>
+        <CommonButton style="width: 300px">{{ $t('Купить') }}</CommonButton>
       </div>
     </div>
   </vue-final-modal>
@@ -81,42 +135,40 @@
 
 <script lang="ts">
 import { ref, PropType } from 'vue'
-import CommonButton from './CommonButton.vue';
-import { packetInterface } from '@/interfaces/packagesTypes';
+import CommonButton from './CommonButton.vue'
+import { packetInterface } from '@/interfaces/packagesTypes'
 
 export default {
-  name: "ModalBuyTokens",
+  name: 'ModalBuyTokens',
   components: { CommonButton },
   props: {
     buyTokensModalIsOpen: {
       type: Boolean,
-      default: false,
+      default: false
     },
     filteredPackages: {
       type: Array as PropType<packetInterface[]>,
-      required: true,
+      required: true
     },
     packet: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   setup() {
-    const showDropdown = ref<boolean>(false);
-    const chosenMethod = ref<string>('');
-    const acceptTermsAndConditions = ref<boolean>(false);
+    const showDropdown = ref<boolean>(false)
+    const chosenMethod = ref<string>('')
+    const acceptTermsAndConditions = ref<boolean>(false)
 
-    const paymentMethods = [
-      'Банковской картой',
-      'С криптокошелька',
-    ]
+    const paymentMethods = ['Банковской картой', 'С криптокошелька']
 
     const changeChosenMethod = (method: string) => {
-      chosenMethod.value = method;
-      showDropdown.value = false;
+      chosenMethod.value = method
+      showDropdown.value = false
     }
 
-    const dividingIntoDigits = (count: number | string) => String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+    const dividingIntoDigits = (count: number | string) =>
+      String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ')
 
     return {
       showDropdown,
@@ -124,9 +176,9 @@ export default {
       paymentMethods,
       acceptTermsAndConditions,
       changeChosenMethod,
-      dividingIntoDigits,
-    };
-  },
+      dividingIntoDigits
+    }
+  }
 }
 </script>
 
@@ -217,14 +269,14 @@ export default {
       content: "";
       position: absolute;
       inset: 0;
-      border-radius: 32px; 
-      padding: 1px; 
+      border-radius: 32px;
+      padding: 1px;
       background: linear-gradient(96.43deg, #ED3FFE 30.37%, #7D1ED4 94.57%);
-      -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
-              mask-composite: exclude; 
+              mask-composite: exclude;
     }
     &OpenList {
       position: absolute;

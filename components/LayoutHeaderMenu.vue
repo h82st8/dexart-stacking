@@ -2,8 +2,8 @@
   <div class="headerMenuWrap">
     <div class="headerMenu">
       <div v-for="(item, i) in headerMenuList" :key="i" class="headerMenu__elem">
-        <router-link v-if="item.title === 'Стейкинг'" :to="item.href" class="headerMenu__link">{{ item.title }}</router-link>
-        <a v-else href="#" class="headerMenu__link">{{ item.title }}</a>
+        <router-link v-if="item.title === 'Стейкинг'" :to="item.href" class="headerMenu__link">{{ $t(item.title) }}</router-link>
+        <a v-else href="#" class="headerMenu__link">{{ $t(item.title) }}</a>
       </div>
     </div>
     <div class="mobileList">
@@ -18,8 +18,8 @@
       </button>
       <div :class="['list', {list_open: isOpenMenu}]">
         <div v-for="(item, i) in headerMenuList" :key="i" class="list__elem">
-          <router-link v-if="item.title === 'Стейкинг'" :to="item.href" :class="['list__link', {list__link_open: isOpenMenu}]">{{ item.title }}</router-link>
-          <a v-else href="#" :class="['list__link', {list__link_open: isOpenMenu}]">{{ item.title }}</a>
+          <router-link v-if="item.title === 'Стейкинг'" :to="item.href" :class="['list__link', {list__link_open: isOpenMenu}]">{{ $t(item.title) }}</router-link>
+          <a v-else href="#" :class="['list__link', {list__link_open: isOpenMenu}]">{{ $t(item.title) }}</a>
         </div>
       </div>
     </div>
@@ -55,8 +55,7 @@ export default {
     ];
 
     const handleButton = () => {
-      isOpenMenu.value = !isOpenMenu.value
-      console.error(isOpenMenu.value);
+      isOpenMenu.value = !isOpenMenu.value;
     };
 
     return {

@@ -1,108 +1,197 @@
 <template>
-  <div :class="['pointsContainer', {pointsContainerInIndex: isIndexPage}]">
-    <div :class="{wrap: isStackingPage}"></div>
-    <img v-if="isIndexPage" class="pointsContainer__coinBottom" :src="require('assets/images/coin-bottom-icon.png')">
-    <img v-if="isStackingPage" class="pointsContainer__coinBottomStacking" :src="require('assets/images/coin-bottom-stacking-icon.png')">
+  <div :class="['pointsContainer', { pointsContainerInIndex: isIndexPage }]">
+    <div :class="{ wrap: isStackingPage }"></div>
+    <img
+      v-if="isIndexPage"
+      class="pointsContainer__coinBottom"
+      :src="require('assets/images/coin-bottom-icon.png')"
+    />
+    <img
+      v-if="isStackingPage"
+      class="pointsContainer__coinBottomStacking"
+      :src="require('assets/images/coin-bottom-stacking-icon.png')"
+    />
     <div class="buyDxaContainer">
       <div class="buyDxaContainer__titleBox">
         <h1 class="buyDxaContainer__title">
-          Пакеты <br>
-          <span class="buyDxaContainer__selectedText">DXA токенов</span>
+          {{ $t('packetsDxaTokens') }}
         </h1>
         <div class="buyDxaContainer__rateBox">
           <h1 class="buyDxaContainer__rate">1 DXA = $0,001</h1>
-          <div class="buyDxaContainer__rateInfo">Выберите пакеты и их количество</div>
+          <div class="buyDxaContainer__rateInfo">
+            {{ $t('Выберите пакеты и их количество') }}
+          </div>
         </div>
       </div>
       <div class="packagesBox">
         <div v-for="item in packages" :key="item.id" class="packagesBox__elem">
-          <div class="packagesBox__dxaPrice">{{ dividingIntoDigits(item.dxaPrice) }} DXA</div>
-          <div class="packagesBox__bonuses">{{ item.bonuses ? `+ ${dividingIntoDigits(item.bonuses)} (${item.percent}%)` : '' }}</div>
-          <div class="packagesBox__priceInDollar">${{ item.priceInDollar }}</div>
+          <div class="packagesBox__dxaPrice">
+            {{ dividingIntoDigits(item.dxaPrice) }} DXA
+          </div>
+          <div class="packagesBox__bonuses">
+            {{
+              item.bonuses
+                ? `+ ${dividingIntoDigits(item.bonuses)} (${item.percent}%)`
+                : ''
+            }}
+          </div>
+          <div class="packagesBox__priceInDollar">
+            ${{ item.priceInDollar }}
+          </div>
           <div class="packagesBox__countBox">
-            <div :class="[{'packagesBox__plusMinus': item.count, inactiveMinus: !item.count}]" @click="$emit('reduceCountPackages', item.id, item.count)">
-              <img class="packagesBox__minusDefault" :src="require('assets/images/minus-icon.png')">
-              <img class="packagesBox__minusHover" :src="require('assets/images/minus-hover-icon.png')">
-              <img class="packagesBox__minusPush" :src="require('assets/images/minus-push-icon.png')">
+            <div
+              :class="[
+                {
+                  packagesBox__plusMinus: item.count,
+                  inactiveMinus: !item.count
+                }
+              ]"
+              @click="$emit('reduceCountPackages', item.id, item.count)"
+            >
+              <img
+                class="packagesBox__minusDefault"
+                :src="require('assets/images/minus-icon.png')"
+              />
+              <img
+                class="packagesBox__minusHover"
+                :src="require('assets/images/minus-hover-icon.png')"
+              />
+              <img
+                class="packagesBox__minusPush"
+                :src="require('assets/images/minus-push-icon.png')"
+              />
             </div>
             <div class="packagesBox__count">{{ item.count }}</div>
-            <div class="packagesBox__plusMinus" @click="$emit('increaseCountPackages', item.id)">
-              <img class="packagesBox__plusDefault" :src="require('assets/images/plus-icon.png')">
-              <img class="packagesBox__plusHover" :src="require('assets/images/plus-hover-icon.png')">
-              <img class="packagesBox__plusPush" :src="require('assets/images/plus-push-icon.png')">
+            <div
+              class="packagesBox__plusMinus"
+              @click="$emit('increaseCountPackages', item.id)"
+            >
+              <img
+                class="packagesBox__plusDefault"
+                :src="require('assets/images/plus-icon.png')"
+              />
+              <img
+                class="packagesBox__plusHover"
+                :src="require('assets/images/plus-hover-icon.png')"
+              />
+              <img
+                class="packagesBox__plusPush"
+                :src="require('assets/images/plus-push-icon.png')"
+              />
             </div>
           </div>
         </div>
       </div>
       <div class="yourChoice">
         <div class="yourChoice__titleBox">
-          <h4 class="yourChoice__title">Ваш выбор:</h4>
+          <h4 class="yourChoice__title">{{ $t('Ваш выбор') }}:</h4>
           <div class="yourChoice__line"></div>
         </div>
         <div class="yourChoice__mainBlock">
           <div class="yourChoice__stackingInfo">
             <div class="">
-              <span class="yourChoice__stackingInfoTitle">Всего токенов:</span>
-              <span :class="['yourChoice__stackingInfoNoneChoice', {yourChoice__stackingInfoChoice: packet.totalTokens}]">{{ `${dividingIntoDigits(packet.totalTokens)} DXA` }}</span>
+              <span class="yourChoice__stackingInfoTitle"
+                >{{ $t('Всего токенов') }}:</span
+              >
+              <span
+                :class="[
+                  'yourChoice__stackingInfoNoneChoice',
+                  { yourChoice__stackingInfoChoice: packet.totalTokens }
+                ]"
+                >{{ `${dividingIntoDigits(packet.totalTokens)} DXA` }}</span
+              >
             </div>
             <div class="">
-              <span class="yourChoice__stackingInfoTitle">Стоимость:</span>
-              <span :class="['yourChoice__stackingInfoNoneChoice', {yourChoice__stackingInfoChoice: packet.priceInDollar}]">{{ `$${dividingIntoDigits(packet.priceInDollar)}` }}</span>
+              <span class="yourChoice__stackingInfoTitle"
+                >{{ $t('Стоимость') }}:</span
+              >
+              <span
+                :class="[
+                  'yourChoice__stackingInfoNoneChoice',
+                  { yourChoice__stackingInfoChoice: packet.priceInDollar }
+                ]"
+                >{{ `$${dividingIntoDigits(packet.priceInDollar)}` }}</span
+              >
             </div>
             <div class="">
-              <span class="yourChoice__stackingInfoTitle yourChoice__bonusesTitle">Бонусов:</span>
-              <span :class="['yourChoice__stackingInfoNoneChoice', 'yourChoice__bonuses', {yourChoice__stackingInfoChoice: packet.bonuses}]">{{ `+${dividingIntoDigits(packet.bonuses)} DXA` }}</span>
+              <span
+                class="yourChoice__stackingInfoTitle yourChoice__bonusesTitle"
+                >{{ $t('Бонусов') }}:</span
+              >
+              <span
+                :class="[
+                  'yourChoice__stackingInfoNoneChoice',
+                  'yourChoice__bonuses',
+                  { yourChoice__stackingInfoChoice: packet.bonuses }
+                ]"
+                >{{ `+${dividingIntoDigits(packet.bonuses)} DXA` }}</span
+              >
             </div>
           </div>
-          <CommonButton class="buyDxaContainer__button" :is-disabled="!packet.priceInDollar" @click="$emit('openBuyTokensModal')">Купить</CommonButton>
+          <CommonButton
+            class="buyDxaContainer__button"
+            :is-disabled="!packet.priceInDollar"
+            @click="$emit('openBuyTokensModal')"
+            >{{ $t('Купить') }}</CommonButton
+          >
         </div>
       </div>
 
-      <img class="buyDxaContainer__coinIcon1" :src="require('assets/images/coin-icon-1.png')">
-      <img class="buyDxaContainer__coinIcon2" :src="require('assets/images/coin-icon-2.png')">
-      <img class="buyDxaContainer__starsBg" :src="require('assets/images/stars-bg.png')">
-      <img class="buyDxaContainer__gradientBg" :src="require('assets/images/packages-gradient-bg.png')">
+      <img
+        class="buyDxaContainer__coinIcon1"
+        :src="require('assets/images/coin-icon-1.png')"
+      />
+      <img
+        class="buyDxaContainer__coinIcon2"
+        :src="require('assets/images/coin-icon-2.png')"
+      />
+      <img
+        class="buyDxaContainer__starsBg"
+        :src="require('assets/images/stars-bg.png')"
+      />
+      <img
+        class="buyDxaContainer__gradientBg"
+        :src="require('assets/images/packages-gradient-bg.png')"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  PropType,
-} from 'vue';
-import CommonButton from './CommonButton.vue';
-import { packetInterface } from '@/interfaces/packagesTypes';
+import { PropType } from 'vue'
+import CommonButton from './CommonButton.vue'
+import { packetInterface } from '@/interfaces/packagesTypes'
 
-export default ({
-  name: "PackagesContainer",
+export default {
+  name: 'PackagesContainer',
   components: { CommonButton },
   props: {
     isIndexPage: {
       type: Boolean,
-      required: false,
+      required: false
     },
     isStackingPage: {
       type: Boolean,
-      required: false,
+      required: false
     },
     packages: {
       type: Array as PropType<packetInterface[]>,
-      required: true,
+      required: true
     },
     packet: {
       type: Object,
-      required: true,
-    },
-  },
-  setup() {
-
-    const dividingIntoDigits = (count: number | string) => String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
-
-    return {
-      dividingIntoDigits,
+      required: true
     }
   },
-})
+  setup() {
+    const dividingIntoDigits = (count: number | string) =>
+      String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ')
+
+    return {
+      dividingIntoDigits
+    }
+  }
+}
 </script>
 
 <style lang="stylus" scoped>

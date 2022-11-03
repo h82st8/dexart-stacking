@@ -2,14 +2,17 @@
   <div class="footerContainer">
     <div class="footerContainer__socialLinksBox">
       <div class="footerContainer__logoBox">
-        <svg-icon
-          class="footerContainer__logo"
-          name="logo-icon"
-        />
+        <svg-icon class="footerContainer__logo" name="logo-icon" />
       </div>
       <div class="footerContainer__socialLinksBoxInfo">Dexart (c) 2022</div>
       <div class="footerContainer__socialLinks">
-        <a v-for="(item, i) in socials" :key="i" :href="item || '#'" target="_blank" class="footerContainer__socialLinkItem">
+        <a
+          v-for="(item, i) in socials"
+          :key="i"
+          :href="item || '#'"
+          target="_blank"
+          class="footerContainer__socialLinkItem"
+        >
           <svg-icon
             class="footerContainer__icon"
             :name="`social-icon-${i + 1}`"
@@ -19,34 +22,48 @@
       </div>
     </div>
     <div class="footerContainer__infoBox">
-      <h4 class="footerContainer__title">Info</h4>
+      <h4 class="footerContainer__title">{{ $t('Info') }}</h4>
       <div class="footerContainer__itemsBox">
         <div v-for="(item, i) in info" :key="i" class="footerContainer__item">
-          <a :href="item.href" target="_blank" class="footerContainer__itemLink" rel="noopener">{{ item.title }}</a>
+          <a
+            :href="item.href"
+            target="_blank"
+            class="footerContainer__itemLink"
+            rel="noopener"
+            >{{ $t(item.title) }}</a
+          >
         </div>
       </div>
     </div>
     <div class="footerContainer__sitemapBox">
-      <h4 class="footerContainer__title">Sitemap</h4>
+      <h4 class="footerContainer__title">{{ $t('Sitemap') }}</h4>
       <div class="footerContainer__itemsBox">
-        <div v-for="(item, i) in sitemap" :key="i" class="footerContainer__item">
-          <a :href="item.href" class="footerContainer__itemLink">{{ item.title }}</a>
+        <div
+          v-for="(item, i) in sitemap"
+          :key="i"
+          class="footerContainer__item"
+        >
+          <a :href="item.href" class="footerContainer__itemLink">{{
+            $t(item.title)
+          }}</a>
         </div>
       </div>
     </div>
     <div class="footerContainer__followBox">
-      <h4 class="footerContainer__title">Follow DEXART</h4>
-      <div class="footerContainer__followInfo">Subscribe to the newsletter of the most important news</div>
+      <h4 class="footerContainer__title">{{ $t('Follow DEXART') }}</h4>
+      <div class="footerContainer__followInfo">
+        {{ $t('Subscribe to the newsletter of the most important news') }}
+      </div>
       <form class="footerContainer__followForm">
-        <input type="text" placeholder="Email" class="footerContainer__input">
-        <button class="footerContainer__button">Sign Up</button>
+        <input type="text" placeholder="Email" class="footerContainer__input" />
+        <button class="footerContainer__button">{{ $t('Sign Up') }}</button>
       </form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-export default ({
+export default {
   name: 'FooterContainer',
   setup() {
     const socials = [
@@ -55,61 +72,61 @@ export default ({
       'https://www.youtube.com/channel/UC13PPy2YX2d6rIbjkdveP7g/',
       'https://t.me/dexartchannelru',
       'https://medium.com/@dexartmetaverse',
-      'https://www.reddit.com/r/dexart/',
+      'https://www.reddit.com/r/dexart/'
     ]
     const info = [
       {
         title: 'Privacy Policy',
-        href: '/docs/PrivacyPolicy_26.10.22.pdf',
+        href: '/docs/PrivacyPolicy_26.10.22.pdf'
       },
       {
         title: 'Cookies Policy',
-        href: '/docs/CookiesPolicy.pdf',
+        href: '/docs/CookiesPolicy.pdf'
       },
       {
         title: 'Term of service',
-        href: '/docs/TermsAndConditions_26.10.22.pdf',
+        href: '/docs/TermsAndConditions_26.10.22.pdf'
       },
       {
         title: 'Legal information',
-        href: '',
+        href: ''
       },
       {
         title: 'Disclaimer',
-        href: '',
-      },
-    ];
+        href: ''
+      }
+    ]
 
     const sitemap = [
       {
         title: 'Main',
-        href: '',
+        href: ''
       },
       {
         title: 'Avatar design tool',
-        href: '',
+        href: ''
       },
       {
         title: 'Avatar design tool',
-        href: '',
+        href: ''
       },
       {
         title: 'World backstory',
-        href: '',
+        href: ''
       },
       {
         title: 'Token',
-        href: '',
-      },
+        href: ''
+      }
     ]
 
     return {
       info,
       sitemap,
-      socials,
-    };
-  },
-})
+      socials
+    }
+  }
+}
 </script>
 
 <style lang="stylus" scoped>
