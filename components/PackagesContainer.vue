@@ -209,25 +209,34 @@ export default {
   z-index: -1;
 }
 .pointsContainerInIndex {
-  height: 765px;
   z-index: 1000;
 }
 .pointsContainer {
   width: 100%;
-  height: 765px;
   position: relative;
   overflow hidden;
   background: $colorBackgroundFade;
   &__coinBottom {
+    width: 200px;
     position: absolute;
     top: 0;
-    left: 50%;
+    left: calc(50% + 100px);
     margin-left: -225px;
   }
   &__coinBottomStacking {
     position: absolute;
     top: 0;
     left: 36px;
+  }
+  +mediaDesktopM() {
+    &__coinBottom {
+      position: absolute;
+      width: auto;
+      left: 50%;
+    }
+  }
+  +mediaDesktop() {
+    height: 765px;
   }
 }
 
@@ -240,7 +249,8 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 80vw;
+    margin: auto;
     margin-bottom: 50px;
     z-index: 1;
   }
@@ -250,18 +260,18 @@ export default {
     -webkit-text-fill-color: transparent;
   }
   &__title {
-    font-size: 48px;
+    font-size: 24px;
     color: $colorBrand;
   }
   &__rateBox {
     text-align: right;
   }
   &__rate {
-    font-size: 36px;
+    font-size: 18px;
     color: $colorBrand;
   }
   &__rateInfo {
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 300;
     color: $colorSecondTitle;
   }
@@ -289,14 +299,32 @@ export default {
     left: 0;
     z-index: -1;
   }
+  +mediaDesktopM() {
+    &__title {
+      font-size: 48px;
+    }
+    &__rate {
+      font-size: 36px;
+    }
+    &__rateInfo {
+      font-size: 18px;
+    }
+  }
+  +mediaDesktop() {
+    &__titleBox {
+      width: 100%;
+    }
+  }
 }
 .packagesBox {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 199px);
+  justify-content: center;
+  gap: 20px;
   z-index: 2;
   &__elem {
-    width: 224px;
-    height: 221px;
+    width: 199px;
+    height: 196px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -315,7 +343,7 @@ export default {
   }
   &__dxaPrice {
     font-weight: 700;
-    font-size: 22px;
+    font-size: 18px;
     text-align: center;
     color: $colorBrand;
   }
@@ -330,7 +358,7 @@ export default {
     color: $colorViolet;
     font-style: normal;
     font-weight: 500;
-    font-size: 40px;
+    font-size: 30px;
     margin-top: 16px;
   }
   &__countBox {
@@ -341,7 +369,7 @@ export default {
   &__count {
     color: $colorFontBase;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 18px;
     padding: 0 14px;
   }
   &__minusHover,
@@ -373,9 +401,35 @@ export default {
       display: block;
     }
   }
+  +mediaDesktopM() {
+    &__elem {
+      width: 224px;
+      height: 221px;
+    }
+    &__dxaPrice {
+      font-size: 22px;
+    }
+    &__count {
+      font-size: 22px;
+    }
+    &__priceInDollar {
+      font-size: 40px;
+    }
+    &__rateInfo {
+      font-size: 18px;
+    }
+  }
+  +mediaDesktop() {
+    display: flex;
+    align-items: center;
+    width: auto;
+    gap: 0;
+  }
 }
 
 .yourChoice {
+  width: 80vw;
+  margin: auto;
   margin-top: 50px;
   z-index: 2;
   &__titleBox {
@@ -388,7 +442,7 @@ export default {
   &__title {
     font-style: normal;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 18px;
     margin: 0;
     color: $colorBase;
     opacity: .4;
@@ -400,9 +454,6 @@ export default {
     width: 88%;
   }
   &__mainBlock {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     z-index: 2;
   }
   &__stackingInfo {
@@ -411,7 +462,8 @@ export default {
     gap: 5px 32px;
     font-style: normal;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 14px;
+    margin-bottom: 20px;
   }
   &__stackingInfoTitle {
     color: $colorBase;
@@ -427,6 +479,27 @@ export default {
   &__bonusesTitle,
   &__bonuses {
     color: $colorPurple;
+  }
+  +mediaTablet() {
+    &__mainBlock {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &__stackingInfo {
+      margin-bottom: 0;
+    }
+  }
+  +mediaDesktop() {
+    width: auto;
+  }
+  +mediaDesktopM() {
+    &__title {
+      font-size: 22px;
+    }
+    &__stackingInfo {
+      font-size: 18px;
+    }
   }
 }
 .inactiveMinus {

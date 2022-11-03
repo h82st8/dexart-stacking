@@ -96,11 +96,47 @@ export default {
     const roadmapItemsBox = ref<any>()
 
     const rightArrowClick = () => {
-      if (formData.countRight - 3 !== 0) {
+      if(window.matchMedia("(min-width: 1165px)").matches) {
+        if (formData.countRight - 3 !== 0) {
+          roadmapItemsBox.value = computed(() => {
+              return {
+                transform: `translate(${
+                  -280 * (roadmap.length - formData.countRight)
+                }px)`
+              };
+          })
+          --formData.countRight;
+          formData.countLeft++;
+        }
+      } else if (window.matchMedia("(min-width: 890px)").matches) {
+        if (formData.countRight - 3 !== 0) {
+          roadmapItemsBox.value = computed(() => {
+              return {
+                transform: `translate(${
+                  -280 * (roadmap.length - formData.countRight)
+                }px)`
+              };
+          })
+          --formData.countRight;
+          formData.countLeft++;
+        }
+      } else if (window.matchMedia("(min-width: 633px)").matches) {
+        if (formData.countRight - 2 !== 0) {
+          roadmapItemsBox.value = computed(() => {
+              return {
+                transform: `translate(${
+                  -280 * (roadmap.length - formData.countRight)
+                }px)`
+              };
+          })
+          --formData.countRight;
+          formData.countLeft++;
+        }
+      } else if (formData.countRight - 1 !== 0) {
         roadmapItemsBox.value = computed(() => {
           return {
             transform: `translate(${
-              -450 * (roadmap.length - formData.countRight)
+              -280 * (roadmap.length - formData.countRight)
             }px)`
           }
         })
@@ -112,10 +148,18 @@ export default {
     const leftArrowClick = () => {
       if (formData.countLeft !== 0) {
         roadmapItemsBox.value = computed(() => {
-          return {
-            transform: `translate(${
-              -450 * (1 + (roadmap.length - formData.countRight)) + 450
-            }px)`
+          if (window.matchMedia("(min-width: 1165px)").matches) {
+            return {
+              transform: `translate(${
+                -450 * (1 + (roadmap.length - formData.countRight)) + 450
+              }px)`
+            };
+          } else {
+            return {
+              transform: `translate(${
+                -280 * (1 + (roadmap.length - formData.countRight)) + 280
+              }px)`
+            };
           }
         })
         formData.countLeft--
@@ -136,7 +180,7 @@ export default {
 <style lang="stylus" scoped>
 .roadmapContainer {
   background: linear-gradient(180deg, #370863 0%, #000000 100%);
-  padding: 64px 0 50px 253px;
+  padding: 64px 0 50px 20px;
   overflow: hidden;
   position: relative;
   &__starsBg {
@@ -149,12 +193,14 @@ export default {
     z-index: 1;
   }
   &__titlePrimary {
+    font-size: 34px;
     background: linear-gradient(89.99deg, #BF81FF 1.88%, #D17558 18.37%, #F84FE7 77.86%);;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     z-index: 1;
   }
   &__titleSecond {
+    font-size: 34px;
     color: $colorBrand;
     z-index: 1;
   }
@@ -199,8 +245,8 @@ export default {
     transition: transform .3s;
   }
   &__item {
-    width: 450px;
-    min-width: 450px;
+    width: 280px;
+    min-width: 280px;
     transform: translate(253px);
     position: relative;
     top: -46px;
@@ -214,13 +260,14 @@ export default {
   &__textBoxTitle {
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     color: $colorBrand;
     margin-bottom: 16px;
   }
   &__listItem {
     position: relative;
     padding-left: 20px;
+    font-size: 12px;
     &::after {
       content: '';
       width: 8px;
@@ -232,6 +279,28 @@ export default {
       background: $colorFontBase;
     }
     margin-top: 5px;
+  }
+  +mediaPhone() {
+    padding: 64px 0 50px 53px;
+  }
+  +mediaDesktopM() {
+    &__titlePrimary,
+    &__titleSecond {
+      font-size: 48px;
+    }
+    &__textBoxTitle {
+      font-size: 24px;
+    }
+    &__listItem {
+      font-size: 16px;
+    }
+    &__item {
+      width: 450px;
+      min-width: 450px;
+    }
+  }
+  +mediaDesktop() {
+    padding: 64px 0 50px 253px;
   }
 }
 </style>

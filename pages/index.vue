@@ -131,12 +131,15 @@ export default {
 }
 .wrap {
   width: 100%;
-  height: 156px;
+  height: 200px;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 60.11%, rgba(0, 0, 0, 0) 100%);
+  +mediaTablet() {
+    height: 156px;
+  }
 }
 
 ::v-deep .vfm__container {

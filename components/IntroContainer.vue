@@ -37,9 +37,10 @@
 <style lang="stylus" scoped>
 .introContainer {
   width: 100%;
-  height: 1080px;
+  height: 700px;
   position: relative;
   overflow hidden;
+  padding-right: 10px;
   &__backgroundImg {
     position: absolute;
     min-width: 100%;
@@ -49,20 +50,24 @@
     left: 0;
   }
   &__introTitle {
-    width: 1137px;
     position: relative;
-    top: 346px;
-    left: 253px;
+    top: 246px;
+    left: 20px;
     z-index: 1;
+    +mediaPhone() {
+      left: 53px;
+    }
   }
   &__firstTitle {
     margin: 0;
-    font-size: 64px;
+    width: calc(100% - 53px);
+    font-size: 32px;
     font-weight: 900;
     color: $colorBrand;
     z-index: 2;
   }
   &__titleFade {
+    display: none;
     width: 100%;
     position: absolute;
     top: -97px;
@@ -70,11 +75,12 @@
     z-index: -2;
   }
   &__secondTitle {
-    max-width: 707px;
+    max-width: 300px;
+    width: calc(100% - 53px);
     color: $colorSecondTitle;
     font-family: 'Didact Gothic';
     font-style: normal;
-    font-size: 28px;
+    font-size: 14px;
     font-weight: 400;
     opacity: 0.8;
     margin: 0;
@@ -87,6 +93,7 @@
     top: -50px;
     left: -262px;
     z-index: -2;
+    display: none;
   }
   &__selectedText {
     font-weight: 700;
@@ -102,10 +109,37 @@
     left: 0;
   }
   &__coinTop {
+    width: 200px;
     position: absolute;
     bottom: 0;
-    left: 50%;
+    left: calc(50% + 100px);
     margin-left: -225px;
+  }
+  +mediaDesktopM() {
+    height: 1080px;
+    padding-right: 0px;
+    &__introTitle {
+      width: 1137px;
+      top: 346px;
+      left: 253px;
+    }
+    &__firstTitle {
+      font-size: 64px;
+    }
+    &__titleFade {
+      display: block;
+    }
+    &__secondTitle {
+      max-width: 707px;
+      font-size: 28px;
+    }
+    &__secondTitleFade {
+      display: block;
+    }
+    &__coinTop {
+      width: auto;
+      left: 50%;
+    }
   }
 }
 </style>
