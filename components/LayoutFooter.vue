@@ -133,10 +133,11 @@ export default {
 .footerContainer {
   display: flex;
   flex-wrap: wrap;
-  padding: 74px 50px 63px;
+  padding: 74px 20px 63px;
   background: linear-gradient(180deg, #160D1F -4.22%, #140C1B 100%);
   &__socialLinksBox {
     margin-right: 72px;
+    margin-bottom: 20px;
   }
   &__logo {
     width: 125px;
@@ -232,7 +233,7 @@ export default {
     margin-bottom: 12px;
   }
   &__input {
-    width: 446px;
+    width: 176px;
     height: 62px;
     padding-left: 16px;
     background: rgba(87, 25, 138, 0.5);
@@ -248,16 +249,25 @@ export default {
     }
   }
   &__button {
-    width: 149px;
+    width: 79px;
     height: 62px;
     background: $colorGradientForButton;
     border-radius: 0px 16px 16px 0px;
     position: relative;
-    top: -1px;
+    top: 0;
     left: -4px;
     &:hover {
       background: $colorGradientForHoverButton;
       opacity: 1;
+    }
+  }
+  +mediaTablet() {
+    padding: 74px 50px 63px;
+    &__input {
+      width: 446px;
+    }
+    &__button {
+      width: 149px;
     }
   }
   +mediaDesktopM() {
@@ -271,6 +281,9 @@ export default {
     }
     &__title {
       font-size: 20px;
+    }
+    &__button {
+      top: -1px;
     }
   }
 }

@@ -32,11 +32,13 @@
         }}
       </div>
       <div class="aboutToken__infoBox">
-        <div v-for="item in [1, 2, 3, 4]" :key="item" class="aboutToken__info">
-          <img
-            :class="`aboutToken__info${item}`"
-            :src="require(`assets/images/about-token-${item}.png`)"
-          />
+        <div v-for="item in aboutTokenInfo" :key="item.id" :class="`aboutToken__infoWrapper aboutToken__infoWrapper${item.id}`">
+          <div class="aboutToken__info">
+            <h3 class="aboutToken__infoTitle">{{ $t(item.title) }}</h3>
+            <ul>
+              <li v-for="(elem, i) in item.text" :key="i" class="aboutToken__infoText">{{ $t(elem) }}</li>
+            </ul>
+          </div>
         </div>
         <img
           :class="`aboutToken__coinIcon`"
@@ -201,6 +203,89 @@ export default {
   margin: auto;
   margin-top: 132px;
   position: relative;
+  &__infoWrapper {
+    position: relative;
+    background: transparent;
+    margin-bottom: 11px;
+    z-index: 0;
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 42px;
+      padding: 2px;
+      background: linear-gradient(96.43deg, #ED3FFE 30.37%, #7D1ED4 94.57%);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+    }
+  }
+  &__infoWrapper1 {
+    width: 80vw;
+    height: 184px;
+    &::before {
+      height: 184px;
+    }
+  }
+  &__infoWrapper2 {
+    width: 80vw;
+    height: 232px;
+    &::before {
+      height: 232px;
+    }
+  }
+  &__infoWrapper3 {
+    width: 80vw;
+    height: 208px;
+    &::before {
+      height: 208px;
+    }
+  }
+  &__infoWrapper4 {
+    width: 80vw;
+    height: 105px;
+    &::before {
+      height: 105px;
+    }
+  }
+  &__info {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    padding: 20px;
+    border: none;
+    border-radius: 62px;
+    background: transparent;
+  }
+  &__infoTitle {
+    font-weight: 700;
+    font-size: 18px;
+    color: $colorBrand;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  &__infoText {
+    position: relative;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    &::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 10px;
+      position: absolute;
+      left: 0;
+      top: 6px;
+      background: $colorFontBase;
+    }
+  }
   &__title {
     font-size: 34px;
     margin-bottom: 30px;
@@ -266,21 +351,21 @@ export default {
     color: $colorBrand;
   }
   +mediaTablet() {
-    &__info1 {
-      width: 30vw;
+    &__infoWrapper1 {
+      width: 35vw;
       position: relative;
       left: 55px;
     }
-    &__info2 {
+    &__infoWrapper2 {
       width: 35vw;
       position: relative;
       top: -90px;
       left: 90px;
     }
-    &__info3 {
+    &__infoWrapper3 {
       width: 40vw;
     }
-    &__info4 {
+    &__infoWrapper4 {
       width: 25vw;
       left: 100px;
     }
@@ -305,6 +390,12 @@ export default {
     &__linkBox {
       font-size: 20px;
     }
+    &__infoTitle {
+      font-size: 22px;
+    }
+    &__infoText {
+      font-size: 16px;
+    }
   }
   +mediaDesktop() {
     &__title {
@@ -315,18 +406,41 @@ export default {
       margin: 0;
       padding: 0;
     }
-    &__info1 {
+    &__infoWrapper1 {
+      position: relative;
+      left: 55px;
       width: 431px;
+      height: 184px;
+      &::before {
+        height: 184px;
+      }
     }
-    &__info2 {
-      width: 539px;
+    &__infoWrapper2 {
+      position: relative;
+      top: -90px;
       left: 65px;
+      width: 539px;
+      height: 232px;
+      &::before {
+        height: 232px;
+      }
     }
-    &__info3 {
+    &__infoWrapper3 {
+      position: relative;
       width: 569px;
+      height: 208px;
+      &::before {
+        height: 208px;
+      }
     }
-    &__info4 {
+    &__infoWrapper4 {
+      position: relative;
+      left: 100px;
       width: 325px;
+      height: 105px;
+      &::before {
+        height: 105px;
+      }
     }
     &__coinIcon {
       width: auto;

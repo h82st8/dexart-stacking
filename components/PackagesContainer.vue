@@ -243,7 +243,7 @@ export default {
   position: relative;
   &__titleBox {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     width: 80vw;
     margin: auto;
@@ -258,9 +258,10 @@ export default {
   &__title {
     font-size: 24px;
     color: $colorBrand;
+    text-align: center;
   }
   &__rateBox {
-    text-align: right;
+    text-align: center;
   }
   &__rate {
     font-size: 18px;
@@ -294,6 +295,18 @@ export default {
     top: -142px;
     left: 0;
     z-index: -1;
+  }
+  +mediaPhone() {
+    &__titleBox {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    &__title {
+      text-align: left;
+    }
+    &__rateBox {
+      text-align: right;
+    }
   }
   +mediaDesktopM() {
     &__title {
