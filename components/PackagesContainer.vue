@@ -281,7 +281,7 @@ export default {
   }
   &__coinIcon1 {
     position: absolute;
-    top: calc(100% + 75px);
+    top: calc(100% + 15px);
     right: calc(100% + 44px);
   }
   &__coinIcon2 {

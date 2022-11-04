@@ -19,6 +19,10 @@
       :filtered-packages="filteredPackages"
       :buy-tokens-modal-is-open="buyTokensModalIsOpen"
     />
+    <ModalCookies
+      :cookiesModalIsOpen="cookiesModalIsOpen"
+      @closeCookiesModal="closeCookiesModal"
+    />
   </div>
 </template>
 
@@ -30,6 +34,7 @@ import IntroContainer from '~/components/IntroContainer.vue'
 import PackagesContainer from '~/components/PackagesContainer.vue'
 import RoadmapContainer from '~/components/RoadmapContainer.vue'
 import ModalBuyTokens from '~/components/ModalBuyTokens.vue'
+import ModalCookies from '~/components/ModalCookies.vue'
 
 export default {
   name: 'IndexPage',
@@ -38,14 +43,16 @@ export default {
     PackagesContainer,
     TokensContainer,
     RoadmapContainer,
-    ModalBuyTokens
-  },
+    ModalBuyTokens,
+    ModalCookies
+},
   layout: 'base',
 
   data() {
     return {
       buyTokensModalIsOpen: false,
-      packets: {}
+      packets: {},
+      cookiesModalIsOpen: false,
     }
   },
 
@@ -88,9 +95,16 @@ export default {
   mounted() {
     this.$store.dispatch('fetchPacketsList')
     this.$store.dispatch('fetchCountry')
+    if (!localStorage.getItem('cookiesPolicies')) {
+      this.cookiesModalIsOpen = true;
+    };
   },
 
   methods: {
+    closeCookiesModal() {
+      localStorage.setItem('cookiesPolicies', 'true');
+      this.cookiesModalIsOpen = false;
+    },
     getCountPackage(id) {
       return this.packets?.[id] || 0
     },
@@ -119,7 +133,7 @@ export default {
     openBuyTokensModal() {
       this.buyTokensModalIsOpen = true
     }
-  }
+  },
 }
 </script>
 
@@ -160,5 +174,20 @@ export default {
 }
 ::v-deep .modal-tokens-overlay {
   backdrop-filter: blur(4px);
+}
+::v-deep .modal-cookies-content {
+  position: relative;
+  top: calc(50% - 100px);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 80px;
+  padding: 12px 16px 24px;
+  min-height: 100px;
+  border-radius: 16px;
+  background: $colorBase;
+}
+::v-deep .modal-cookies-overlay {
+  // background-color: transparent !important;
+  background-color: rgba(#A768D4, 0.4) !important;
 }
 </style>

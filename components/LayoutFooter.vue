@@ -88,13 +88,9 @@ export default {
         href: '/docs/TermsAndConditions_26.10.22.pdf'
       },
       {
-        title: 'Legal information',
-        href: ''
+        title: 'Risk discloser statement',
+        href: '/docs/RiskDiscloserStatement.pdf'
       },
-      {
-        title: 'Disclaimer',
-        href: ''
-      }
     ]
 
     const sitemap = [
