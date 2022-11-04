@@ -88,7 +88,12 @@ export default {
         (item) => +item > 0
       )
 
-      return this.packages.filter((item) => includesPackages.includes(item.id))
+      return this.packages
+        .filter((item) => includesPackages.includes(String(item.id)))
+        .map((item) => ({
+          ...item,
+          count: this.packets[item.id]
+        }))
     }
   },
 
@@ -117,7 +122,7 @@ export default {
           [id]: currentValue - 1
         }
       } else {
-        this.packets = omit([id], this.packets)
+        this.packets = omit([String(id)], this.packets)
       }
     },
 

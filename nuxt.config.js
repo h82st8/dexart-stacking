@@ -4,17 +4,27 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'dexart-stacking',
+    title: 'DEXART Metaverse Tokens Staking',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Buy and stake tokens of DEXART metaverse'
+      },
       { name: 'format-detection', content: 'telephone=no' },
-      { name: 'msapplication-TileColor', content: '#6a1dac' },
-      { name: 'theme-color', content: '#6a1dac' }
+
+      { property: 'og:type', content: 'website' },
+      // { property: 'og:image', content: '/og/DXAdesign.jpg' },
+      {
+        property: 'og:og:description',
+        content: 'Buy and stake tokens of DEXART metaverse'
+      },
+      { charset: 'utf-8' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -29,7 +39,18 @@ export default {
         sizes: '32x32',
         href: '/favicon-32x32.png'
       },
-      { rel: 'manifest', href: '/site.webmanifest' }
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon-16x16.png'
+      },
+      { rel: 'manifest', href: '/site.webmanifest' },
+      {
+        rel: 'mask-icon',
+        type: 'image/x-icon',
+        href: '/safari-pinned-tab.svg'
+      }
     ]
   },
 

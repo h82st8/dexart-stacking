@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="hr" />
-      <div class="buttonContainer">
+      <form class="buttonContainer" @submit.prevent="onBuy">
         <div class="buttonContainer__priceBox">
           <h3 class="title">{{ $t('Стоимость') }}:</h3>
           <h3 class="title">
@@ -54,8 +54,10 @@
         </div>
         <div class="buttonContainer__itemBoxWrapper">
           <input
+            v-model="email"
             type="email"
             class="buttonContainer__itemBox"
+            required
             :placeholder="$t('Ваш email')"
           />
         </div>
@@ -107,6 +109,7 @@
             type="checkbox"
             name="termAndCondition"
             class="buttonContainer__checkbox"
+            required
           />
           <div style="position: relative">
             <label
@@ -127,27 +130,37 @@
             >
           </div>
         </div>
-        <CommonButton style="width: 280px">{{ $t('Купить') }}</CommonButton>
-      </div>
+        <CommonLoader v-if="buyState === 'PENDING'" />
+        <CommonButton v-else type="submit" style="width: 280px">{{
+          $t('Купить')
+        }}</CommonButton>
+        <div
+          v-if="buyState === 'REJECTED'"
+          style="color: chocolate; margin-top: 5px; text-align: center"
+        >
+          {{ $t('Something went wrong') }}
+        </div>
+      </form>
     </div>
   </vue-final-modal>
 </template>
 
-<script lang="ts">
-import { ref, PropType } from 'vue'
+<script>
+import { isEmpty } from 'rambda'
+import { mapState } from 'vuex'
 import CommonButton from './CommonButton.vue'
-import { packetInterface } from '@/interfaces/packagesTypes'
+import CommonLoader from './CommonLoader.vue'
 
 export default {
   name: 'ModalBuyTokens',
-  components: { CommonButton },
+  components: { CommonButton, CommonLoader },
   props: {
     buyTokensModalIsOpen: {
       type: Boolean,
       default: false
     },
     filteredPackages: {
-      type: Array as PropType<packetInterface[]>,
+      type: Array,
       required: true
     },
     packet: {
@@ -155,28 +168,53 @@ export default {
       required: true
     }
   },
-  setup() {
-    const showDropdown = ref<boolean>(false)
-    const chosenMethod = ref<string>('')
-    const acceptTermsAndConditions = ref<boolean>(false)
 
-    const paymentMethods = ['Банковской картой', 'С криптокошелька']
-
-    const changeChosenMethod = (method: string) => {
-      chosenMethod.value = method
-      showDropdown.value = false
-    }
-
-    const dividingIntoDigits = (count: number | string) =>
-      String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ')
-
+  data() {
     return {
-      showDropdown,
-      chosenMethod,
-      paymentMethods,
-      acceptTermsAndConditions,
-      changeChosenMethod,
-      dividingIntoDigits
+      email: '',
+      paymentMethods: ['Банковской картой', 'С криптокошелька'],
+      showDropdown: false,
+      chosenMethod: '',
+      acceptTermsAndConditions: false,
+
+      hasError: false
+    }
+  },
+
+  computed: {
+    ...mapState(['buyState'])
+  },
+  methods: {
+    changeChosenMethod(method) {
+      this.chosenMethod = method
+      this.showDropdown = false
+    },
+    dividingIntoDigits(count) {
+      return String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ')
+    },
+
+    onBuy() {
+      const valuesOfPaymentMethods = {
+        'Банковской картой': 'odb',
+        'С криптокошелька': 'oton'
+      }
+
+      const data = {
+        email: this.email,
+        packages: this.filteredPackages.map((item) => ({
+          id: item.id,
+          count: item.count
+        })),
+        payment_method: valuesOfPaymentMethods[this.chosenMethod] // odb || oton
+      }
+
+      if (!data.email || isEmpty(data.packages) || !data.payment_method) {
+        this.hasError = true
+      }
+
+      this.hasError = false
+
+      this.$store.dispatch('buyPackets', data)
     }
   }
 }
@@ -189,7 +227,7 @@ export default {
   height: 63px;
   position: relative;
   margin-bottom: 11px;
-  z-index: 1;
+  z-index: 10;
 }
 .hr {
   width: 280px;
@@ -262,6 +300,7 @@ export default {
   }
 }
 .buttonContainer {
+  display block
   &__priceBox {
     width: 280px;
     display: flex;
@@ -368,8 +407,9 @@ export default {
     }
   }
   &__accessTermsAndConditions {
-    z-index: -1;
+    z-index: 1;
     margin-bottom: 10px;
+    position relative
   }
   &__label {
     position: absolute;
@@ -400,7 +440,12 @@ export default {
     }
   }
   &__checkbox {
-    display: none;
+    opacity 0
+    position absolute
+    left: 17px;
+    top: 5px;
+    width: 23px;
+    height: 23px;
     &:checked + div .buttonContainer__label {
       &:after {
         display: block;
