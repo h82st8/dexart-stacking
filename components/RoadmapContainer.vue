@@ -319,7 +319,7 @@ export default {
       min-width: 450px;
     }
   }
-  +mediaDesktop() {
+  +mediaLarge() {
     padding: 64px 0 50px 253px;
   }
 }
