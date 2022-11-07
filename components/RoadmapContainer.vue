@@ -247,6 +247,7 @@ export default {
       width: 42px;
       height: 42px;
       background: $colorGradientForButton;
+      border-radius: 8px;
     }
   }
   &__sliderBox {
