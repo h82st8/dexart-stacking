@@ -246,6 +246,7 @@ export default {
     &:active {
       width: 42px;
       height: 42px;
+      background: $colorGradientForButton;
     }
   }
   &__sliderBox {
