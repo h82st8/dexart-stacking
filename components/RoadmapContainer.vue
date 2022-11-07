@@ -236,15 +236,16 @@ export default {
     cursor: pointer;
     user-select: none;
     z-index: 1;
-    &:hover {
-      background: $colorGradientForButton;
-    }
+
     +mediaTablet() {
-      &:active .aboutStaking__arrow,
-      &:active {
-        width: 42px;
-        height: 42px;
+      &:hover {
+        background: $colorGradientForButton;
       }
+    }
+    &:active .aboutStaking__arrow,
+    &:active {
+      width: 42px;
+      height: 42px;
     }
   }
   &__sliderBox {
