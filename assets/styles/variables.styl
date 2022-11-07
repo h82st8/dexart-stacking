@@ -27,6 +27,7 @@ $mediaSizes = {
   phone: 428px,
   tabletS: 560px,
   tablet: 768px,
+  extraTablet: 890px,
   desktopS: 1024px,
   desktopM: 1165px,
   desktop: 1280px,
@@ -98,6 +99,12 @@ mediaTabletS() {
 
 mediaTablet() {
   +getMedia($mediaSizes.tablet) {
+    {block};
+  }
+}
+
+mediaExtraTablet() {
+  +getMedia($mediaSizes.extraTablet) {
     {block};
   }
 }

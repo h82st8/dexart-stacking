@@ -101,7 +101,7 @@ export default {
           roadmapItemsBox.value = computed(() => {
               return {
                 transform: `translate(${
-                  -280 * (roadmap.length - formData.countRight)
+                  -450 * (roadmap.length - formData.countRight)
                 }px)`
               };
           })
@@ -178,6 +178,24 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.wrapper {
+  width: 280px;
+  padding-top: 40px;
+  padding-left: 40px;
+  position: relative;
+  top: -40px;
+  left: -40px;
+  overflow: hidden;
+  +getMedia(633px) {
+    width: 560px;
+  }
+  +mediaExtraTablet() {
+    width: 840px;
+  }
+  +mediaDesktopM() {
+    width: 1350px;
+  }
+}
 .roadmapContainer {
   background: linear-gradient(180deg, #370863 0%, #000000 100%);
   padding: 64px 0 50px 20px;
@@ -221,10 +239,12 @@ export default {
     &:hover {
       background: $colorGradientForButton;
     }
-    &:active .aboutStaking__arrow,
-    &:active {
-      width: 42px;
-      height: 42px;
+    +mediaTablet() {
+      &:active .aboutStaking__arrow,
+      &:active {
+        width: 42px;
+        height: 42px;
+      }
     }
   }
   &__sliderBox {

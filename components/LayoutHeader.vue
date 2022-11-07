@@ -76,6 +76,7 @@
     +mediaTablet() {
       top: -20px;
       left: -70px;
+      width: 450px;
     }
     +mediaDesktopS() {
       position: static;
