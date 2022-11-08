@@ -86,17 +86,26 @@ export default {
   },
 
   i18n: {
-    locales: ['en'],
-    defaultLocale: 'en',
-    vueI18n: {
-      fallbackLocale: 'en',
-      messages: {
-        en: {
-          mainTitle:
-            'Earn <br> on stacking with DEXART <br> <span class="introContainer__selectedText">up to 24% per annum</span>'
-        }
+    locales: [
+      {
+        code: 'en',
+        file: 'en.js'
+      },
+      {
+        code: 'ru',
+        file: 'ru.js'
       }
-    }
+    ],
+
+    defaultLocale: 'en',
+    fallbackLocale: 'en',
+    langDir: 'langs/dist',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      onlyOnRoot: true // recommended
+    },
+    vueI18n: '~/i18n.js'
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
