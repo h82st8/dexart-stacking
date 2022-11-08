@@ -22,11 +22,10 @@
 import Vue, { reactive, computed } from 'vue'
 import AddTokensContainer from '~/components/AddTokensContainer.vue'
 import ModalBuyTokens from '~/components/ModalBuyTokens.vue'
-import PackagesContainer from '~/components/PackagesContainer.vue'
 
 export default Vue.extend({
   name: 'StackingPage',
-  components: { PackagesContainer, AddTokensContainer, ModalBuyTokens },
+  components: { AddTokensContainer, ModalBuyTokens },
   layout: 'base',
   setup() {
     const formData = reactive({

@@ -228,6 +228,10 @@ export default {
   position: relative;
   margin-bottom: 11px;
   z-index: 10;
+  +mediaDesktopM() {
+    margin: auto;
+    margin-bottom: 11px;
+  }
 }
 .hr {
   width: 280px;
@@ -235,6 +239,9 @@ export default {
   background: $colorBrand;
   opacity: .4;
   margin: 30px 0;
+  +mediaDesktopM() {
+    width: 400px;
+  }
 }
 .title {
   font-style: normal;
@@ -291,11 +298,15 @@ export default {
     color: #BF81FF;
   }
   +mediaDesktopM() {
+    max-width: 600px;
     &__yourChoiceInfoTitle {
       font-size: 18px;
     }
     &__yourChoiceInfo {
       font-size: 19px;
+    }
+    &__yourChoiceInfoBox {
+      width: 400px;
     }
   }
 }
@@ -476,6 +487,19 @@ export default {
     }
   }
   +mediaDesktopM() {
+    display flex;
+    flex-direction: column;
+    align-items: center;
+    &__priceBox {
+      width: 400px;
+    }
+    &__label {
+      left: -20px;
+    }
+    &__itemBoxWrapper {
+      margin: 0 auto;
+      margin-bottom: 11px;
+    }
     &__itemBox,
     &__textBox {
       font-size: 16px;

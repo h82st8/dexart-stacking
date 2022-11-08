@@ -122,7 +122,7 @@
                   'yourChoice__bonuses',
                   { yourChoice__stackingInfoChoice: packet.bonuses }
                 ]"
-                >{{ `+${dividingIntoDigits(packet.bonuses)} DXA` }}</span
+                >{{ `+${dividingIntoDigits(packet.bonuses)} UNITS` }}</span
               >
             </div>
           </div>
@@ -279,7 +279,7 @@ export default {
   }
   &__coinIcon1 {
     position: absolute;
-    top: calc(100% + 15px);
+    top: calc(100% - 15px);
     right: calc(100% + 44px);
   }
   &__coinIcon2 {
