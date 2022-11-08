@@ -245,13 +245,13 @@ export default {
     }
   }
   &__button {
-    width: 79px;
     height: 62px;
     background: $colorGradientForButton;
     border-radius: 0px 16px 16px 0px;
     position: relative;
     top: 0;
     left: -4px;
+    padding: 0 5px;
     &:hover {
       background: $colorGradientForHoverButton;
       opacity: 1;
@@ -262,13 +262,11 @@ export default {
     &__input {
       width: 446px;
     }
-    &__button {
-      width: 149px;
-    }
   }
   +mediaDesktopM() {
     display: flex;
-    padding: 84px 128px 63px;
+    flex-wrap: nowrap;
+    padding: 84px 98px 63px;
     &__socialLinksBoxInfo,
     &__itemLink,
     &__followInfo,
