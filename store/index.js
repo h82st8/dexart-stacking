@@ -36,7 +36,7 @@ export const getters = {
 
     return state.packetsOfDxaTokensData.map((packet) => ({
       id: packet.id,
-      dxaPrice: packet.amount,
+      dxaPrice: packet.tokens,
       priceInDollar: packet.price,
       bonuses: packet.bonus,
       percent: String(packet.bonus_rate).replace('%', '')

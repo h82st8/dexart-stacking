@@ -28,9 +28,9 @@
           </div>
           <div class="packagesBox__bonuses">
             {{
-              item.bonuses
-                ? `+ ${dividingIntoDigits(item.bonuses)} (${item.percent}%)`
-                : ''
+              item.bonuses !== 0
+                ? `${item.priceInDollar / 10} + ${dividingIntoDigits(item.bonuses)} UNITS`
+                : '1 UNIT'
             }}
           </div>
           <div class="packagesBox__priceInDollar">
@@ -342,7 +342,7 @@ export default {
     background: $colorBgPackage;
     box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.25);
     border-radius: 32px;
-    padding: 26px 24px;
+    padding: 26px 10px;
     &:not(:last-child) {
       margin-right: 20px;
     }
