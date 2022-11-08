@@ -1,15 +1,15 @@
-const { execSync } = require('child_process');
+const { execSync } = require('child_process')
 
-const generateFiles = require('./langs/strings');
+const generateFiles = require('./langs/translationsGenerator.js')
 
-(async () => {
+;(async () => {
   try {
-    console.info('> build locales');
-    await generateFiles();
+    console.info('> build locales')
+    await generateFiles()
   } catch (err) {
-    console.error(err);
-    process.exit();
+    console.error(err)
+    process.exit()
   }
 
-  execSync('nuxt generate');
-})();
+  execSync('nuxt generate')
+})()
