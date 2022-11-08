@@ -1,5 +1,4 @@
-const translationsGenerator = require('./langs/translationsGenerator.js')(
-  async () => {
-    await translationsGenerator()
-  }
-)()
+const translationsGenerator = require('./translationsGenerator.js')
+;(async () => {
+  await translationsGenerator()
+})()
