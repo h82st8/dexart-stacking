@@ -13,9 +13,7 @@
     />
     <div class="buyDxaContainer">
       <div class="buyDxaContainer__titleBox">
-        <h1 class="buyDxaContainer__title">
-          {{ $t('packetsDxaTokens') }}
-        </h1>
+        <h1 class="buyDxaContainer__title" v-html="$t(`packetsDxaTokens`)" />
         <div class="buyDxaContainer__rateBox">
           <h1 class="buyDxaContainer__rate">1 DXA = $0,001</h1>
           <div class="buyDxaContainer__rateInfo">
