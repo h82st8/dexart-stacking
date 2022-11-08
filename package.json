@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "generate:messages": "node ./langs/translationsGenerator.js",
+    "generate:messages": "node ./langs/runGenerator.js",
     "predev": "yarn run generate:messages",
-    "preci": "yarn run generate:messages",
     "dev": "nuxt",
     "build": "node build-script.js",
     "start": "nuxt start",

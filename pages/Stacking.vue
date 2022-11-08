@@ -1,14 +1,14 @@
 <template>
   <div class="indexPage">
     <AddTokensContainer />
-    <PackagesContainer
+    <!-- <PackagesContainer
       :is-stacking-page="true"
       :packages="packages"
       :packet="packet"
       @openBuyTokensModal="openBuyTokensModal"
       @reduceCountPackages="reduceCountPackages"
       @increaseCountPackages="increaseCountPackages"
-    />
+    /> -->
     <ModalBuyTokens
       v-model="formData.buyTokensModalIsOpen"
       :packet="packet"

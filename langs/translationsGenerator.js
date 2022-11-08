@@ -54,38 +54,44 @@ const generateFiles = async (messages) => {
   )
 }
 
-;(async function () {
+const getMessages = async () => {
+  const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID)
+
+  await doc.useApiKey(process.env.GOOGLE_SHEETS_API_KEY)
+  await doc.loadInfo()
+
+  const sheet = doc.sheetsByIndex[0]
+
+  const rows = await sheet.getRows()
+
+  const { headerValues } = sheet
+  const langs = headerValues.splice(1)
+
+  const messages = {}
+
+  langs.forEach((l) => {
+    messages[l] = {}
+  })
+
+  rows.forEach((row) => {
+    langs.forEach((lang) => {
+      const value = row[lang]
+      const result = normalizeText(value)
+      if (result) {
+        messages[lang][row.key] = normalizeText(value)
+      }
+    })
+  })
+
+  return messages
+}
+
+module.exports = async () => {
   try {
-    const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID)
-
-    await doc.useApiKey(process.env.GOOGLE_SHEETS_API_KEY)
-    await doc.loadInfo()
-
-    const sheet = doc.sheetsByIndex[0]
-
-    const rows = await sheet.getRows()
-
-    const { headerValues } = sheet
-    const langs = headerValues.splice(1)
-
-    const messages = {}
-
-    langs.forEach((l) => {
-      messages[l] = {}
-    })
-
-    rows.forEach((row) => {
-      langs.forEach((lang) => {
-        const value = row[lang]
-        const result = normalizeText(value)
-        if (result) {
-          messages[lang][row.key] = normalizeText(value)
-        }
-      })
-    })
+    const messages = await getMessages()
 
     await generateFiles(messages)
   } catch (err) {
     console.error(err)
   }
-})()
+}
