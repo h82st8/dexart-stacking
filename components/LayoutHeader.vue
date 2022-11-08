@@ -6,12 +6,24 @@
     />
     <LayoutHeaderMenu class="headerContainer__headerMenu" />
     <div class="headerContainer__buttonBox">
-      <img class="headerContainer__buttonWallet" :src="require('assets/images/buttonWallet.png')" alt="wallet connection button">
-      <img class="headerContainer__buttonWalletHover" :src="require('assets/images/buttonWalletHover.png')" alt="wallet connection button">
+      <button :class="['headerContainer__buttonWallet', {buttonDisabled: isConnectButtonDisabled}]">{{ $t('Подключить кошелек') }}</button>
+      <!-- <img class="headerContainer__buttonWallet" :src="require('assets/images/buttonWallet.png')" alt="wallet connection button">
+      <img class="headerContainer__buttonWalletHover" :src="require('assets/images/buttonWalletHover.png')" alt="wallet connection button"> -->
       <LangSwitch />
     </div>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'LayoutHeader',
+  data() {
+    return {
+      isConnectButtonDisabled: true,
+    };
+  },
+}
+</script>
 
 <style lang="stylus" scoped>
 .headerContainer {
@@ -92,6 +104,31 @@
     // &:hover .headerContainer__buttonWalletHover {
     //   display: block;
     // }
+  }
+  &__buttonWallet {
+    padding: 8px 12px;
+    border: 1px solid #ED3FFE;
+    border-radius: 32px;
+    position: relative;
+    font-size: 12px;
+    color: $colorBrand;
+    z-index: 1
+    &:hover {
+      opacity: 1;
+      background: linear-gradient(90deg, #7C1DD3 2.02%, #912EEF 49.93%, #EE40FF 96.86%);
+    }
+    +mediaDesktopM() {
+      font-size: 16px;
+      padding: 16px 24px;
+    }
+  }
+}
+.buttonDisabled {
+  cursor: default;
+  opacity: .6;
+  &:hover {
+    opacity: .6;
+    background: none;
   }
 }
 </style>

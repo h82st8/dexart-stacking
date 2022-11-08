@@ -41,7 +41,7 @@ export default {
         href: '',
       },
       {
-        title: 'Купить токен',
+        title: 'Купить энергию',
         href: '',
       },
       // {

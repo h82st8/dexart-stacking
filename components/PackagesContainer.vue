@@ -17,7 +17,7 @@
         <div class="buyDxaContainer__rateBox">
           <h1 class="buyDxaContainer__rate">1 DXA = $0,001</h1>
           <div class="buyDxaContainer__rateInfo">
-            {{ $t('Выберите пакеты и их количество') }}
+            {{ $t('Выберите тип ячеек и их количество') }}
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
           <div class="yourChoice__stackingInfo">
             <div class="">
               <span class="yourChoice__stackingInfoTitle"
-                >{{ $t('Всего токенов') }}:</span
+                >{{ $t('Всего ячеек') }}:</span
               >
               <span
                 :class="[
@@ -101,7 +101,7 @@
             </div>
             <div class="">
               <span class="yourChoice__stackingInfoTitle"
-                >{{ $t('Стоимость') }}:</span
+                >{{ $t('Финальная стоимость') }}:</span
               >
               <span
                 :class="[
@@ -114,7 +114,7 @@
             <div class="">
               <span
                 class="yourChoice__stackingInfoTitle yourChoice__bonusesTitle"
-                >{{ $t('Бонусов') }}:</span
+                >{{ $t('Бонус') }}:</span
               >
               <span
                 :class="[

@@ -6,7 +6,7 @@
       alt="intro background"
     />
     <div class="introContainer__introTitle">
-      <h1 class="introContainer__firstTitle" v-html="$t(`mainTitle`)"></h1>
+      <h1 class="introContainer__firstTitle" v-html="$t(`intro-title`)"></h1>
       <img
         class="introContainer__titleFade"
         :src="require('assets/images/title-fade-img.png')"
@@ -14,7 +14,7 @@
       <h2 class="introContainer__secondTitle">
         {{
           $t(
-            'Выбирайте пакеты токенов, чтобы получить максимальную выгоду, зарабатывать и поддерживать эко-систему DEXART Metaverse'
+            'intro-text'
           )
         }}
       </h2>

@@ -5,8 +5,8 @@
       :src="require('assets/images/stars-roadmap-bg.png')"
     />
     <div class="roadmapContainer__titleBox">
-      <h3 class="roadmapContainer__titlePrimary">Roadmap</h3>
-      <h3 class="roadmapContainer__titleSecond">DEXART</h3>
+      <h3 class="roadmapContainer__titlePrimary">RoadMap</h3>
+      <h3 class="roadmapContainer__titleSecond">DXA</h3>
     </div>
     <div class="roadmapContainer__arrowsBox">
       <div class="roadmapContainer__arrowWrapper" @click="leftArrowClick">
@@ -59,33 +59,21 @@ export default {
       {
         id: 1,
         title: 'Q4 2022',
-        textList: ['rodmap-text-1-1', 'rodmap-text-1-2']
+        textList: ['Пресейл энергетических ячеек', 'Запуск производства токенов']
       },
       {
         id: 2,
         title: 'Q1 2023',
         textList: [
-          'rodmap-text-2-1',
-          'rodmap-text-2-2',
-          'rodmap-text-2-3',
-          'rodmap-text-2-4'
+          'Первые токены произведены',
+          'Экономика DEXART запущена',
         ]
       },
       {
         id: 3,
         title: 'Q2 2023',
-        textList: ['rodmap-text-3-1', 'rodmap-text-3-2']
+        textList: ['Доступен стейкинг токенов']
       },
-      {
-        id: 4,
-        title: 'Q3 2023',
-        textList: ['rodmap-text-4-1', 'rodmap-text-4-2', 'rodmap-text-4-3']
-      },
-      {
-        id: 5,
-        title: '2023-2024',
-        textList: ['rodmap-text-5-1']
-      }
     ]
 
     const formData = reactive({

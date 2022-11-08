@@ -1,6 +1,6 @@
 <template>
   <div class="tokensContainer">
-    <div class="aboutStaking">
+    <div class="aboutStaking" v-if="0">
       <div class="aboutStaking__imgBox">
         <img
           class="aboutStaking__img"
@@ -22,12 +22,13 @@
         :src="require('assets/images/stars-staking-bg.png')"
       />
     </div>
+
     <div class="aboutToken">
-      <h3 class="aboutToken__title">{{ $t('О токене') }}</h3>
+      <h3 class="aboutToken__title">{{ $t('Монетизация внимания пользователей') }}</h3>
       <div class="aboutToken__text">
         {{
           $t(
-            'DXA — это внутренний платёжный токен, который используется для совершения сделок в метавселенной DEXART.'
+            'Токен DXA — это криптовалюта, обеспеченная вниманием пользователей метавселенной DEXART. Эмиссия токенов происходит, когда пользователь проводит время в метавселенной, взаимодействует с ней и выполняет активные действия.'
           )
         }}
       </div>
@@ -35,9 +36,10 @@
         <div v-for="item in aboutTokenInfo" :key="item.id" :class="`aboutToken__infoWrapper aboutToken__infoWrapper${item.id}`">
           <div class="aboutToken__info">
             <h3 class="aboutToken__infoTitle">{{ $t(item.title) }}</h3>
-            <ul>
+            <!-- <ul>
               <li v-for="(elem, i) in item.text" :key="i" class="aboutToken__infoText">{{ $t(elem) }}</li>
-            </ul>
+            </ul> -->
+            <p class="aboutToken__infoText">{{ $t(item.text) }}</p>
           </div>
         </div>
         <img
@@ -61,42 +63,47 @@ export default {
     const aboutTokenInfo = [
       {
         id: 1,
-        title: 'about-token-info-title-1',
-        text: [
-          'about-token-info-1-content-1',
-          'about-token-info-1-content-2',
-          'about-token-info-1-content-3',
-          'about-token-info-1-content-4'
-        ]
+        title: 'Производство токенов',
+        text: 'Мы создали Token Production Facility (TPF). Чтобы его запустить, нужна энергия. Она хранится в энергетических ячейках. Ячейки питают TPF, он производит токены, которые скапливаются в хранилище пользователя.',
+        // [
+        //   'about-token-info-1-content-1',
+        //   'about-token-info-1-content-2',
+        //   'about-token-info-1-content-3',
+        //   'about-token-info-1-content-4',
+        //   'about-token-info-1-content-5',
+        //   'about-token-info-1-content-6'
+        // ]
       },
 
       {
         id: 2,
-        title: 'about-token-info-title-2',
-        text: [
-          'about-token-info-2-content-1',
-          'about-token-info-2-content-2',
-          'about-token-info-2-content-3',
-          'about-token-info-2-content-4',
-          'about-token-info-2-content-5',
-          'about-token-info-2-content-6'
-        ]
+        title: 'Чем больше энергии, тем больше токенов',
+        text: 'Токены на TPF производятся постепенно. Чем дольше работает TPF, тем выше его эффективность. Главное, вовремя забирать токены из хранилища, иначе оно переполнится и производство остановится.',
+        // [
+        //   'about-token-info-2-content-1',
+        //   'about-token-info-2-content-2',
+        //   'about-token-info-2-content-3',
+        //   'about-token-info-2-content-4',
+        //   'about-token-info-2-content-5',
+        //   'about-token-info-2-content-6'
+        // ]
       },
       {
         id: 3,
-        title: 'about-token-info-title-3',
-        text: [
-          'about-token-info-3-content-1',
-          'about-token-info-3-content-2',
-          'about-token-info-3-content-3',
-          'about-token-info-3-content-4',
-          'about-token-info-3-content-5'
-        ]
+        title: 'Первые токены через 6 недель',
+        text: 'После запуска TPF первые токены появятся через 6 недель. Их можно будет потратить на покупки внутри DEXART, обменять на бирже, улучшить с их помощью TPF или увеличить объем хранилища.',
+        // [
+        //   'about-token-info-3-content-1',
+        //   'about-token-info-3-content-2',
+        //   'about-token-info-3-content-3',
+        //   'about-token-info-3-content-4',
+        //   'about-token-info-3-content-5'
+        // ]
       },
       {
         id: 4,
-        title: 'about-token-info-title-4',
-        text: ['about-token-info-4-content-1']
+        title: 'Особый статус',
+        text: 'Пользователи, участвующие в создании токенов, получают особый статус DEX Builder и специальный подарочный NFT-предмет для своего аватара.',
       }
     ]
 
@@ -201,7 +208,7 @@ export default {
 .aboutToken {
   max-width: 1206px;
   margin: auto;
-  margin-top: 132px;
+  margin-top: 52px;
   position: relative;
   &__infoWrapper {
     position: relative;
@@ -224,30 +231,30 @@ export default {
   }
   &__infoWrapper1 {
     width: 80vw;
-    height: 184px;
+    height: 174px;
     &::before {
-      height: 184px;
+      height: 174px;
     }
   }
   &__infoWrapper2 {
     width: 80vw;
-    height: 232px;
+    height: 202px;
     &::before {
-      height: 232px;
+      height: 202px;
     }
   }
   &__infoWrapper3 {
     width: 80vw;
-    height: 208px;
+    height: 158px;
     &::before {
-      height: 208px;
+      height: 158px;
     }
   }
   &__infoWrapper4 {
     width: 80vw;
-    height: 105px;
+    height: 175px;
     &::before {
-      height: 105px;
+      height: 175px;
     }
   }
   &__info {
@@ -273,18 +280,6 @@ export default {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    padding-left: 20px;
-    margin-bottom: 5px;
-    &::after {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 10px;
-      position: absolute;
-      left: 0;
-      top: 6px;
-      background: $colorFontBase;
-    }
   }
   &__title {
     font-size: 34px;
@@ -398,6 +393,7 @@ export default {
     }
   }
   +mediaDesktop() {
+    margin-top: 0;
     &__title {
       text-align: left;
     }
@@ -410,7 +406,7 @@ export default {
       position: relative;
       left: 55px;
       width: 431px;
-      height: 184px;
+      height: 204px;
       &::before {
         height: 184px;
       }
@@ -420,26 +416,26 @@ export default {
       top: -90px;
       left: 65px;
       width: 539px;
-      height: 232px;
+      height: 182px;
       &::before {
-        height: 232px;
+        height: 182px;
       }
     }
     &__infoWrapper3 {
       position: relative;
       width: 569px;
-      height: 208px;
+      height: 158px;
       &::before {
-        height: 208px;
+        height: 158px;
       }
     }
     &__infoWrapper4 {
       position: relative;
       left: 100px;
       width: 325px;
-      height: 105px;
+      height: 165px;
       &::before {
-        height: 105px;
+        height: 165px;
       }
     }
     &__coinIcon {
