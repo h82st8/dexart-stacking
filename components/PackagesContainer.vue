@@ -29,7 +29,9 @@
           <div class="packagesBox__bonuses">
             {{
               item.bonuses !== 0
-                ? `${item.priceInDollar / 10} + ${dividingIntoDigits(item.bonuses)} UNITS`
+                ? `${item.priceInDollar / 10} + ${dividingIntoDigits(
+                    item.bonuses
+                  )} UNITS`
                 : '1 UNIT'
             }}
           </div>
