@@ -157,7 +157,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { PropType } from 'vue'
 import { mapGetters } from 'vuex'
 import CommonButton from './CommonButton.vue'
@@ -176,7 +176,7 @@ export default {
       required: false
     },
     packages: {
-      type: Array as PropType<packetInterface[]>,
+      type: Array,
       required: true
     },
     packet: {
@@ -196,7 +196,7 @@ export default {
   },
 
   methods: {
-    dividingIntoDigits(count: number | string) {
+    dividingIntoDigits(count) {
       return String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ')
     }
   }
