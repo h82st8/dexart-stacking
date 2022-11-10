@@ -158,10 +158,8 @@
 </template>
 
 <script>
-import { PropType } from 'vue'
 import { mapGetters } from 'vuex'
 import CommonButton from './CommonButton.vue'
-import { packetInterface } from '@/interfaces/packagesTypes'
 
 export default {
   name: 'PackagesContainer',
@@ -191,7 +189,7 @@ export default {
   computed: {
     ...mapGetters({ isPaymentBlocked: 'isPaymentBlocked' }),
     isDisabledBuyButton() {
-      return !this.packet.priceInDollar && this.isPaymentBlocked
+      return !this.packet.priceInDollar || this.isPaymentBlocked
     }
   },
 
