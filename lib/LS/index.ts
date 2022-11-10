@@ -6,10 +6,10 @@ export default class LS {
   }
 
   public set(value: string) {
-    localStorage.setItem(this.name, value);
+    return localStorage.setItem(this.name, value);
   }
 
   public get() {
-    localStorage.getItem(this.name);
+    return localStorage.getItem(this.name);
   }
 }
