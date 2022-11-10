@@ -41,6 +41,9 @@ export const getters = {
       bonuses: packet.bonus,
       percent: String(packet.bonus_rate).replace('%', '')
     }))
+  },
+  isPaymentBlocked(state) {
+    return state.country === 'US' || state.country === 'CN'
   }
 }
 
@@ -92,7 +95,11 @@ export const actions = {
     }
   },
 
-  async buyPackets({ commit, state }, payload) {
+  async buyPackets({ commit, state, getters }, payload) {
+    if (getters.isPaymentBlocked) {
+      return
+    }
+
     if (state.buyState === PENDING) {
       return
     }
@@ -102,7 +109,7 @@ export const actions = {
 
       const headers = {}
 
-      if (state.country === 'Russia') {
+      if (state.country === 'RU') {
         headers['x-price-ru'] = true
       }
 
@@ -128,7 +135,7 @@ export const actions = {
       commit('SET_COUNTRY_STATE', PENDING)
       const response = await this.$axios.$get('https://ipapi.co/json/')
       if (response) {
-        commit('SET_COUNTRY', response.country_name)
+        commit('SET_COUNTRY', response.country)
         commit('SET_COUNTRY_STATE', FULFILLED)
       }
     } catch (e) {

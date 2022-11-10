@@ -130,7 +130,7 @@
           </div>
           <CommonButton
             class="buyDxaContainer__button"
-            :is-disabled="!packet.priceInDollar"
+            :is-disabled="isDisabledBuyButton"
             @click="$emit('openBuyTokensModal')"
             >{{ $t('Купить') }}</CommonButton
           >
@@ -159,6 +159,7 @@
 
 <script lang="ts">
 import { PropType } from 'vue'
+import { mapGetters } from 'vuex'
 import CommonButton from './CommonButton.vue'
 import { packetInterface } from '@/interfaces/packagesTypes'
 
@@ -187,12 +188,16 @@ export default {
       required: true
     }
   },
-  setup() {
-    const dividingIntoDigits = (count: number | string) =>
-      String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ')
+  computed: {
+    ...mapGetters({ isPaymentBlocked: 'isPaymentBlocked' }),
+    isDisabledBuyButton() {
+      return !this.packet.priceInDollar && this.isPaymentBlocked
+    }
+  },
 
-    return {
-      dividingIntoDigits
+  methods: {
+    dividingIntoDigits(count: number | string) {
+      return String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ')
     }
   }
 }
