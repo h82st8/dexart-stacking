@@ -6,6 +6,7 @@ import {
   REJECTED,
   STACKING_API_URL
 } from '~/lib/constants'
+import referral from '~/lib/LS/referral'
 
 const initState = {
   packetsOfDxaTokensData: [],
@@ -115,7 +116,7 @@ export const actions = {
 
       const response = await this.$axios.$post(
         `${STACKING_API_URL}/api/orders`,
-        payload,
+        { ...payload, ref: referral.get() },
         { headers }
       )
 
