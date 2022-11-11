@@ -43,7 +43,7 @@
           :key="i"
           class="footerContainer__item"
         >
-          <a :href="item.href" class="footerContainer__itemLink">{{
+          <a :href="item.href" class="footerContainer__itemLink" target="_blank">{{
             $t(item.title)
           }}</a>
         </div>
@@ -94,25 +94,21 @@ export default {
     ]
 
     const sitemap = [
+      // {
+      //   title: 'Main',
+      //   href: ''
+      // },
       {
-        title: 'Main',
-        href: ''
-      },
-      {
-        title: 'Avatar design tool',
-        href: ''
-      },
-      {
-        title: 'Avatar design tool',
-        href: ''
+        title: 'About DEXART Metaverse',
+        href: 'https://dex.art'
       },
       {
         title: 'World backstory',
-        href: ''
+        href: 'https://dex.art/history'
       },
       {
-        title: 'Token',
-        href: ''
+        title: 'Land map',
+        href: 'https://map.dex.art'
       }
     ]
 
@@ -265,7 +261,6 @@ export default {
   }
   +mediaDesktopM() {
     display: flex;
-    flex-wrap: nowrap;
     padding: 84px 98px 63px;
     &__socialLinksBoxInfo,
     &__itemLink,
@@ -279,6 +274,9 @@ export default {
     &__button {
       top: -1px;
     }
+  }
+  +mediaExtraLarge() {
+    flex-wrap: nowrap;
   }
 }
 </style>

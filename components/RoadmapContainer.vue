@@ -4,7 +4,7 @@
       class="roadmapContainer__starsBg"
       :src="require('assets/images/stars-roadmap-bg.png')"
     />
-    <div class="roadmapContainer__titleBox">
+    <div id="indexRoadmap" class="roadmapContainer__titleBox">
       <h3 class="roadmapContainer__titlePrimary">RoadMap</h3>
       <h3 class="roadmapContainer__titleSecond">DXA</h3>
     </div>

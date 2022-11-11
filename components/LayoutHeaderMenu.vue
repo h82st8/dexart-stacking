@@ -12,7 +12,7 @@
           class="headerMenu__link"
           >{{ $t(item.title) }}</router-link
         >
-        <a v-else href="#" class="headerMenu__link">{{ $t(item.title) }}</a>
+        <a v-else :href="item.href" class="headerMenu__link">{{ $t(item.title) }}</a>
       </div>
     </div>
     <div class="mobileList">
@@ -35,7 +35,7 @@
           >
           <a
             v-else
-            href="#"
+            :href="item.href"
             :class="['list__link', { list__link_open: isOpenMenu }]"
             >{{ $t(item.title) }}</a
           >
@@ -56,11 +56,11 @@ export default {
     const headerMenuList = [
       {
         title: 'DEXART Metaverse',
-        href: ''
+        href: 'https://map.dex.art/'
       },
       {
         title: 'Купить энергию',
-        href: ''
+        href: '#indexPackagesBuy'
       },
       // {
       //   title: 'Стейкинг',
@@ -68,7 +68,7 @@ export default {
       // },
       {
         title: 'Дорожная карта',
-        href: ''
+        href: '#indexRoadmap'
       }
     ]
 

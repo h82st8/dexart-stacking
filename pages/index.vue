@@ -147,6 +147,7 @@ export default {
   position: relative;
   background: $colorBackground;
   overflow: hidden;
+  scroll-behavior: smooth;
 }
 .wrap {
   width: 100%;
