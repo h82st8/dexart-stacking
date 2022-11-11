@@ -3,6 +3,7 @@
     <div class="wrap"></div>
     <IntroContainer />
     <PackagesContainer
+      id="indexPackagesBuy"
       :is-index-page="true"
       :packets="packets"
       :packages="packages"

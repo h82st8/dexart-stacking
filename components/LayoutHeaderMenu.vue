@@ -12,7 +12,8 @@
           class="headerMenu__link"
           >{{ $t(item.title) }}</router-link
         >
-        <a v-else :href="item.href" class="headerMenu__link">{{ $t(item.title) }}</a>
+        <a v-else-if="item.title !== 'DEXART Metaverse'" :href="item.href" class="headerMenu__link">{{ $t(item.title) }}</a>
+        <a v-else :href="item.href" class="headerMenu__link" target="_blank">{{ $t(item.title) }}</a>
       </div>
     </div>
     <div class="mobileList">

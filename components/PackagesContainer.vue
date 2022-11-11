@@ -11,7 +11,7 @@
       class="pointsContainer__coinBottomStacking"
       :src="require('assets/images/coin-bottom-stacking-icon.png')"
     />
-    <div id="indexPackagesBuy" class="buyDxaContainer">
+    <div class="buyDxaContainer">
       <div class="buyDxaContainer__titleBox">
         <h1 class="buyDxaContainer__title" v-html="$t(`packetsDxaTokens`)" />
         <div class="buyDxaContainer__rateBox">
