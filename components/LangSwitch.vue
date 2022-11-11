@@ -9,7 +9,9 @@
                     "
                     @click="$i18n.setLocale('en')"
                 >
-                    En
+                    <a href="#">
+                        En
+                    </a>
                 </button>
             </li>
 
@@ -21,7 +23,9 @@
                     "
                     @click="$i18n.setLocale('ru')"
                 >
-                    Ru
+                    <a href="#">
+                        Ru
+                    </a>
                 </button>
             </li>
         </ul>

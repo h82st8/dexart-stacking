@@ -9,13 +9,13 @@
       <h3 class="roadmapContainer__titleSecond">DXA</h3>
     </div>
     <div class="roadmapContainer__arrowsBox">
-      <div class="roadmapContainer__arrowWrapper" @click="leftArrowClick">
+      <div :class="['roadmapContainer__arrowWrapper', {roadmapContainer__arrowDisable: formData.countLeft === 0}]" @click="leftArrowClick">
         <img
           class="aboutStaking__arrow"
           :src="require('assets/images/arrow-left-icon.png')"
         />
       </div>
-      <div class="roadmapContainer__arrowWrapper" @click="rightArrowClick">
+      <div :class="['roadmapContainer__arrowWrapper', {roadmapContainer__arrowDisable: (formData.countRight - formData.newsOnWindowCount) === 0}]" @click="rightArrowClick">
         <img
           class="aboutStaking__arrow"
           :src="require('assets/images/arrow-right-icon.png')"
@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ref, reactive } from 'vue'
+import { computed, ref, reactive, onMounted } from 'vue'
 
 export default {
   name: 'RoadmapContainer',
@@ -78,7 +78,8 @@ export default {
 
     const formData = reactive({
       countRight: roadmap.length,
-      countLeft: 0
+      countLeft: 0,
+      newsOnWindowCount: 1,
     })
 
     const roadmapItemsBox = ref<any>()
@@ -155,11 +156,18 @@ export default {
       }
     }
 
+    onMounted(() => {
+      if (window.matchMedia("(min-width: 1165px)").matches) formData.newsOnWindowCount = 3;
+      else if (window.matchMedia("(min-width: 633px)").matches) formData.newsOnWindowCount = 2
+      else formData.newsOnWindowCount = 1
+    });
+
     return {
       roadmap,
       roadmapItemsBox,
       rightArrowClick,
-      leftArrowClick
+      leftArrowClick,
+      formData,
     }
   }
 }
@@ -236,6 +244,21 @@ export default {
       height: 42px;
       background: $colorGradientForButton;
       border-radius: 8px;
+    }
+  }
+  &__arrowDisable {
+    cursor: default;
+    opacity: .6;
+    +mediaTablet() {
+      &:hover {
+        background: transparent;
+      }
+    }
+    &:active .aboutStaking__arrow,
+    &:active {
+      width: 48px;
+      height: 48px;
+      background: transparent;
     }
   }
   &__sliderBox {
