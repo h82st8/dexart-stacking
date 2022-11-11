@@ -84,7 +84,7 @@ export default {
         href: '/docs/Cookies Policy_09112022.pdf'
       },
       {
-        title: 'Term of service',
+        title: 'Terms of service',
         href: '/docs/Token Sale Terms and Conditions 09112022.pdf'
       },
     ]
