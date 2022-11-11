@@ -77,19 +77,15 @@ export default {
     const info = [
       {
         title: 'Privacy Policy',
-        href: '/docs/PrivacyPolicy_26.10.22.pdf'
+        href: '/docs/Privacy Policy_09112022.pdf'
       },
       {
         title: 'Cookies Policy',
-        href: '/docs/CookiesPolicy.pdf'
+        href: '/docs/Cookies Policy_09112022.pdf'
       },
       {
         title: 'Term of service',
-        href: '/docs/TermsAndConditions_26.10.22.pdf'
-      },
-      {
-        title: 'Risk discloser statement',
-        href: '/docs/RiskDiscloserStatement.pdf'
+        href: '/docs/Token Sale Terms and Conditions 09112022.pdf'
       },
     ]
 
