@@ -211,6 +211,9 @@ export default {
   &__followBox {
     margin-top: 10px;
   }
+  &__followForm {
+    display: flex;
+  }
   &__followInfo {
     font-style: normal;
     font-weight: 300;
