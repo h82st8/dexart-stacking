@@ -7,7 +7,7 @@
                     :class="
                         $i18n.locale === 'en' && 'lang-switch__link--active'
                     "
-                    @click="$i18n.locale = 'en'"
+                    @click="$i18n.setLocale('en')"
                 >
                     En
                 </button>
@@ -19,7 +19,7 @@
                     :class="
                         $i18n.locale === 'ru' && 'lang-switch__link--active'
                     "
-                    @click="$i18n.locale = 'ru'"
+                    @click="$i18n.setLocale('ru')"
                 >
                     Ru
                 </button>
