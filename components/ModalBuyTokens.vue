@@ -138,7 +138,7 @@
           v-if="buyState === 'REJECTED'"
           style="color: chocolate; margin-top: 5px; text-align: center"
         >
-          {{ $t('Something went wrong') }}
+          {{ $t('Выберите способ оплаты') }}
         </div>
       </form>
     </div>

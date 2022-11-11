@@ -27,6 +27,7 @@
   font-family: 'Styrene',
     sans-serif;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 *:focus {

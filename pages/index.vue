@@ -3,6 +3,7 @@
     <div class="wrap"></div>
     <IntroContainer />
     <PackagesContainer
+      id="indexPackagesBuy"
       :is-index-page="true"
       :packets="packets"
       :packages="packages"
@@ -147,6 +148,7 @@ export default {
   position: relative;
   background: $colorBackground;
   overflow: hidden;
+  scroll-behavior: smooth;
 }
 .wrap {
   width: 100%;

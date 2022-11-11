@@ -89,42 +89,42 @@
         </div>
         <div class="yourChoice__mainBlock">
           <div class="yourChoice__stackingInfo">
-            <div class="">
-              <span class="yourChoice__stackingInfoTitle"
-                >{{ $t('Всего ячеек') }}:</span
+            <div class="yourChoice__item">
+              <div class="yourChoice__stackingInfoTitle"
+                >{{ $t('Всего ячеек') }}:</div
               >
-              <span
+              <div
                 :class="[
                   'yourChoice__stackingInfoNoneChoice',
                   { yourChoice__stackingInfoChoice: packet.totalTokens }
                 ]"
-                >{{ `${dividingIntoDigits(packet.totalTokens)} DXA` }}</span
+                >{{ `${dividingIntoDigits(packet.totalTokens)} DXA` }}</div
               >
             </div>
-            <div class="">
-              <span class="yourChoice__stackingInfoTitle"
-                >{{ $t('Финальная стоимость') }}:</span
+            <div class="yourChoice__item">
+              <div class="yourChoice__stackingInfoTitle"
+                >{{ $t('Финальная стоимость') }}:</div
               >
-              <span
+              <div
                 :class="[
                   'yourChoice__stackingInfoNoneChoice',
                   { yourChoice__stackingInfoChoice: packet.priceInDollar }
                 ]"
-                >{{ `$${dividingIntoDigits(packet.priceInDollar)}` }}</span
+                >{{ `$${dividingIntoDigits(packet.priceInDollar)}` }}</div
               >
             </div>
-            <div class="">
-              <span
+            <div class="yourChoice__item">
+              <div
                 class="yourChoice__stackingInfoTitle yourChoice__bonusesTitle"
-                >{{ $t('Бонус') }}:</span
+                >{{ $t('Бонус') }}:</div
               >
-              <span
+              <div
                 :class="[
                   'yourChoice__stackingInfoNoneChoice',
                   'yourChoice__bonuses',
                   { yourChoice__stackingInfoChoice: packet.bonuses }
                 ]"
-                >{{ `+${dividingIntoDigits(packet.bonuses)} UNITS` }}</span
+                >{{ `+${dividingIntoDigits(packet.bonuses)} UNITS` }}</div
               >
             </div>
           </div>
@@ -504,6 +504,11 @@ export default {
     }
     &__stackingInfo {
       margin-bottom: 0;
+    }
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
   }
   +mediaDesktop() {

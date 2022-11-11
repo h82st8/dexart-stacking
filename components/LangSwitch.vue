@@ -7,9 +7,11 @@
                     :class="
                         $i18n.locale === 'en' && 'lang-switch__link--active'
                     "
-                    @click="$i18n.locale = 'en'"
+                    @click="$i18n.setLocale('en')"
                 >
-                    En
+                    <a class="link" href="#">
+                        En
+                    </a>
                 </button>
             </li>
 
@@ -19,9 +21,11 @@
                     :class="
                         $i18n.locale === 'ru' && 'lang-switch__link--active'
                     "
-                    @click="$i18n.locale = 'ru'"
+                    @click="$i18n.setLocale('ru')"
                 >
-                    Ru
+                    <a class="link" href="#">
+                        Ru
+                    </a>
                 </button>
             </li>
         </ul>
@@ -31,6 +35,14 @@
 <script setup lang="ts"></script>
 
 <style scoped lang="stylus">
+.link {
+    text-decoration: none;
+    color: #d7b2ff;
+    &:hover {
+        text-decoration: none;
+        color: #d7b2ff;
+    }
+}
 .lang-switch {
     &__list {
 

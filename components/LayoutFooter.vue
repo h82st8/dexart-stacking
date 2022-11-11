@@ -43,7 +43,7 @@
           :key="i"
           class="footerContainer__item"
         >
-          <a :href="item.href" class="footerContainer__itemLink">{{
+          <a :href="item.href" class="footerContainer__itemLink" target="_blank">{{
             $t(item.title)
           }}</a>
         </div>
@@ -77,42 +77,34 @@ export default {
     const info = [
       {
         title: 'Privacy Policy',
-        href: '/docs/PrivacyPolicy_26.10.22.pdf'
+        href: '/docs/Privacy Policy_09112022.pdf'
       },
       {
         title: 'Cookies Policy',
-        href: '/docs/CookiesPolicy.pdf'
+        href: '/docs/Cookies Policy_09112022.pdf'
       },
       {
-        title: 'Term of service',
-        href: '/docs/TermsAndConditions_26.10.22.pdf'
-      },
-      {
-        title: 'Risk discloser statement',
-        href: '/docs/RiskDiscloserStatement.pdf'
+        title: 'Terms of service',
+        href: '/docs/Token Sale Terms and Conditions 09112022.pdf'
       },
     ]
 
     const sitemap = [
+      // {
+      //   title: 'Main',
+      //   href: ''
+      // },
       {
-        title: 'Main',
-        href: ''
-      },
-      {
-        title: 'Avatar design tool',
-        href: ''
-      },
-      {
-        title: 'Avatar design tool',
-        href: ''
+        title: 'About DEXART Metaverse',
+        href: 'https://dex.art'
       },
       {
         title: 'World backstory',
-        href: ''
+        href: 'https://dex.art/history'
       },
       {
-        title: 'Token',
-        href: ''
+        title: 'Land map',
+        href: 'https://map.dex.art'
       }
     ]
 
@@ -219,6 +211,9 @@ export default {
   &__followBox {
     margin-top: 10px;
   }
+  &__followForm {
+    display: flex;
+  }
   &__followInfo {
     font-style: normal;
     font-weight: 300;
@@ -265,7 +260,6 @@ export default {
   }
   +mediaDesktopM() {
     display: flex;
-    flex-wrap: nowrap;
     padding: 84px 98px 63px;
     &__socialLinksBoxInfo,
     &__itemLink,
@@ -279,6 +273,9 @@ export default {
     &__button {
       top: -1px;
     }
+  }
+  +mediaExtraLarge() {
+    flex-wrap: nowrap;
   }
 }
 </style>
