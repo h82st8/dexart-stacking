@@ -205,7 +205,8 @@ export default {
           id: item.id,
           count: item.count
         })),
-        payment_method: valuesOfPaymentMethods[this.chosenMethod] // odb || oton
+        payment_method: valuesOfPaymentMethods[this.chosenMethod], // odb || oton
+        lang: this.$i18n.locale
       }
 
       if (!data.email || isEmpty(data.packages) || !data.payment_method) {
