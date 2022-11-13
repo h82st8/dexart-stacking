@@ -24,6 +24,8 @@
       :cookiesModalIsOpen="cookiesModalIsOpen"
       @closeCookiesModal="closeCookiesModal"
     />
+    <ModalPaymentSuccess />
+    <ModalPaymentFail />
   </div>
 </template>
 
@@ -36,6 +38,8 @@ import PackagesContainer from '~/components/PackagesContainer.vue'
 import RoadmapContainer from '~/components/RoadmapContainer.vue'
 import ModalBuyTokens from '~/components/ModalBuyTokens.vue'
 import ModalCookies from '~/components/ModalCookies.vue'
+import ModalPaymentSuccess from '~/components/ModalPaymentSuccess.vue'
+import ModalPaymentFail from '~/components/ModalPaymentFail.vue'
 
 export default {
   name: 'IndexPage',
@@ -45,7 +49,9 @@ export default {
     TokensContainer,
     RoadmapContainer,
     ModalBuyTokens,
-    ModalCookies
+    ModalCookies,
+    ModalPaymentSuccess,
+    ModalPaymentFail
 },
   layout: 'base',
 
