@@ -59,21 +59,39 @@ export default {
       {
         id: 1,
         title: 'Q4 2022',
-        textList: ['Пресейл энергетических ячеек', 'Запуск производства токенов']
+        textList: ['rodmap-text-1-1', 'rodmap-text-1-2']
       },
       {
         id: 2,
         title: 'Q1 2023',
         textList: [
-          'Первые токены произведены',
-          'Экономика DEXART запущена',
+          'rodmap-text-2-1',
+          'rodmap-text-2-2',
+          'rodmap-text-2-3',
+          'rodmap-text-2-4',
         ]
       },
       {
         id: 3,
         title: 'Q2 2023',
-        textList: ['Доступен стейкинг токенов']
+        textList: ['rodmap-text-3-1', 'rodmap-text-3-2']
       },
+      {
+        id: 4,
+        title: 'Q3 23',
+        textList: [
+          'rodmap-text-4-1',
+          'rodmap-text-4-2',
+          'rodmap-text-4-3',
+        ],
+      },
+      {
+        id: 5,
+        title: '2023-2024',
+        textList: [
+          'rodmap-text-5-1',
+        ],
+      }
     ]
 
     const formData = reactive({

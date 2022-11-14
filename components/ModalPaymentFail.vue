@@ -1,7 +1,7 @@
 <template>
   <vue-final-modal
     v-model="isOpenBuyFailModal"
-    classes="modal-tokens-container"
+    classes="modal-tokens-payment-status"
     overlay-class="modal-tokens-overlay"
     content-class="modal-tokens-content"
     :click-to-close="true"

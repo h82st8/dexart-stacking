@@ -179,6 +179,9 @@ export default {
   align-items: start;
   padding-top: 34px
 }
+::v-deep .modal-tokens-payment-status {
+  align-items: center;
+}
 
 ::v-deep .modal-tokens-content {
   position: relative;
