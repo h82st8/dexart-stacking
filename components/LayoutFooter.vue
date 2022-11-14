@@ -277,5 +277,8 @@ export default {
   +mediaExtraLarge() {
     flex-wrap: nowrap;
   }
+  +getMedia(1950px) {
+    align-self: center;
+  }
 }
 </style>
