@@ -201,13 +201,13 @@ export default {
   left: -40px;
   overflow: hidden;
   +getMedia(633px) {
-    width: 560px;
+    width: 600px;
   }
   +mediaExtraTablet() {
-    width: 840px;
+    width: 880px;
   }
   +mediaDesktopM() {
-    width: 1350px;
+    width: 1390px;
   }
 }
 .roadmapContainer {
