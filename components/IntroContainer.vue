@@ -41,13 +41,17 @@
   position: relative;
   overflow hidden;
   padding-right: 10px;
+  display: flex;
+  flex-direction: column;
   &__backgroundImg {
+    align-self: center;
     position: absolute;
     min-width: 100%;
     height: 100%;
     margin: 0 auto;
-    top: 0;
-    left: 0;
+    +getMedia(1950px) {
+      min-width: auto;
+    }
   }
   &__introTitle {
     position: relative;
@@ -139,6 +143,12 @@
     &__coinTop {
       width: auto;
       left: 50%;
+    }
+  }
+  +getMedia(2200px) {
+    align-items: center;
+    &__introTitle {
+      left: 0;
     }
   }
 }

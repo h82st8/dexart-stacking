@@ -336,5 +336,8 @@ export default {
   +mediaLarge() {
     padding: 64px 0 50px 253px;
   }
+  +getMedia(1950px) {
+    padding-left: calc(50% - 715px);
+  }
 }
 </style>

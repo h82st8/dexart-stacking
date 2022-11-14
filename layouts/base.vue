@@ -25,5 +25,6 @@ export default {
   display: flex;
   flex-direction: column;
   z-index: 3;
+  background: $colorBackground;
 }
 </style>

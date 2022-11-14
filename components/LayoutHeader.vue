@@ -122,6 +122,10 @@ export default {
       padding: 16px 24px;
     }
   }
+  +getMedia(1950px) {
+    width: 1850px;
+    align-self: center;
+  }
 }
 .buttonDisabled {
   cursor: default;
