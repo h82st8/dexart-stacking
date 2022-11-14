@@ -78,12 +78,18 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios', '@nuxtjs/i18n'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/i18n', '@nuxtjs/gtm',],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // baseURL: 'https://some-url/api/v1'
   },
+
+  ...{
+      gtm: {
+        id: 'G-BQN7F252PK'
+      }
+    },
 
   i18n: {
     locales: [
