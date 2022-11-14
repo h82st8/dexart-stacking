@@ -123,7 +123,7 @@
               $t('I have read and agree to the')
             }}</span>
             <a
-              href="/docs/TermsAndConditions_26.10.22.pdf"
+              href="/docs/Token Sale Terms and Conditions 09112022.pdf"
               target="_blank"
               class="buttonContainer__link"
               >{{ $t('Terms & Conditions') }}</a
