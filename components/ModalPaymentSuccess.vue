@@ -26,7 +26,7 @@ export default {
   computed: {
     isOpenBuySuccessModal: {
       get() {
-        return this.$route.query.payment === 'success';
+        return this.$route.query.payment === 'success' || this.$route.query.state === 'success';
       },
       set(value) {
         const query = value ? { payment: 'success', state: 'done' } : {};
