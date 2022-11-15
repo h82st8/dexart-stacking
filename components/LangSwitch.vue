@@ -21,9 +21,8 @@
                     :class="
                         $i18n.locale === 'ru' && 'lang-switch__link--active'
                     "
-                    @click="$i18n.setLocale('ru')"
                 >
-                    <a class="link" href="#">
+                    <a class="link" href="#" @click="$i18n.setLocale('ru')">
                         Ru
                     </a>
                 </button>
