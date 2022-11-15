@@ -59,21 +59,39 @@ export default {
       {
         id: 1,
         title: 'Q4 2022',
-        textList: ['Пресейл энергетических ячеек', 'Запуск производства токенов']
+        textList: ['rodmap-text-1-1', 'rodmap-text-1-2']
       },
       {
         id: 2,
         title: 'Q1 2023',
         textList: [
-          'Первые токены произведены',
-          'Экономика DEXART запущена',
+          'rodmap-text-2-1',
+          'rodmap-text-2-2',
+          'rodmap-text-2-3',
+          'rodmap-text-2-4',
         ]
       },
       {
         id: 3,
         title: 'Q2 2023',
-        textList: ['Доступен стейкинг токенов']
+        textList: ['rodmap-text-3-1', 'rodmap-text-3-2']
       },
+      {
+        id: 4,
+        title: 'Q3 23',
+        textList: [
+          'rodmap-text-4-1',
+          'rodmap-text-4-2',
+          'rodmap-text-4-3',
+        ],
+      },
+      {
+        id: 5,
+        title: '2023-2024',
+        textList: [
+          'rodmap-text-5-1',
+        ],
+      }
     ]
 
     const formData = reactive({
@@ -85,8 +103,20 @@ export default {
     const roadmapItemsBox = ref<any>()
 
     const rightArrowClick = () => {
-      if(window.matchMedia("(min-width: 1165px)").matches) {
+      if(window.matchMedia("(min-width: 1620px)").matches) {
         if (formData.countRight - 3 !== 0) {
+          roadmapItemsBox.value = computed(() => {
+              return {
+                transform: `translate(${
+                  -450 * (roadmap.length - formData.countRight)
+                }px)`
+              };
+          })
+          --formData.countRight;
+          formData.countLeft++;
+        }
+      } else if (window.matchMedia("(min-width: 1165px)").matches) {
+        if (formData.countRight - 2 !== 0) {
           roadmapItemsBox.value = computed(() => {
               return {
                 transform: `translate(${
@@ -157,8 +187,10 @@ export default {
     }
 
     onMounted(() => {
-      if (window.matchMedia("(min-width: 1165px)").matches) formData.newsOnWindowCount = 3;
-      else if (window.matchMedia("(min-width: 633px)").matches) formData.newsOnWindowCount = 2
+      if (window.matchMedia("(min-width: 1620px)").matches) formData.newsOnWindowCount = 3;
+      else if (window.matchMedia("(min-width: 1165px)").matches) formData.newsOnWindowCount = 2;
+      else if (window.matchMedia("(min-width: 890px)").matches) formData.newsOnWindowCount = 3;
+      else if (window.matchMedia("(min-width: 633px)").matches) formData.newsOnWindowCount = 2;
       else formData.newsOnWindowCount = 1
     });
 
@@ -177,19 +209,23 @@ export default {
 .wrapper {
   width: 280px;
   padding-top: 40px;
-  padding-left: 40px;
+  padding-left: 12px;
+  margin-left: 28px;
   position: relative;
   top: -40px;
   left: -40px;
   overflow: hidden;
   +getMedia(633px) {
-    width: 600px;
+    width: 560px;
   }
   +mediaExtraTablet() {
-    width: 880px;
+    width: 840px;
   }
   +mediaDesktopM() {
-    width: 1390px;
+    width: 900px;
+  }
+  +mediaExtraLargeS() {
+    width: 1350px;
   }
 }
 .roadmapContainer {
@@ -280,6 +316,7 @@ export default {
   }
   &__item {
     width: 280px;
+    padding: 0 10px;
     min-width: 280px;
     transform: translate(253px);
     position: relative;
@@ -332,6 +369,9 @@ export default {
       width: 450px;
       min-width: 450px;
     }
+  }
+  +mediaExtraLargeS() {
+    
   }
   +mediaLarge() {
     padding: 64px 0 50px 253px;
