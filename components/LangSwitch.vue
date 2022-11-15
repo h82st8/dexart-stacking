@@ -9,9 +9,9 @@
                     "
                     @click="$i18n.setLocale('en')"
                 >
-                    <a class="link" href="#">
+                    <router-link class="link" :to="'/'">
                         En
-                    </a>
+                    </router-link>
                 </button>
             </li>
 
@@ -21,10 +21,11 @@
                     :class="
                         $i18n.locale === 'ru' && 'lang-switch__link--active'
                     "
+                    @click="$i18n.setLocale('ru')"
                 >
-                    <a class="link" href="#" @click="$i18n.setLocale('ru')">
+                    <router-link class="link" :to="'/ru'">
                         Ru
-                    </a>
+                    </router-link>
                 </button>
             </li>
         </ul>

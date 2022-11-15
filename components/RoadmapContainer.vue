@@ -316,7 +316,7 @@ export default {
   }
   &__item {
     width: 280px;
-    padding: 0 10px;
+    padding: 0 20px;
     min-width: 280px;
     transform: translate(253px);
     position: relative;
@@ -369,9 +369,6 @@ export default {
       width: 450px;
       min-width: 450px;
     }
-  }
-  +mediaExtraLargeS() {
-    
   }
   +mediaLarge() {
     padding: 64px 0 50px 253px;
