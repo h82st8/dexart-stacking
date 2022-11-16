@@ -32,6 +32,7 @@ $mediaSizes = {
   desktopM: 1165px,
   desktop: 1280px,
   large: 1440px,
+  extraLargeS: 1620px,
   extraLarge: 1920px,
 };
 
@@ -129,6 +130,12 @@ mediaDesktop() {
 
 mediaLarge() {
   +getMedia($mediaSizes.large) {
+    {block};
+  }
+}
+
+mediaExtraLargeS() {
+  +getMedia($mediaSizes.extraLargeS) {
     {block};
   }
 }

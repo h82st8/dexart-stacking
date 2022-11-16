@@ -54,15 +54,29 @@
       <div class="footerContainer__followInfo">
         {{ $t('Subscribe to the newsletter of the most important news') }}
       </div>
-      <form class="footerContainer__followForm">
-        <input type="text" placeholder="Email" class="footerContainer__input" />
-        <button class="footerContainer__button">{{ $t('Sign Up') }}</button>
+      <form v-if="state !== 'FULFILLED'" class="footerContainer__followForm" @submit.prevent="onSubmit($event, $i18n.locale)">
+        <input v-model="email" type="email" placeholder="Email" class="footerContainer__input" required />
+        <button class="footerContainer__button">{{ $t(state === 'PENDING' ? 'loading' : 'Sign Up') }}</button>
       </form>
+      <div
+        v-if="state === 'FULFILLED'"
+        class="subscription-form__result subscription-form__result_success"
+      >
+        {{ $t('success') }}
+      </div>
+      <div
+        v-if="state === 'FAILURE'"
+        class="subscription-form__result subscription-form__result_fail"
+      >
+        {{ $t('fail') }}
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import { ref } from 'vue'
+
 export default {
   name: 'FooterContainer',
   setup() {
@@ -108,10 +122,53 @@ export default {
       }
     ]
 
+    const email = ref<string>('')
+
+    const state = ref<'INIT' | 'PENDING' | 'FAILURE' | 'FULFILLED'>('INIT')
+
+    const onSubmit = async (e: any, locale: string) => {
+      e.preventDefault();
+
+      if (state.value === 'PENDING') {
+        return
+      }
+
+      state.value = 'PENDING'
+
+      try {
+        const response = await fetch('https://dexart.niksher.ru', {
+          method: 'POST',
+          mode: 'cors', // no-cors, *cors, same-origin
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+          body: JSON.stringify({
+            email: email.value,
+            domain: 'dexart',
+            lang: locale,
+          }), // body data type must match "Content-Type" header
+        })
+
+        const result = await response.json()
+
+        if (result.status) {
+          state.value = 'FULFILLED'
+        } else {
+          state.value = 'FAILURE'
+        }
+      } catch (err) {
+        state.value = 'FAILURE'
+      }
+    }
+
     return {
       info,
       sitemap,
-      socials
+      socials,
+      onSubmit,
+      state,
+      email,
     }
   }
 }
@@ -280,5 +337,20 @@ export default {
   +getMedia(1950px) {
     align-self: center;
   }
+}
+.subscription-form {
+  &__result {
+      color: #ffffff;
+      opacity: 1;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px;
+      font-size: rem(18px);
+    }
+    // &__result_success {
+    // }
+    &__result_fail {
+      color: red;
+    }
 }
 </style>
