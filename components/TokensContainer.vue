@@ -51,7 +51,7 @@
         class="aboutToken__stars"
         :src="require('assets/images/stars-tokens-bg.png')"
       />
-      <div class="aboutToken__linkBox" v-html="$t('dxa-tokens-about')"></div>
+      <div class="aboutToken__linkBox">{{ $t('dxa-tokens-about-text') }} <a :href='`${$i18n.locale === "en" ? "/docs/DEXART Tokenomics and DXA about Presentation.pdf" : "/docs/Презентация токеномики DEXART и токена DXA.pdf"}`' target="_blank" rel="noopener" class="link">{{ $t('dxa-tokens-about-link') }}</a></div>
     </div>
   </div>
 </template>
