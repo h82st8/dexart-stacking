@@ -182,7 +182,8 @@ export default {
   },
 
   computed: {
-    ...mapState(['buyState'])
+    ...mapState(['buyState']),
+    ...mapGetters({ packages: 'packetsOfDxaTokensData' })
   },
   methods: {
     changeChosenMethod(method) {
@@ -214,6 +215,24 @@ export default {
       }
 
       this.hasError = false
+
+      const packagesGtmMap = {
+        0: '1unit_selected',
+        1: '10unit_selected',
+        2: '100unit_selected',
+        3: '500unit_selected',
+        4: '1000unit_selected'
+      }
+      const packagesByGtmKeys = {}
+
+      packages
+        .sort((item1, item2) => item1 - item2)
+        .forEach((item, i) => {
+          packagesByGtmKeys[packagesGtmMap[i]] =
+            this.filteredPackages.find(({ id }) => id === item.id)?.count || 0
+        })
+
+      this.$gtm.push({ event: 'buy_click', ...packagesByGtmKeys })
 
       this.$store.dispatch('buyPackets', data)
     }

@@ -121,7 +121,8 @@ export const actions = {
       )
 
       if (response.data) {
-        openMerchant(response)
+        // hach for Google Analutics
+        setTimeout(() => openMerchant(response), 3000)
       } else {
         commit('SET_BUY_STATE', REJECTED)
       }
