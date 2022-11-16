@@ -225,7 +225,7 @@ export default {
       }
       const packagesByGtmKeys = {}
 
-      packages
+      this.packages
         .sort((item1, item2) => item1 - item2)
         .forEach((item, i) => {
           packagesByGtmKeys[packagesGtmMap[i]] =
