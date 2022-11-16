@@ -147,7 +147,7 @@
 
 <script>
 import { isEmpty } from 'rambda'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import CommonButton from './CommonButton.vue'
 import CommonLoader from './CommonLoader.vue'
 
