@@ -88,6 +88,7 @@ export default {
   ...(process.env.NODE_ENV === 'production'
     ? {
         gtm: {
+          debug: true,
           id: 'GTM-WK6BP54'
         }
       }
