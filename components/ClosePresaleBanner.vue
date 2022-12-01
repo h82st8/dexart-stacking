@@ -93,7 +93,7 @@ export default {
   border: 1px solid #BF81FF;
   border-radius: 32px;
   padding: 10px 20px;
-  max-width: 280px;
+  max-width: 85%;
   &__title {
     background: $colorTitle;
     -webkit-background-clip: text;
@@ -133,16 +133,15 @@ export default {
   }
   &__icon {
     display: none;
-    width: 338px;
+    height: 307px;
     position: absolute;
     bottom: 0;
     right: -189px;
   }
   &__iconOnEn {
-    right: -214px;
+    right: -239px;
   }
   +mediaPhone() {
-    max-width: none;
     padding: 20px 30px;
     &_forEn {
       min-width: 425px;
@@ -194,6 +193,7 @@ export default {
     &__info {
       font-size: 20px;
       max-width: 440px;
+      margin-bottom: 20px;
     }
   }
 }
