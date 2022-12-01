@@ -1,5 +1,5 @@
 <template>
-  <div class="closePresaleBanner">
+  <div :class="['closePresaleBanner', {closePresaleBanner_forEn: $i18n.locale === 'en'}]">
     <h1 class="closePresaleBanner__title">{{ $t('Предпродажа закончится') }}</h1>
     <div class="closePresaleBanner__timerBox">
       <div class="closePresaleBanner__flexBox">
@@ -98,14 +98,15 @@ export default {
     background: $colorTitle;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 40px;
-    font-size: 28px;
+    margin-bottom: 20px;
+    font-size: 24px;
     text-align: center;
+    font-weight: 900;
   }
   &__timerBox {
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
   &__flexBox {
     display: flex;
@@ -135,7 +136,7 @@ export default {
     width: 338px;
     position: absolute;
     bottom: 0;
-    right: -169px;
+    right: -189px;
   }
   &__iconOnEn {
     right: -214px;
@@ -143,31 +144,56 @@ export default {
   +mediaPhone() {
     max-width: none;
     padding: 20px 30px;
+    &_forEn {
+      min-width: 425px;
+    }
     &__title {
       font-size: 34px;
     }
+    &__flexBox {
+      width: 70px;
+    }
     &__count {
       font-size: 48px;
+    }
+    &__countName {
+      width: 51px;
+      text-align: center;
     }
     &__info {
       max-width: 400px;
     }
   }
   +mediaDesktopM() {
+    &_forEn {
+      min-width: 615px;
+    }
     &__title {
       font-size: 48px;
+      margin-bottom: 40px;
+    }
+    &__timerBox {
+      margin-bottom: 40px;
+    }
+    &__flexBox {
+      width: 85px;
     }
     &__count {
       font-size: 64px;
     }
     &__countName {
-      font-size: 16px;
+      font-size: 20px;
+      width: 90px;
     }
     &__colon {
       margin: 0 34px;
     }
     &__icon {
       display: block;
+    }
+    &__info {
+      font-size: 20px;
+      max-width: 440px;
     }
   }
 }
