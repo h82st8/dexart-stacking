@@ -185,6 +185,7 @@ export default {
   +getMedia(2200px) {
     align-items: center;
     &__introTitle {
+      align-self: center;
       left: 0;
     }
   }
