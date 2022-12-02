@@ -202,6 +202,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+* {
+  font-family: 'Styrene', sans-serif;
+}
 .wrap {
   position: absolute;
   background: $colorBackground;

@@ -23,6 +23,7 @@
         :src="require('assets/images/second-title-fade-img.png')"
       />
     </div>
+    <ClosePresaleBanner v-if="timerIsShown" class="closePresaleBanner" :time-to-deadline="timeToDeadline" />
     <img
       class="introContainer__introFade"
       :src="require('assets/images/intro-fade-img.png')"
@@ -34,15 +35,49 @@
   </div>
 </template>
 
+<script>
+import ClosePresaleBanner from './ClosePresaleBanner.vue';
+
+export default {
+  name: "IntroContainer",
+  components: { ClosePresaleBanner },
+  data() {
+    return {
+      timeToDeadline: -1,
+    };
+  },
+  computed: {
+    deadline() {
+      return new Date('December 16, 2022 12:00:00').getTime();
+    },
+    timerIsShown() {
+      return !String(this.timeToDeadline).includes('-');
+    },
+  },
+  mounted() {
+    this.timeToDeadline = this.deadline - new Date().getTime();
+    setInterval(() => {
+      this.timeToDeadline = this.deadline - new Date().getTime();
+    }, 1000)
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
+.closePresaleBanner {
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+}
 .introContainer {
-  width: 100%;
-  height: 700px;
+  width: 100vw;
+  height: 760px;
   position: relative;
   overflow hidden;
   padding-right: 10px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   &__backgroundImg {
     align-self: center;
     position: absolute;
@@ -54,6 +89,7 @@
     }
   }
   &__introTitle {
+    align-self: flex-start;
     position: relative;
     top: 246px;
     left: 20px;
@@ -116,10 +152,11 @@
     width: 200px;
     position: absolute;
     bottom: 0;
-    left: calc(50% + 100px);
+    left: calc(50% + 93px);
     margin-left: -225px;
   }
   +mediaDesktopM() {
+    width: 100%;
     height: 1080px;
     padding-right: 0px;
     &__introTitle {
@@ -148,6 +185,7 @@
   +getMedia(2200px) {
     align-items: center;
     &__introTitle {
+      align-self: center;
       left: 0;
     }
   }
