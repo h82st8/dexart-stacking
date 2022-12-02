@@ -143,11 +143,8 @@ export default {
   }
   +mediaPhone() {
     padding: 20px 30px;
-    &_forEn {
-      min-width: 425px;
-    }
     &__title {
-      font-size: 34px;
+      font-size: 32px;
     }
     &__flexBox {
       width: 70px;
