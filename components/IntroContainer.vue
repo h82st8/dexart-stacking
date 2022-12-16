@@ -12,18 +12,18 @@
         :src="require('assets/images/title-fade-img.png')"
       />
       <h2 class="introContainer__secondTitle">
-        {{
-          $t(
-            'intro-text'
-          )
-        }}
+        {{ $t('intro-text') }}
       </h2>
       <img
         class="introContainer__secondTitleFade"
         :src="require('assets/images/second-title-fade-img.png')"
       />
     </div>
-    <ClosePresaleBanner v-if="timerIsShown" class="closePresaleBanner" :time-to-deadline="timeToDeadline" />
+    <ClosePresaleBanner
+      v-if="timerIsShown"
+      class="closePresaleBanner"
+      :time-to-deadline="timeToDeadline"
+    />
     <img
       class="introContainer__introFade"
       :src="require('assets/images/intro-fade-img.png')"
@@ -36,28 +36,28 @@
 </template>
 
 <script>
-import ClosePresaleBanner from './ClosePresaleBanner.vue';
+import ClosePresaleBanner from './ClosePresaleBanner.vue'
 
 export default {
-  name: "IntroContainer",
+  name: 'IntroContainer',
   components: { ClosePresaleBanner },
   data() {
     return {
-      timeToDeadline: -1,
-    };
+      timeToDeadline: -1
+    }
   },
   computed: {
     deadline() {
-      return new Date('December 16, 2022 12:00:00').getTime();
+      return new Date('December 16, 2022 17:00:00').getTime()
     },
     timerIsShown() {
-      return !String(this.timeToDeadline).includes('-');
-    },
+      return !String(this.timeToDeadline).includes('-')
+    }
   },
   mounted() {
-    this.timeToDeadline = this.deadline - new Date().getTime();
+    this.timeToDeadline = this.deadline - new Date().getTime()
     setInterval(() => {
-      this.timeToDeadline = this.deadline - new Date().getTime();
+      this.timeToDeadline = this.deadline - new Date().getTime()
     }, 1000)
   }
 }
