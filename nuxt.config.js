@@ -21,7 +21,7 @@ export default {
       { property: 'og:type', content: 'website' },
       // { property: 'og:image', content: '/og/DXAdesign.jpg' },
       {
-        property: 'og:og:description',
+        property: 'og:description',
         content: 'Buy and stake tokens of DEXART metaverse'
       },
       { charset: 'utf-8' }
@@ -50,6 +50,12 @@ export default {
         rel: 'mask-icon',
         type: 'image/x-icon',
         href: '/safari-pinned-tab.svg'
+      }
+    ],
+    script: [
+      {
+        src: '//rf.revolvermaps.com/0/0/9.js?i=5ajmm69h455&t=Live%20Statistics',
+        async: true
       }
     ]
   },
