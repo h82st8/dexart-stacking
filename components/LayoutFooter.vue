@@ -20,6 +20,13 @@
           <div class="footerContainer__socialLinksWrapper"></div>
         </a>
       </div>
+      <div class="revolvermaps">
+        <component
+          :is="'script'"
+          src="//rf.revolvermaps.com/0/0/9.js?i=5upw0rsq4lw&amp;t=Live%20Statistics"
+          async
+        />
+      </div>
     </div>
     <div class="footerContainer__infoBox">
       <h4 class="footerContainer__title">{{ $t('Info') }}</h4>
@@ -43,9 +50,12 @@
           :key="i"
           class="footerContainer__item"
         >
-          <a :href="item.href" class="footerContainer__itemLink" target="_blank">{{
-            $t(item.title)
-          }}</a>
+          <a
+            :href="item.href"
+            class="footerContainer__itemLink"
+            target="_blank"
+            >{{ $t(item.title) }}</a
+          >
         </div>
       </div>
     </div>
@@ -54,9 +64,21 @@
       <div class="footerContainer__followInfo">
         {{ $t('Subscribe to the newsletter of the most important news') }}
       </div>
-      <form v-if="state !== 'FULFILLED'" class="footerContainer__followForm" @submit.prevent="onSubmit($event, $i18n.locale)">
-        <input v-model="email" type="email" placeholder="Email" class="footerContainer__input" required />
-        <button class="footerContainer__button">{{ $t(state === 'PENDING' ? 'loading' : 'Sign Up') }}</button>
+      <form
+        v-if="state !== 'FULFILLED'"
+        class="footerContainer__followForm"
+        @submit.prevent="onSubmit($event, $i18n.locale)"
+      >
+        <input
+          v-model="email"
+          type="email"
+          placeholder="Email"
+          class="footerContainer__input"
+          required
+        />
+        <button class="footerContainer__button">
+          {{ $t(state === 'PENDING' ? 'loading' : 'Sign Up') }}
+        </button>
       </form>
       <div
         v-if="state === 'FULFILLED'"
@@ -100,7 +122,7 @@ export default {
       {
         title: 'Terms of service',
         href: '/docs/Token Sale Terms and Conditions 09112022.pdf'
-      },
+      }
     ]
 
     const sitemap = [
@@ -127,7 +149,7 @@ export default {
     const state = ref<'INIT' | 'PENDING' | 'FAILURE' | 'FULFILLED'>('INIT')
 
     const onSubmit = async (e: any, locale: string) => {
-      e.preventDefault();
+      e.preventDefault()
 
       if (state.value === 'PENDING') {
         return
@@ -140,14 +162,14 @@ export default {
           method: 'POST',
           mode: 'cors', // no-cors, *cors, same-origin
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
 
           body: JSON.stringify({
             email: email.value,
             domain: 'dexart',
-            lang: locale,
-          }), // body data type must match "Content-Type" header
+            lang: locale
+          }) // body data type must match "Content-Type" header
         })
 
         const result = await response.json()
@@ -168,7 +190,7 @@ export default {
       socials,
       onSubmit,
       state,
-      email,
+      email
     }
   }
 }
@@ -352,5 +374,15 @@ export default {
     &__result_fail {
       color: red;
     }
+}
+.revolvermaps {
+  margin-top 18px
+  > ::v-deep a {
+    color: #fff;
+    opacity: 0.6;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 </style>
