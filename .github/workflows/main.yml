@@ -1,14 +1,11 @@
 name: telegram message
-on: 
-  pull_request:
-    # types: [opened, closed, edited, ready_for_review, review_requested, reopened]
-    types: [opened, reopened]
+on:
   pull_request_review_comment:
     types: [created]
   pull_request_target:
     types: [opened, ready_for_review, reopened]
-jobs:
 
+jobs:
   build:
     name: Build
 
@@ -22,7 +19,6 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: send telegram message on pull req
-        if: ${{ github.event_name == 'pull_request' || github.event_name == 'pull_request_review_comment' }}
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
@@ -39,7 +35,7 @@ jobs:
             
             Repository: ${{ github.repository }}
 
-            See please: https://github.com/${{ github.repository }}/pull/${{github.event.number}}
+            See please: https://github.com/${{ github.repository }}/pull/${{github.event.pull_request.number}}
             
             See please: ${{ github.event.pull_request.url }}
       
