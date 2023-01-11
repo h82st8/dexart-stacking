@@ -1,9 +1,12 @@
 name: telegram message
 on: 
   pull_request:
-    types: [opened, closed, edited, ready_for_review, review_requested, reopened]
+    # types: [opened, closed, edited, ready_for_review, review_requested, reopened]
+    types: [opened, reopened]
   pull_request_review_comment:
     types: [created]
+  pull_request_target:
+    types: [opened, ready_for_review, reopened]
 jobs:
 
   build:
@@ -11,17 +14,33 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
+      
+      - uses: uesteibar/reviewer-lottery@v2
+        if: ${{ github.event_name == 'pull_request_target' }}
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: send telegram message on pull req
+        if: ${{ github.event_name == 'pull_request' || github.event_name == 'pull_request_review_comment' }}
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+            # |
+              # ${{ github.actor }} created commit:
+              # Commit message: ${{ github.event.commits[0].message }}
+              
+              # Repository: ${{ github.repository }}
+              
+              # See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
           message: |
-            ${{ github }}
-          # |
-            # ${{ github.actor }} created commit:
-            # Commit message: ${{ github.event.commits[0].message }}
+            ${{ github.actor }} ${{github.event.action}} ${{github.event_name}} 
             
-            # Repository: ${{ github.repository }}
+            Repository: ${{ github.repository }}
+
+            See please: https://github.com/${{ github.repository }}/pull/${{github.event.number}}
             
-            # See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            See please: ${{ github.event.pull_request.url }}
+      
+    
