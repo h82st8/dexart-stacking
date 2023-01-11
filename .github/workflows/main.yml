@@ -27,7 +27,8 @@ jobs:
           message: |
             ${{ github.actor }} ${{github.event.action}} ${{github.event_name}} 
 
-            reviewer: ${{ github.event.pull_request.requested_reviewers[0] }}
+            ${{ github.event.pull_request.requested_reviewers[0].avatar_url }}
+            reviewer: ${{ github.event.pull_request.requested_reviewers[0].name }}
 
             See please: https://github.com/${{ github.repository }}/pull/${{github.event.pull_request.number}}
 
