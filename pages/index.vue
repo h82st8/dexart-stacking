@@ -107,6 +107,7 @@ export default {
   mounted() {
     this.$store.dispatch('fetchPacketsList')
     this.$store.dispatch('fetchCountry')
+    this.$store.dispatch('getRates')
     if (!localStorage.getItem('cookiesPolicies')) {
       this.cookiesModalIsOpen = true;
     };

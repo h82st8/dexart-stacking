@@ -15,6 +15,9 @@ const initState = {
   country: '',
   countryState: INIT,
 
+  ratesState: INIT,
+  rate: 0,
+
   buyState: INIT
 }
 
@@ -45,7 +48,10 @@ export const getters = {
   },
   isPaymentBlocked(state) {
     return state.country === 'US' || state.country === 'CN'
-  }
+  },
+  rate(state) {
+    return state.rate.data;
+  },
 }
 
 export const mutations = {
@@ -62,6 +68,12 @@ export const mutations = {
 
   SET_COUNTRY_STATE(state, value) {
     state.countryState = value
+  },
+
+  SET_RATES_STATE(state, payload) {
+    if (payload.data) {
+      state.rate = payload
+    }
   },
 
   SET_BUY_STATE(state, value) {
@@ -143,6 +155,35 @@ export const actions = {
     } catch (e) {
       console.error('ipapi.co', e)
       commit('SET_COUNTRY_STATE', REJECTED)
+    }
+  },
+
+  async getRates({ commit }) {
+    const response = await fetch('https://api.easy-bizzi.com/index/rates/dxa/usd', {
+      method: 'POST',
+      mode: 'cors', // no-cors, *cors, same-origin
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+
+      body: JSON.stringify({
+        signature: 1
+      }), // body data type must match "Content-Type" header
+    })
+    const result = await response.json();
+    console.error(result.data.rate)
+    try {
+      if (result) {
+        commit('SET_RATES_STATE', {
+          state: FULFILLED,
+          data: result.data.rate,
+        })
+      } else {
+        commit('SET_RATES_STATE', { state: REJECTED })
+      }
+    } catch (e) {
+      commit('SET_RATES_STATE', { state: REJECTED })
+      console.error(e)
     }
   }
 }
