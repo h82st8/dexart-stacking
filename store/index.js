@@ -4,7 +4,8 @@ import {
   INIT,
   PENDING,
   REJECTED,
-  STACKING_API_URL
+  STACKING_API_URL,
+  RATES_API_URL,
 } from '~/lib/constants'
 import referral from '~/lib/LS/referral'
 
@@ -159,7 +160,7 @@ export const actions = {
   },
 
   async getRates({ commit }) {
-    const response = await fetch('https://api.easy-bizzi.com/index/rates/dxa/usd', {
+    const response = await fetch(`${RATES_API_URL}/index/rates/dxa/usd`, {
       method: 'POST',
       mode: 'cors', // no-cors, *cors, same-origin
       headers: {
@@ -171,7 +172,6 @@ export const actions = {
       }), // body data type must match "Content-Type" header
     })
     const result = await response.json();
-    console.error(result.data.rate)
     try {
       if (result) {
         commit('SET_RATES_STATE', {
