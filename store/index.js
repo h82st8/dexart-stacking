@@ -160,23 +160,12 @@ export const actions = {
   },
 
   async getRates({ commit }) {
-    const response = await fetch(`${RATES_API_URL}/index/rates/dxa/usd`, {
-      method: 'POST',
-      mode: 'cors', // no-cors, *cors, same-origin
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-
-      body: JSON.stringify({
-        signature: 1
-      }), // body data type must match "Content-Type" header
-    })
-    const result = await response.json();
     try {
-      if (result) {
+      const response = await this.$axios.post(`${RATES_API_URL}/index/rates/dxa/usd`,{ signature: 1 })
+      if (response.data) {
         commit('SET_RATES_STATE', {
           state: FULFILLED,
-          data: result.data.rate,
+          data: response.data.data.rate,
         })
       } else {
         commit('SET_RATES_STATE', { state: REJECTED })
