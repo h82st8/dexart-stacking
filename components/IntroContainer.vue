@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     deadline() {
-      return new Date('January 16, 2023 23:59:00').getTime()
+      return new Date('January 16, 2023 23:59:00+1').getTime()
     },
     timerIsShown() {
       return !String(this.timeToDeadline).includes('-')
