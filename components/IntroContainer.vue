@@ -19,47 +19,16 @@
         :src="require('assets/images/second-title-fade-img.png')"
       />
     </div>
-    <ClosePresaleBanner
-      v-if="timerIsShown"
-      class="closePresaleBanner"
-      :time-to-deadline="timeToDeadline"
-    />
     <img
       class="introContainer__introFade"
       :src="require('assets/images/intro-fade-img.png')"
-    />
-    <img
-      class="introContainer__coinTop"
-      :src="require('assets/images/coin-top-icon.png')"
     />
   </div>
 </template>
 
 <script>
-import ClosePresaleBanner from './ClosePresaleBanner.vue'
-
 export default {
   name: 'IntroContainer',
-  components: { ClosePresaleBanner },
-  data() {
-    return {
-      timeToDeadline: -1
-    }
-  },
-  computed: {
-    deadline() {
-      return new Date('January 17, 2023 17:00:00+3').getTime()
-    },
-    timerIsShown() {
-      return !String(this.timeToDeadline).includes('-')
-    }
-  },
-  mounted() {
-    this.timeToDeadline = this.deadline - new Date().getTime()
-    setInterval(() => {
-      this.timeToDeadline = this.deadline - new Date().getTime()
-    }, 1000)
-  }
 }
 </script>
 
@@ -91,7 +60,7 @@ export default {
   &__introTitle {
     align-self: flex-start;
     position: relative;
-    top: 246px;
+    top: 346px;
     left: 20px;
     z-index: 1;
     +mediaPhone() {
@@ -107,11 +76,10 @@ export default {
     z-index: 2;
   }
   &__titleFade {
-    display: none;
     width: 100%;
     position: absolute;
-    top: -97px;
-    left: -143px;
+    top: -9px;
+    left: -43px;
     z-index: -2;
   }
   &__secondTitle {
@@ -131,9 +99,8 @@ export default {
     width: 100%;
     position: absolute;
     top: -50px;
-    left: -262px;
+    left: -20px;
     z-index: -2;
-    display: none;
   }
   &__selectedText {
     font-weight: 700;
@@ -152,8 +119,17 @@ export default {
     width: 200px;
     position: absolute;
     bottom: 0;
-    left: calc(50% + 93px);
-    margin-left: -225px;
+    left: calc(50% - 132px);
+  }
+  +mediaTabletS() {
+    &__titleFade {
+      top: -100px;
+      left: -80px;
+    }
+    &__secondTitleFade {
+      top: -100px;
+      left: -120px;
+    }
   }
   +mediaDesktopM() {
     width: 100%;
@@ -161,14 +137,15 @@ export default {
     padding-right: 0px;
     &__introTitle {
       width: 1137px;
-      top: 346px;
+      top: 446px;
       left: 253px;
     }
     &__firstTitle {
       font-size: 64px;
     }
     &__titleFade {
-      display: block;
+      top: -97px;
+      left: -143px;
     }
     &__secondTitle {
       max-width: 707px;
