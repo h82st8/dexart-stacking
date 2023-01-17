@@ -2,11 +2,6 @@
   <div :class="['pointsContainer', { pointsContainerInIndex: isIndexPage }]">
     <div :class="{ wrap: isStackingPage }"></div>
     <img
-      v-if="isIndexPage"
-      class="pointsContainer__coinBottom"
-      :src="require('assets/images/coin-bottom-icon.png')"
-    />
-    <img
       v-if="isStackingPage"
       class="pointsContainer__coinBottomStacking"
       :src="require('assets/images/coin-bottom-stacking-icon.png')"
@@ -15,7 +10,7 @@
       <div class="buyDxaContainer__titleBox">
         <h1 class="buyDxaContainer__title" v-html="$t(`packetsDxaTokens`)" />
         <div class="buyDxaContainer__rateBox">
-          <h1 class="buyDxaContainer__rate">1 DXA = $0,001</h1>
+          <h1 class="buyDxaContainer__rate">1 DXA = ${{ rates }}</h1>
           <div class="buyDxaContainer__rateInfo">
             {{ $t('Выберите тип ячеек и их количество') }}
           </div>
@@ -187,7 +182,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ isPaymentBlocked: 'isPaymentBlocked' }),
+    ...mapGetters({
+      isPaymentBlocked: 'isPaymentBlocked',
+      rates: 'rate',
+    }),
     isDisabledBuyButton() {
       return !this.packet.priceInDollar || this.isPaymentBlocked
     }
@@ -215,10 +213,10 @@ export default {
   z-index: -1;
 }
 .pointsContainerInIndex {
-  z-index: 1000;
+  z-index: 5;
 }
 .pointsContainer {
-  width: 100%;
+  width: 100vw;
   position: relative;
   overflow hidden;
   background: $colorBackgroundFade;
@@ -226,15 +224,15 @@ export default {
     width: 200px;
     position: absolute;
     top: 0;
-    left: calc(50% + 100px);
-    margin-left: -225px;
+    left: calc(50% - 131.5px);
   }
-  &__coinBottomStacking {
-    position: absolute;
-    top: 0;
-    left: 36px;
-  }
+  // &__coinBottomStacking {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 36px;
+  // }
   +mediaDesktopM() {
+    width: 100%;
     &__coinBottom {
       position: absolute;
       width: auto;

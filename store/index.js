@@ -4,7 +4,8 @@ import {
   INIT,
   PENDING,
   REJECTED,
-  STACKING_API_URL
+  STACKING_API_URL,
+  RATES_API_BASE_URL,
 } from '~/lib/constants'
 import referral from '~/lib/LS/referral'
 
@@ -14,6 +15,9 @@ const initState = {
 
   country: '',
   countryState: INIT,
+
+  ratesState: INIT,
+  rate: 0,
 
   buyState: INIT
 }
@@ -45,7 +49,10 @@ export const getters = {
   },
   isPaymentBlocked(state) {
     return state.country === 'US' || state.country === 'CN'
-  }
+  },
+  rate(state) {
+    return state.rate.data;
+  },
 }
 
 export const mutations = {
@@ -62,6 +69,12 @@ export const mutations = {
 
   SET_COUNTRY_STATE(state, value) {
     state.countryState = value
+  },
+
+  SET_RATES_STATE(state, payload) {
+    if (payload.data) {
+      state.rate = payload
+    }
   },
 
   SET_BUY_STATE(state, value) {
@@ -143,6 +156,23 @@ export const actions = {
     } catch (e) {
       console.error('ipapi.co', e)
       commit('SET_COUNTRY_STATE', REJECTED)
+    }
+  },
+
+  async getRates({ commit }) {
+    try {
+      const response = await this.$axios.post(`${RATES_API_BASE_URL}/index/rates/dxa/usd`,{ signature: 1 })
+      if (response.data) {
+        commit('SET_RATES_STATE', {
+          state: FULFILLED,
+          data: response.data.data.rate,
+        })
+      } else {
+        commit('SET_RATES_STATE', { state: REJECTED })
+      }
+    } catch (e) {
+      commit('SET_RATES_STATE', { state: REJECTED })
+      console.error(e)
     }
   }
 }

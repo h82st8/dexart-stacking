@@ -1,6 +1,6 @@
 <template>
   <div class="cabinet">
-    <LayoutHeader />
+    <LayoutHeader class="header" />
     <Nuxt />
     <LayoutFooter />
   </div>
@@ -26,5 +26,8 @@ export default {
   flex-direction: column;
   z-index: 3;
   background: $colorBackground;
+}
+.header {
+  z-index 11;
 }
 </style>

@@ -32,7 +32,7 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 156px;
-  z-index: 5;
+  z-index: 11;
   +mediaTablet() {
     padding: 50px;
     flex-direction: row;

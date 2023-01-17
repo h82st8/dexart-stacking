@@ -1,7 +1,19 @@
 <template>
   <div class="indexPage">
     <div class="wrap"></div>
-    <IntroContainer />
+    <div class="introContainerWrap">
+      <IntroContainer />
+      <div class="introContainerWrap__coin">
+        <img
+          class="introContainerWrap__coinTop"
+          :src="require('assets/images/coin-top-icon.png')"
+        />
+        <img
+          class="introContainerWrap__coinBottom"
+          :src="require('assets/images/coin-bottom-icon.png')"
+        />
+      </div>
+    </div>
     <PackagesContainer
       id="indexPackagesBuy"
       :is-index-page="true"
@@ -107,6 +119,7 @@ export default {
   mounted() {
     this.$store.dispatch('fetchPacketsList')
     this.$store.dispatch('fetchCountry')
+    this.$store.dispatch('getRates')
     if (!localStorage.getItem('cookiesPolicies')) {
       this.cookiesModalIsOpen = true;
     };
@@ -162,10 +175,30 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 10;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 60.11%, rgba(0, 0, 0, 0) 100%);
   +mediaTablet() {
     height: 156px;
+  }
+}
+
+.introContainerWrap {
+  position: relative;
+  z-index: 6;
+  &__coin {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: -110px;
+    left: calc(50% - 100px);
+    width: 200px;
+  }
+  +mediaDesktopM() {
+    &__coin {
+      width: auto;
+      bottom: -192px;
+      left: calc(50% - 174px);
+    }
   }
 }
 
