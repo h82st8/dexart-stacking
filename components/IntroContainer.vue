@@ -29,12 +29,6 @@
 <script>
 export default {
   name: 'IntroContainer',
-  mounted() {
-    this.timeToDeadline = this.deadline - new Date().getTime()
-    setInterval(() => {
-      this.timeToDeadline = this.deadline - new Date().getTime()
-    }, 1000)
-  }
 }
 </script>
 
