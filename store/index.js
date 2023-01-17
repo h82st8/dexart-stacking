@@ -162,7 +162,7 @@ export const actions = {
   async getRates({ commit }) {
     try {
       const response = await this.$axios.post(
-        `${RATES_API_BASE_URL}/index/rates/dxa/usd`,{ signature: 1 }
+        `${RATES_API_BASE_URL}/index/rates/dxa/usdt`,{ signature: 1 }
       )
       if (response.data) {
         commit('SET_RATES_STATE', {
