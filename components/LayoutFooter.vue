@@ -90,10 +90,6 @@ export default {
     ]
     const info = [
       {
-        title: 'WhitePaper',
-        href: '/docs/DEXART Metaverse_white-paper.pdf',
-      },
-      {
         title: 'Privacy Policy',
         href: '/docs/Privacy Policy_09112022.pdf'
       },
