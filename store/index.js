@@ -19,7 +19,8 @@ const initState = {
   ratesState: INIT,
   rate: 0,
 
-  buyState: INIT
+  buyState: INIT,
+  locStorUtm: '',
 }
 
 const openMerchant = (response) => {
@@ -79,10 +80,24 @@ export const mutations = {
 
   SET_BUY_STATE(state, value) {
     state.buyState = value
-  }
+  },
+
+  SET_LOC_STOR_UTM(state, value) {
+    state.locStorUtm = value;
+  },
 }
 
 export const actions = {
+  async sendUtm(value) {
+    try {
+      const localStorageUtm = localStorage.getItem('utm');
+      const locStorUtm = localStorageUtm ? JSON.parse(localStorageUtm) : {};
+      await api.dexart.utm.sendUtm(value, locStorUtm);
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
   async fetchPacketsList({ commit, state }) {
     if (state.packetsOfDxaTokensState === PENDING) {
       return

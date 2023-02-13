@@ -147,9 +147,12 @@
 
 <script>
 import { isEmpty } from 'rambda'
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 import CommonButton from './CommonButton.vue'
 import CommonLoader from './CommonLoader.vue'
+import {
+  LocalStorageUtm,
+} from '@/utils/localStorage';
 
 export default {
   name: 'ModalBuyTokens',
@@ -182,10 +185,29 @@ export default {
   },
 
   computed: {
-    ...mapState(['buyState']),
+    ...mapState(['buyState', 'locStorUtm']),
     ...mapGetters({ packages: 'packetsOfDxaTokensData' })
   },
+  mounted() {
+    const routerQuery = { ...this.$route.query };
+    const routerUtmQuery = {};
+    Object.keys(routerQuery).forEach(key => {
+      if (key.startsWith('utm_')) {
+        routerUtmQuery[key] = routerQuery[key];
+      }
+    });
+    if (Object.keys(routerUtmQuery).length) {
+      LocalStorageUtm.set(routerUtmQuery);
+    }
+    const locStorUtmQuery = LocalStorageUtm.get();
+    if (locStorUtmQuery) {
+      this.setLocStorUtm(routerUtmQuery);
+    }
+  },
   methods: {
+    ...mapMutations({
+      setLocStorUtm: 'SET_LOC_STOR_UTM',
+    }),
     changeChosenMethod(method) {
       this.chosenMethod = method
       this.showDropdown = false
@@ -208,6 +230,9 @@ export default {
         })),
         payment_method: valuesOfPaymentMethods[this.chosenMethod], // odb || oton
         lang: this.$i18n.locale
+      }
+      if (Object.keys(this.locStorUtm).length) {
+        Object.assign(data, this.locStorUtm);
       }
 
       if (!data.email || isEmpty(data.packages) || !data.payment_method) {
@@ -236,7 +261,7 @@ export default {
 
       this.$store.dispatch('buyPackets', data)
     }
-  }
+  },
 }
 </script>
 
