@@ -22,7 +22,7 @@
         <div class="closePresaleBanner__countName">{{ $t(`${getSecondsName}`) }}</div>
       </div>
     </div>
-    <p class="closePresaleBanner__info">{{ $t('Успейте получить статус DEX Builder и уникальные привилегии') }}</p>
+    <p :class="['closePresaleBanner__info', {closePresaleBanner__info_forEn: $i18n.locale === 'en'}]" v-html="$t('Успейте получить статус DEX Builder и уникальные привилегии')" />
     <img
       :class="['closePresaleBanner__icon', {closePresaleBanner__iconOnEn: $i18n.locale === 'en'}]"
       :src="require('assets/images/energy-for-banner-icon.png')"
@@ -171,6 +171,7 @@ export default {
       font-size: 48px;
       margin-bottom: 5px;
       max-width: 469px;
+      line-height: 58px;
     }
     &__timerBox {
       margin-bottom: 20px;
@@ -193,8 +194,11 @@ export default {
     }
     &__info {
       font-size: 20px;
-      max-width: 440px;
+      max-width: 400px;
       margin-bottom: 10px;
+      &_forEn {
+        max-width: 450px;
+      }
     }
   }
 }
