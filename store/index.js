@@ -148,9 +148,9 @@ export const actions = {
 
       const headers = {}
 
-      // if (state.country === 'RU') {
-      //   headers['x-price-ru'] = true
-      // }
+      if (state.country === 'RU') {
+        headers['x-price-ru'] = true
+      }
 
       const response = await this.$axios.$post(
         `${STACKING_API_URL}/api/orders`,
