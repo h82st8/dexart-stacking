@@ -7,6 +7,7 @@
     :click-to-close="true"
     :lock-scroll="false"
     @input="$emit('input', $event)"
+    @closed="setBuyState({state: INIT})"
   >
     <div class="modalBuyTokens">
       <div class="modalBuyTokens__yourChoice">
@@ -200,7 +201,7 @@ export default {
     ...mapState(['buyState', 'locStorUtm', 'checkUser', 'linkForMerchant']),
     ...mapGetters({ packages: 'packetsOfDxaTokensData' }),
     isLinkSentToSponsor() {
-      return !this.linkForMerchant.includes('https') && this.buyState === 'FULFILLED';
+      return !this.linkForMerchant.includes('https') && this.buyState === 'FULFILLED' && this.chosenMethod === 'Банковской картой';
     },
     isNonChosenMethod() {
       return !this.chosenMethod && this.buyState === 'REJECTED';
@@ -228,6 +229,7 @@ export default {
   methods: {
     ...mapMutations({
       setLocStorUtm: 'SET_LOC_STOR_UTM',
+      setBuyState: 'SET_BUY_STATE',
     }),
     changeChosenMethod(method) {
       this.chosenMethod = method
@@ -283,7 +285,7 @@ export default {
       this.$gtm.push({ event: 'buy_click', ...packagesByGtmKeys })
 
       this.$store.dispatch('buyPackets', data)
-    }
+    },
   },
 }
 </script>
