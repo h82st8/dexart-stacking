@@ -1,6 +1,6 @@
 <template>
   <div :class="['closePresaleBanner', {closePresaleBanner_forEn: $i18n.locale === 'en'}]">
-    <h1 class="closePresaleBanner__title">{{ $t('Предпродажа закончится') }}</h1>
+    <h1 class="closePresaleBanner__title">{{ $t('До конца продаж Energy Units') }}</h1>
     <div class="closePresaleBanner__timerBox">
       <div class="closePresaleBanner__flexBox">
         <div class="closePresaleBanner__count">{{ days }}</div>
@@ -22,7 +22,7 @@
         <div class="closePresaleBanner__countName">{{ $t(`${getSecondsName}`) }}</div>
       </div>
     </div>
-    <p class="closePresaleBanner__info">{{ $t('Выбирайте мощность Energy Units, чтобы зафиксировать стартовую цену') }}</p>
+    <p :class="['closePresaleBanner__info', {closePresaleBanner__info_forEn: $i18n.locale === 'en'}]" v-html="$t('Успейте получить статус DEX Builder и уникальные привилегии')" />
     <img
       :class="['closePresaleBanner__icon', {closePresaleBanner__iconOnEn: $i18n.locale === 'en'}]"
       :src="require('assets/images/energy-for-banner-icon.png')"
@@ -135,16 +135,18 @@ export default {
     display: none;
     height: 307px;
     position: absolute;
-    bottom: 0;
-    right: -189px;
+    top: -100px;
+    right: -234px;
   }
   &__iconOnEn {
-    right: -239px;
+    top: -140px;
+    right: -189px;
   }
   +mediaPhone() {
     padding: 20px 30px;
     &__title {
       font-size: 32px;
+      max-width: 322px;
     }
     &__flexBox {
       width: 70px;
@@ -161,15 +163,18 @@ export default {
     }
   }
   +mediaDesktopM() {
+    padding: 20px 60px;
     &_forEn {
       min-width: 615px;
     }
     &__title {
       font-size: 48px;
-      margin-bottom: 40px;
+      margin-bottom: 5px;
+      max-width: 469px;
+      line-height: 58px;
     }
     &__timerBox {
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
     &__flexBox {
       width: 85px;
@@ -182,15 +187,18 @@ export default {
       width: 90px;
     }
     &__colon {
-      margin: 0 34px;
+      margin: 0 20px;
     }
     &__icon {
       display: block;
     }
     &__info {
       font-size: 20px;
-      max-width: 440px;
-      margin-bottom: 20px;
+      max-width: 400px;
+      margin-bottom: 10px;
+      &_forEn {
+        max-width: 450px;
+      }
     }
   }
 }

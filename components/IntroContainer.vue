@@ -19,6 +19,11 @@
         :src="require('assets/images/second-title-fade-img.png')"
       />
     </div>
+    <ClosePresaleBanner
+      v-if="timerIsShown"
+      class="closePresaleBanner"
+      :time-to-deadline="timeToDeadline"
+    />
     <img
       class="introContainer__introFade"
       :src="require('assets/images/intro-fade-img.png')"
@@ -27,8 +32,30 @@
 </template>
 
 <script>
+import ClosePresaleBanner from './ClosePresaleBanner.vue'
+
 export default {
   name: 'IntroContainer',
+  components: { ClosePresaleBanner },
+  data() {
+    return {
+      timeToDeadline: -1
+    }
+  },
+  computed: {
+    deadline() {
+      return new Date('March 09, 2023 23:59:00 GMT+01:00').getTime()
+    },
+    timerIsShown() {
+      return !String(this.timeToDeadline).includes('-')
+    }
+  },
+  mounted() {
+    this.timeToDeadline = this.deadline - new Date().getTime()
+    setInterval(() => {
+      this.timeToDeadline = this.deadline - new Date().getTime()
+    }, 1000)
+  }
 }
 </script>
 
@@ -40,7 +67,7 @@ export default {
 }
 .introContainer {
   width: 100vw;
-  height: 760px;
+  height: 830px;
   position: relative;
   overflow hidden;
   padding-right: 10px;
