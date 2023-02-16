@@ -7,6 +7,7 @@
     :click-to-close="true"
     :lock-scroll="false"
     @input="$emit('input', $event)"
+    @closed="setBuyState({state: INIT})"
   >
     <div class="modalBuyTokens">
       <div class="modalBuyTokens__yourChoice">
@@ -135,10 +136,22 @@
           $t('Купить')
         }}</CommonButton>
         <div
-          v-if="buyState === 'REJECTED'"
+          v-if="isNonChosenMethod"
           style="color: chocolate; margin-top: 5px; text-align: center"
         >
           {{ $t('Выберите способ оплаты') }}
+        </div>
+        <div
+          v-else-if="isLinkSentToSponsor"
+          style="color: chocolate; margin-top: 5px; text-align: center"
+        >
+          {{ $t('Your payment link has been sent to your sponsor') }}
+        </div>
+        <div
+          v-else-if="isServiceUnavailable"
+          style="color: chocolate; margin-top: 5px; text-align: center"
+        >
+          {{ $t('The service is temporarily unavailable') }}
         </div>
       </form>
     </div>
@@ -180,13 +193,22 @@ export default {
       chosenMethod: '',
       acceptTermsAndConditions: false,
 
-      hasError: false
+      hasError: false,
     }
   },
 
   computed: {
-    ...mapState(['buyState', 'locStorUtm']),
-    ...mapGetters({ packages: 'packetsOfDxaTokensData' })
+    ...mapState(['buyState', 'locStorUtm', 'checkUser', 'linkForMerchant']),
+    ...mapGetters({ packages: 'packetsOfDxaTokensData' }),
+    isLinkSentToSponsor() {
+      return !this.linkForMerchant.includes('https') && this.buyState === 'FULFILLED' && this.chosenMethod === 'Банковской картой';
+    },
+    isNonChosenMethod() {
+      return !this.chosenMethod && this.buyState === 'REJECTED';
+    },
+    isServiceUnavailable() {
+      return !this.checkUser && this.buyState === 'REJECTED';
+    },
   },
   mounted() {
     const routerQuery = { ...this.$route.query };
@@ -207,6 +229,7 @@ export default {
   methods: {
     ...mapMutations({
       setLocStorUtm: 'SET_LOC_STOR_UTM',
+      setBuyState: 'SET_BUY_STATE',
     }),
     changeChosenMethod(method) {
       this.chosenMethod = method
@@ -217,6 +240,8 @@ export default {
     },
 
     onBuy() {
+      this.$store.dispatch('checkUser', this.email);
+
       const valuesOfPaymentMethods = {
         'Банковской картой': 'odb',
         'С криптокошелька': 'oton'
@@ -260,7 +285,7 @@ export default {
       this.$gtm.push({ event: 'buy_click', ...packagesByGtmKeys })
 
       this.$store.dispatch('buyPackets', data)
-    }
+    },
   },
 }
 </script>
