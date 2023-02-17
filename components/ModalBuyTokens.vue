@@ -210,6 +210,14 @@ export default {
       return !this.checkUser && this.buyState === 'REJECTED';
     },
   },
+  watch: {
+    email() {
+      this.setBuyState({state: "INIT"})
+    },
+    chosenMethod() {
+      this.setBuyState({state: "INIT"})
+    },
+  },
   mounted() {
     const routerQuery = { ...this.$route.query };
     const routerUtmQuery = {};
