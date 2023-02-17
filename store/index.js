@@ -19,7 +19,11 @@ const initState = {
   ratesState: INIT,
   rate: 0,
 
-  buyState: INIT
+  buyState: INIT,
+  locStorUtm: '',
+  linkForMerchant: '',
+
+  checkUser: true,
 }
 
 const openMerchant = (response) => {
@@ -77,12 +81,33 @@ export const mutations = {
     }
   },
 
+  SET_CHECK_USER_STATE(state, payload) {
+    state.checkUser = payload.success;
+  },
+
   SET_BUY_STATE(state, value) {
-    state.buyState = value
-  }
+    state.buyState = value.state;
+    if (value.data) {
+      state.linkForMerchant = value.data;
+    }
+  },
+
+  SET_LOC_STOR_UTM(state, value) {
+    state.locStorUtm = value;
+  },
 }
 
 export const actions = {
+  async sendUtm(value) {
+    try {
+      const localStorageUtm = localStorage.getItem('utm');
+      const locStorUtm = localStorageUtm ? JSON.parse(localStorageUtm) : {};
+      await api.dexart.utm.sendUtm(value, locStorUtm);
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
   async fetchPacketsList({ commit, state }) {
     if (state.packetsOfDxaTokensState === PENDING) {
       return
@@ -119,7 +144,7 @@ export const actions = {
     }
 
     try {
-      commit('SET_BUY_STATE', PENDING)
+      commit('SET_BUY_STATE', {state: PENDING})
 
       const headers = {}
 
@@ -134,13 +159,35 @@ export const actions = {
       )
 
       if (response.data) {
-        // hach for Google Analutics
-        setTimeout(() => openMerchant(response), 3000)
+        commit('SET_BUY_STATE', {state: FULFILLED, data: response.data.link});
+        if (response.data.link.includes('https')) {
+          // hach for Google Analutics
+          setTimeout(() => openMerchant(response), 3000)
+        }
       } else {
-        commit('SET_BUY_STATE', REJECTED)
+        commit('SET_BUY_STATE', {state: REJECTED})
       }
     } catch (e) {
-      commit('SET_BUY_STATE', REJECTED)
+      commit('SET_BUY_STATE', {state: REJECTED})
+      console.error(e)
+    }
+  },
+
+  async checkUser({ commit }, email) {
+    try {
+      const response = await this.$axios.$get(
+        `${STACKING_API_URL}/api/user/payment/private-link?email=${email}`
+      )
+      if (response) {
+        commit('SET_CHECK_USER_STATE', {
+          state: FULFILLED,
+          data: response.success,
+        })
+      } else {
+        commit('SET_RATES_STATE', { state: REJECTED })
+      }
+    } catch (e) {
+      commit('SET_CHECK_USER_STATE', { state: REJECTED })
       console.error(e)
     }
   },
