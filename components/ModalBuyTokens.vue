@@ -198,7 +198,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['buyState', 'locStorUtm', 'checkUser', 'linkForMerchant']),
+    ...mapState(['buyState', 'locStorUtm', 'checkUser', 'linkForMerchant', 'country']),
     ...mapGetters({ packages: 'packetsOfDxaTokensData' }),
     isLinkSentToSponsor() {
       return !this.linkForMerchant.includes('https') && this.buyState === 'FULFILLED' && this.chosenMethod === 'Банковской картой';
@@ -251,7 +251,7 @@ export default {
       this.$store.dispatch('checkUser', this.email);
 
       const valuesOfPaymentMethods = {
-        'Банковской картой': 'odb',
+        'Банковской картой': this.country !== 'ru' ? 'nearpay' : 'odb',
         'С криптокошелька': 'oton'
       }
 
