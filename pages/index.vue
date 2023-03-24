@@ -77,7 +77,7 @@ export default {
       packets: {},
       cookiesModalIsOpen: false,
       timeToDeadline: -1,
-      deadline: new Date('March 25, 2023 02:00:00 GMT+03:00').getTime(),
+      deadline: new Date(process.env.NUXT_ENV_DEADLINE).getTime(),
     }
   },
 
@@ -121,7 +121,7 @@ export default {
         }))
     },
     timerIsShown() {
-      return !String(this.timeToDeadline).includes('-')
+      return this.timeToDeadline >= 0;
     },
   },
 

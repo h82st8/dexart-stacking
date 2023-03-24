@@ -1,5 +1,5 @@
 <template>
-  <div class="saleIsOver">
+  <div :class="['saleIsOver', {saleIsOver_forRu: $i18n.locale === 'ru'}]">
     <div class="saleIsOver__bannerBox">
       <div class="saleIsOver__bannerBoxWrap">
         <h1 class="saleIsOver__title">{{ $t('Energy Units sale is over') }}</h1>
@@ -47,9 +47,12 @@ export default {
 
 <style lang="stylus">
 .saleIsOver {
-  height: 180px;
+  height: 140px;
   position: relative;
   margin: 0 auto;
+  &_forRu {
+    height: 200px;
+  }
   * {
     color: $colorBase;
     font-family: 'Montserrat';
@@ -136,6 +139,9 @@ export default {
   }
   +mediaTablet() {
     height: 260px;
+    &_forRu {
+      height: 300px;
+    }
     &__bannerBox {
       top: -240px;
       left: calc(50% - (70vw / 2));
@@ -158,9 +164,12 @@ export default {
     }
   }
   +mediaDesktopM() {
-    height: 230px;
+    height: 280px;
+    &_forRu {
+      height: 345px;
+    }
     &__bannerBox {
-      top: -300px;
+      top: -250px;
       left: calc(50% - 500px);
       width: 1000px;
     }
