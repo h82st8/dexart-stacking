@@ -2,7 +2,7 @@
   <div class="indexPage">
     <div class="wrap"></div>
     <div class="introContainerWrap">
-      <IntroContainer :timer-is-shown="timerIsShown" :time-to-deadline="timeToDeadline" @changeDeadline="changeDeadline()" />
+      <IntroContainer :timer-is-shown="timerIsShown" :time-to-deadline="timeToDeadline" />
       <div class="introContainerWrap__coin">
         <img
           class="introContainerWrap__coinTop"
@@ -170,10 +170,6 @@ export default {
 
     openBuyTokensModal() {
       this.buyTokensModalIsOpen = true
-    },
-
-    changeDeadline() {
-      this.deadline = new Date().getTime();
     },
   },
 }

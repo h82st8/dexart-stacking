@@ -23,7 +23,6 @@
       </div>
     </div>
     <p :class="['closePresaleBanner__info', {closePresaleBanner__info_forEn: $i18n.locale === 'en'}]" v-html="$t('Успейте получить статус DEX Builder и уникальные привилегии')" />
-    <button @click="changeDeadline()">Change deadline</button>
     <img
       :class="['closePresaleBanner__icon', {closePresaleBanner__iconOnEn: $i18n.locale === 'en'}]"
       :src="require('assets/images/energy-for-banner-icon.png')"
@@ -79,9 +78,6 @@ export default {
       const timeInNumbers = time;
       return Number(timeInNumbers) < 10 ? `0${timeInNumbers}` : timeInNumbers
     },
-    changeDeadline() {
-      this.$emit('changeDeadline');
-    }
   }
 }
 </script>

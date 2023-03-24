@@ -23,7 +23,6 @@
       v-if="timerIsShown"
       class="closePresaleBanner"
       :time-to-deadline="timeToDeadline"
-      @changeDeadline="changeDeadline()"
     />
     <img
       class="introContainer__introFade"
@@ -39,11 +38,6 @@ export default {
   name: 'IntroContainer',
   components: { ClosePresaleBanner },
   props: ['timerIsShown', 'timeToDeadline'],
-  methods: {
-    changeDeadline() {
-      this.$emit('changeDeadline');
-    },
-  }
 }
 </script>
 

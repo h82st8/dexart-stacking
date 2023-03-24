@@ -33,9 +33,9 @@ export default {
   data() {
     return {
       socials: [
+        'https://www.youtube.com/channel/UC13PPy2YX2d6rIbjkdveP7g/',
         'https://instagram.com/dexartmetaverse',
         'https://twitter.com/dexartmetaverse',
-        'https://www.youtube.com/channel/UC13PPy2YX2d6rIbjkdveP7g/',
         'https://t.me/dexartchannelru',
         'https://medium.com/@dexartmetaverse',
         'https://www.reddit.com/r/dexart/',
