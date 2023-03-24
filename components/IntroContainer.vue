@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     deadline() {
-      return new Date('March 24, 2023 19:00:00 GMT+03:00').getTime()
+      return new Date('March 25, 2023 02:00:00 GMT+03:00').getTime()
     },
     timerIsShown() {
       return !String(this.timeToDeadline).includes('-')
