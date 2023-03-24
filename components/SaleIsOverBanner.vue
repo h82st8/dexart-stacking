@@ -47,7 +47,7 @@ export default {
 
 <style lang="stylus">
 .saleIsOver {
-  height: 350px;
+  height: 180px;
   position: relative;
   margin: 0 auto;
   * {
@@ -57,18 +57,18 @@ export default {
   }
   &__bannerBox {
     position: absolute;
-    top: 35px;
+    top: -155px;
     left: calc(50% - (90vw / 2));
     width: 90vw;
     display: inline-block;
     background: linear-gradient(103.4deg, rgba(124, 29, 211, 0.8) 0.77%, rgba(36, 12, 59, 0.8) 98.1%);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
     border-radius: 40px;
     z-index: 10;
   }
   &__bannerBoxWrap {
     position: relative;
-    padding: 24px 0 31px 32px;
+    padding: 24px 32px 31px 32px;
     width 100%
     height 100%
   }
@@ -135,13 +135,14 @@ export default {
     height 20px
   }
   +mediaTablet() {
-    height: 500px;
+    height: 260px;
     &__bannerBox {
+      top: -240px;
       left: calc(50% - (70vw / 2));
       width: 70vw;
     }
     &__bannerBoxWrap {
-      padding: 48px 0 62px 64px;
+      padding: 48px 64px 62px 64px;
     }
     &__title {
       font-size: 64px;
@@ -157,9 +158,9 @@ export default {
     }
   }
   +mediaDesktopM() {
-    height: 550px;
+    height: 230px;
     &__bannerBox {
-      top: 55px;
+      top: -300px;
       left: calc(50% - 500px);
       width: 1000px;
     }

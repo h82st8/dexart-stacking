@@ -77,7 +77,7 @@ export default {
       packets: {},
       cookiesModalIsOpen: false,
       timeToDeadline: -1,
-      deadline: new Date('March 24, 2023 19:00:00 GMT+03:00').getTime(),
+      deadline: new Date('March 25, 2023 02:00:00 GMT+03:00').getTime(),
     }
   },
 
