@@ -51,13 +51,6 @@ export default {
         type: 'image/x-icon',
         href: '/safari-pinned-tab.svg'
       }
-    ],
-    script: [
-      {
-        src: '//rf.revolvermaps.com/0/0/9.js?i=5ajmm69h455&t=Live%20Statistics',
-        async: true,
-        body: true
-      }
     ]
   },
 
