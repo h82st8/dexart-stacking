@@ -169,7 +169,7 @@ export default {
       height: 315px;
     }
     &__bannerBox {
-      top: -280px;
+      top: -290px;
       left: calc(50% - 500px);
       width: 1000px;
     }
