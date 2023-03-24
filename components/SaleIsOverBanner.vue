@@ -47,11 +47,11 @@ export default {
 
 <style lang="stylus">
 .saleIsOver {
-  height: 140px;
+  height: 110px;
   position: relative;
   margin: 0 auto;
   &_forRu {
-    height: 200px;
+    height: 170px;
   }
   * {
     color: $colorBase;
@@ -60,7 +60,7 @@ export default {
   }
   &__bannerBox {
     position: absolute;
-    top: -155px;
+    top: -185px;
     left: calc(50% - (90vw / 2));
     width: 90vw;
     display: inline-block;
@@ -138,12 +138,12 @@ export default {
     height 20px
   }
   +mediaTablet() {
-    height: 260px;
+    height: 170px;
     &_forRu {
-      height: 300px;
+      height: 230px;
     }
     &__bannerBox {
-      top: -240px;
+      top: -270px;
       left: calc(50% - (70vw / 2));
       width: 70vw;
     }
@@ -164,12 +164,12 @@ export default {
     }
   }
   +mediaDesktopM() {
-    height: 280px;
+    height: 250px;
     &_forRu {
-      height: 345px;
+      height: 315px;
     }
     &__bannerBox {
-      top: -250px;
+      top: -280px;
       left: calc(50% - 500px);
       width: 1000px;
     }
