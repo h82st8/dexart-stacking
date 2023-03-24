@@ -2,7 +2,7 @@
   <div class="indexPage">
     <div class="wrap"></div>
     <div class="introContainerWrap">
-      <IntroContainer />
+      <IntroContainer :timer-is-shown="timerIsShown" :time-to-deadline="timeToDeadline" />
       <div class="introContainerWrap__coin">
         <img
           class="introContainerWrap__coinTop"
@@ -15,6 +15,7 @@
       </div>
     </div>
     <PackagesContainer
+      v-if="timerIsShown"
       id="indexPackagesBuy"
       :is-index-page="true"
       :packets="packets"
@@ -24,6 +25,7 @@
       @reduceCountPackages="reduceCountPackages"
       @increaseCountPackages="increaseCountPackages"
     />
+    <SaleIsOverBanner v-else />
     <TokensContainer />
     <RoadmapContainer />
     <ModalBuyTokens
@@ -52,6 +54,7 @@ import ModalBuyTokens from '~/components/ModalBuyTokens.vue'
 import ModalCookies from '~/components/ModalCookies.vue'
 import ModalPaymentSuccess from '~/components/ModalPaymentSuccess.vue'
 import ModalPaymentFail from '~/components/ModalPaymentFail.vue'
+import SaleIsOverBanner from '~/components/SaleIsOverBanner.vue'
 
 export default {
   name: 'IndexPage',
@@ -63,7 +66,8 @@ export default {
     ModalBuyTokens,
     ModalCookies,
     ModalPaymentSuccess,
-    ModalPaymentFail
+    ModalPaymentFail,
+    SaleIsOverBanner
 },
   layout: 'base',
 
@@ -72,6 +76,8 @@ export default {
       buyTokensModalIsOpen: false,
       packets: {},
       cookiesModalIsOpen: false,
+      timeToDeadline: -1,
+      deadline: new Date(process.env.NUXT_ENV_DEADLINE).getTime(),
     }
   },
 
@@ -113,7 +119,10 @@ export default {
           ...item,
           count: this.packets[item.id]
         }))
-    }
+    },
+    timerIsShown() {
+      return this.timeToDeadline >= 0;
+    },
   },
 
   mounted() {
@@ -123,6 +132,10 @@ export default {
     if (!localStorage.getItem('cookiesPolicies')) {
       this.cookiesModalIsOpen = true;
     };
+    this.timeToDeadline = this.deadline - new Date().getTime()
+    setInterval(() => {
+      this.timeToDeadline = this.deadline - new Date().getTime()
+    }, 1000)
   },
 
   methods: {
@@ -157,7 +170,7 @@ export default {
 
     openBuyTokensModal() {
       this.buyTokensModalIsOpen = true
-    }
+    },
   },
 }
 </script>

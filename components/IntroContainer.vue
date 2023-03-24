@@ -37,25 +37,7 @@ import ClosePresaleBanner from './ClosePresaleBanner.vue'
 export default {
   name: 'IntroContainer',
   components: { ClosePresaleBanner },
-  data() {
-    return {
-      timeToDeadline: -1
-    }
-  },
-  computed: {
-    deadline() {
-      return new Date('March 25, 2023 02:00:00 GMT+03:00').getTime()
-    },
-    timerIsShown() {
-      return !String(this.timeToDeadline).includes('-')
-    }
-  },
-  mounted() {
-    this.timeToDeadline = this.deadline - new Date().getTime()
-    setInterval(() => {
-      this.timeToDeadline = this.deadline - new Date().getTime()
-    }, 1000)
-  }
+  props: ['timerIsShown', 'timeToDeadline'],
 }
 </script>
 
