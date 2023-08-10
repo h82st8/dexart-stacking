@@ -24,6 +24,8 @@ const initState = {
   linkForMerchant: '',
 
   checkUser: true,
+
+  errorMessage: '',
 }
 
 const openMerchant = (response) => {
@@ -95,6 +97,10 @@ export const mutations = {
   SET_LOC_STOR_UTM(state, value) {
     state.locStorUtm = value;
   },
+
+  SET_ERROR_MESSAGE(state, value) {
+    state.errorMessage = value;
+  },
 }
 
 export const actions = {
@@ -157,6 +163,7 @@ export const actions = {
         { ...payload, ref: referral.get() },
         { headers }
       )
+      commit('SET_ERROR_MESSAGE', response.message);
 
       if (response.data) {
         commit('SET_BUY_STATE', {state: FULFILLED, data: response.data.link});

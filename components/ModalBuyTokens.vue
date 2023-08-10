@@ -151,7 +151,7 @@
           v-else-if="isServiceUnavailable"
           style="color: chocolate; margin-top: 5px; text-align: center"
         >
-          {{ $t('The service is temporarily unavailable') }}
+          {{ isSalesClosed ? $t(errorMessage) : $t('The service is temporarily unavailable') }}
         </div>
       </form>
     </div>
@@ -198,7 +198,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['buyState', 'locStorUtm', 'checkUser', 'linkForMerchant']),
+    ...mapState(['buyState', 'locStorUtm', 'checkUser', 'linkForMerchant', 'errorMessage']),
     ...mapGetters({ packages: 'packetsOfDxaTokensData' }),
     isLinkSentToSponsor() {
       return !this.linkForMerchant.includes('https') && this.buyState === 'FULFILLED' && this.chosenMethod === 'Банковской картой';
@@ -208,6 +208,9 @@ export default {
     },
     isServiceUnavailable() {
       return !this.checkUser && this.buyState === 'REJECTED';
+    },
+    isSalesClosed() {
+      return this.errorMessage === 'Sales are closed';
     },
   },
   watch: {
