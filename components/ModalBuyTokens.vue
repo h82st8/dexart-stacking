@@ -188,7 +188,7 @@ export default {
   data() {
     return {
       email: '',
-      paymentMethods: ['Банковской картой', 'С криптокошелька'],
+      paymentMethods: ['Банковской картой', 'С криптокошелька', 'Transak'],
       showDropdown: false,
       chosenMethod: '',
       acceptTermsAndConditions: false,
@@ -255,7 +255,8 @@ export default {
 
       const valuesOfPaymentMethods = {
         'Банковской картой': 'odb',
-        'С криптокошелька': 'oton'
+        'С криптокошелька': 'oton',
+        'Transak': 'transak',
       }
 
       const data = {
@@ -494,7 +495,7 @@ export default {
       background: #57198A;
       color: $colorBrand;
     }
-    &:nth-child(2) {
+    &:last-child {
       border-radius: 0 0 32px 32px;
     }
   }

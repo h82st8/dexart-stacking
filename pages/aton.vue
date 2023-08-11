@@ -6,7 +6,7 @@
 
 <script>
 import Cookies from 'js-cookie';
-import { CommonLoader } from '@/components/CommonLoader.vue';
+import CommonLoader from '~/components/CommonLoader.vue';
 
 export default {
   name: 'AdminDexfarmPage',
