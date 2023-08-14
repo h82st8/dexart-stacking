@@ -7,7 +7,8 @@
     :click-to-close="true"
     :lock-scroll="false"
     @input="$emit('input', $event)"
-    @closed="setBuyState({state: INIT})"
+    @closed="onClosed"
+    @before-open="onBeforeOpen"
   >
     <div class="modalBuyTokens">
       <div class="modalBuyTokens__yourChoice">
@@ -129,6 +130,7 @@
               class="buttonContainer__link"
               >{{ $t('Terms & Conditions') }}</a
             >
+            {{ country }}
           </div>
         </div>
         <CommonLoader v-if="buyState === 'PENDING'" />
@@ -188,7 +190,7 @@ export default {
   data() {
     return {
       email: '',
-      paymentMethods: ['Банковской картой', 'С криптокошелька', 'Transak'],
+      paymentMethods: ['Банковской картой', 'С криптокошелька'],
       showDropdown: false,
       chosenMethod: '',
       acceptTermsAndConditions: false,
@@ -198,7 +200,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['buyState', 'locStorUtm', 'checkUser', 'linkForMerchant', 'errorMessage']),
+    ...mapState(['buyState', 'locStorUtm', 'checkUser', 'linkForMerchant', 'errorMessage', 'country']),
     ...mapGetters({ packages: 'packetsOfDxaTokensData' }),
     isLinkSentToSponsor() {
       return !this.linkForMerchant.includes('https') && this.buyState === 'FULFILLED' && this.chosenMethod === 'Банковской картой';
@@ -248,6 +250,15 @@ export default {
     },
     dividingIntoDigits(count) {
       return String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ')
+    },
+    onBeforeOpen() {
+      if (this.country && this.country !== 'RU') {
+        this.paymentMethods.push('Transak');
+      }
+    },
+    onClosed() {
+      this.setBuyState({state: 'INIT'});
+      this.paymentMethods = ['Банковской картой', 'С криптокошелька'];
     },
 
     onBuy() {
