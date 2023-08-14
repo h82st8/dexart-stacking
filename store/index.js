@@ -169,7 +169,7 @@ export const actions = {
         commit('SET_BUY_STATE', {state: FULFILLED, data: response.data.link});
         if (response.data.link.includes('https')) {
           // hach for Google Analutics
-          setTimeout(() => openMerchant(response), 3000)
+          setTimeout(() => openMerchant(response), 1000)
         }
       } else {
         commit('SET_BUY_STATE', {state: REJECTED})

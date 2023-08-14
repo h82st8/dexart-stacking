@@ -130,7 +130,6 @@
               class="buttonContainer__link"
               >{{ $t('Terms & Conditions') }}</a
             >
-            {{ country }}
           </div>
         </div>
         <CommonLoader v-if="buyState === 'PENDING'" />
