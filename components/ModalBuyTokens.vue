@@ -8,7 +8,6 @@
     :lock-scroll="false"
     @input="$emit('input', $event)"
     @closed="onClosed"
-    @before-open="onBeforeOpen"
   >
     <div class="modalBuyTokens">
       <div class="modalBuyTokens__yourChoice">
