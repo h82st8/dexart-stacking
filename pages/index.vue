@@ -2,7 +2,7 @@
   <div class="indexPage">
     <div class="wrap"></div>
     <div class="introContainerWrap">
-      <IntroContainer :timer-is-shown="timerIsShown" :time-to-deadline="timeToDeadline" />
+      <IntroContainer :timer-is-shown="timerIsShown && isAtonUser" :time-to-deadline="timeToDeadline" />
       <div class="introContainerWrap__coin">
         <img
           class="introContainerWrap__coinTop"
@@ -15,7 +15,7 @@
       </div>
     </div>
     <PackagesContainer
-      v-if="timerIsShown"
+      v-if="timerIsShown && isAtonUser"
       id="indexPackagesBuy"
       :is-index-page="true"
       :packets="packets"
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 import { mapGetters } from 'vuex'
 import { omit } from 'rambda'
 import TokensContainer from '~/components/TokensContainer.vue'
@@ -122,6 +123,9 @@ export default {
     },
     timerIsShown() {
       return this.timeToDeadline >= 0;
+    },
+    isAtonUser() {
+      return Cookies.get('atonUser') === '527';
     },
   },
 
