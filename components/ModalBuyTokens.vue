@@ -7,7 +7,7 @@
     :click-to-close="true"
     :lock-scroll="false"
     @input="$emit('input', $event)"
-    @closed="setBuyState({state: INIT})"
+    @closed="onClosed"
   >
     <div class="modalBuyTokens">
       <div class="modalBuyTokens__yourChoice">
@@ -151,7 +151,7 @@
           v-else-if="isServiceUnavailable"
           style="color: chocolate; margin-top: 5px; text-align: center"
         >
-          {{ $t('The service is temporarily unavailable') }}
+          {{ isSalesClosed ? $t(errorMessage) : $t('The service is temporarily unavailable') }}
         </div>
       </form>
     </div>
@@ -198,7 +198,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['buyState', 'locStorUtm', 'checkUser', 'linkForMerchant']),
+    ...mapState(['buyState', 'locStorUtm', 'checkUser', 'linkForMerchant', 'errorMessage', 'country']),
     ...mapGetters({ packages: 'packetsOfDxaTokensData' }),
     isLinkSentToSponsor() {
       return !this.linkForMerchant.includes('https') && this.buyState === 'FULFILLED' && this.chosenMethod === 'Банковской картой';
@@ -208,6 +208,9 @@ export default {
     },
     isServiceUnavailable() {
       return !this.checkUser && this.buyState === 'REJECTED';
+    },
+    isSalesClosed() {
+      return this.errorMessage === 'Sales are closed';
     },
   },
   watch: {
@@ -246,13 +249,23 @@ export default {
     dividingIntoDigits(count) {
       return String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ')
     },
+    onBeforeOpen() {
+      if (this.country && this.country !== 'RU') {
+        this.paymentMethods.push('Transak');
+      }
+    },
+    onClosed() {
+      this.setBuyState({state: 'INIT'});
+      this.paymentMethods = ['Банковской картой', 'С криптокошелька'];
+    },
 
     onBuy() {
       this.$store.dispatch('checkUser', this.email);
 
       const valuesOfPaymentMethods = {
         'Банковской картой': 'odb',
-        'С криптокошелька': 'oton'
+        'С криптокошелька': 'oton',
+        'Transak': 'transak',
       }
 
       const data = {
@@ -491,7 +504,7 @@ export default {
       background: #57198A;
       color: $colorBrand;
     }
-    &:nth-child(2) {
+    &:last-child {
       border-radius: 0 0 32px 32px;
     }
   }

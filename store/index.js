@@ -24,6 +24,8 @@ const initState = {
   linkForMerchant: '',
 
   checkUser: true,
+
+  errorMessage: '',
 }
 
 const openMerchant = (response) => {
@@ -95,6 +97,10 @@ export const mutations = {
   SET_LOC_STOR_UTM(state, value) {
     state.locStorUtm = value;
   },
+
+  SET_ERROR_MESSAGE(state, value) {
+    state.errorMessage = value;
+  },
 }
 
 export const actions = {
@@ -153,17 +159,23 @@ export const actions = {
       }
 
       const response = await this.$axios.$post(
-        `${STACKING_API_URL}/api/orders`,
+        `${STACKING_API_URL}/api/orders/aton`,
         { ...payload, ref: referral.get() },
         { headers }
       )
+      commit('SET_ERROR_MESSAGE', response.message);
 
       if (response.data) {
-        commit('SET_BUY_STATE', {state: FULFILLED, data: response.data.link});
         if (response.data.link.includes('https')) {
           // hach for Google Analutics
-          setTimeout(() => openMerchant(response), 3000)
+          setTimeout(() => {
+            openMerchant(response)
+            commit('SET_BUY_STATE', {state: FULFILLED, data: response.data.link});
+          }, 500)
         }
+        setTimeout(() => {
+          commit('SET_BUY_STATE', {state: FULFILLED, data: response.data.link});
+        }, 1000)
       } else {
         commit('SET_BUY_STATE', {state: REJECTED})
       }
