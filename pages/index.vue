@@ -256,7 +256,6 @@ export default {
   background: $colorBase;
 }
 ::v-deep .modal-cookies-overlay {
-  // background-color: transparent !important;
   background-color: rgba(#A768D4, 0.4) !important;
 }
 </style>
