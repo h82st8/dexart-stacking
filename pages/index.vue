@@ -15,7 +15,7 @@
       </div>
     </div>
     <PackagesContainer
-      v-if="timerIsShown && (isAtonUser || isOtonUser)"
+      v-if="(isAtonUser || isOtonUser)"
       id="indexPackagesBuy"
       :is-index-page="true"
       :packets="packets"

@@ -19,11 +19,11 @@
         :src="require('assets/images/second-title-fade-img.png')"
       />
     </div>
-    <ClosePresaleBanner
+    <!-- <ClosePresaleBanner
       v-if="timerIsShown"
       class="closePresaleBanner"
       :time-to-deadline="timeToDeadline"
-    />
+    /> -->
     <img
       class="introContainer__introFade"
       :src="require('assets/images/intro-fade-img.png')"
@@ -32,12 +32,12 @@
 </template>
 
 <script>
-import ClosePresaleBanner from './ClosePresaleBanner.vue'
+// import ClosePresaleBanner from './ClosePresaleBanner.vue'
 
 export default {
   name: 'IntroContainer',
-  components: { ClosePresaleBanner },
-  props: ['timerIsShown', 'timeToDeadline'],
+  // components: { ClosePresaleBanner },
+  // props: ['timerIsShown', 'timeToDeadline'],
 }
 </script>
 
