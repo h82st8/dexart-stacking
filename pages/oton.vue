@@ -16,7 +16,7 @@ export default {
   },
 
   mounted() {
-    Cookies.set('otonUser', 527, { expires: new Date(process.env.NUXT_ENV_DEADLINE) });
+    Cookies.set('otonUser', 527);
     window.location.assign('/');
   },
 };
