@@ -2,7 +2,7 @@
   <div class="indexPage">
     <div class="wrap"></div>
     <div class="introContainerWrap">
-      <IntroContainer :timer-is-shown="timerIsShown && isAtonUser" :time-to-deadline="timeToDeadline" />
+      <IntroContainer :timer-is-shown="timerIsShown && (isAtonUser || isOtonUser)" :time-to-deadline="timeToDeadline" />
       <div class="introContainerWrap__coin">
         <img
           class="introContainerWrap__coinTop"
@@ -15,7 +15,7 @@
       </div>
     </div>
     <PackagesContainer
-      v-if="timerIsShown && isAtonUser"
+      v-if="timerIsShown && (isAtonUser || isOtonUser)"
       id="indexPackagesBuy"
       :is-index-page="true"
       :packets="packets"
@@ -126,6 +126,9 @@ export default {
     },
     isAtonUser() {
       return Cookies.get('atonUser') === '527';
+    },
+    isOtonUser() {
+      return Cookies.get('otonUser') === '527';
     },
   },
 
