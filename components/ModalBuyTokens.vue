@@ -281,15 +281,6 @@ export default {
         payment_method: valuesOfPaymentMethods[this.chosenMethod], // odb || oton
         lang: this.$i18n.locale
       }
-      const dataForOton = {
-        email: this.email,
-        packages: this.filteredPackages.map((item) => ({
-          id: item.id,
-          count: item.count
-        })),
-        payment_method: 'oton',
-        lang: this.$i18n.locale
-      }
       if (Object.keys(this.locStorUtm).length) {
         Object.assign(data, this.locStorUtm);
       }
@@ -319,7 +310,7 @@ export default {
       this.$gtm.push({ event: 'buy_click', ...packagesByGtmKeys })
 
       if (Cookies.get('otonUser') === '527') {
-        this.$store.dispatch('buyPacketsForOton', dataForOton)
+        this.$store.dispatch('buyPacketsForOton', data)
       } else {
         this.$store.dispatch('buyPackets', data)
       }
