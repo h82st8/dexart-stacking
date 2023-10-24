@@ -58,6 +58,7 @@
             v-model="email"
             type="email"
             class="buttonContainer__itemBox"
+            disabled
             required
             :placeholder="$t('Ваш email')"
           />
@@ -188,7 +189,6 @@ export default {
 
   data() {
     return {
-      email: '',
       paymentMethods: ['Банковской картой', 'С криптокошелька'],
       showDropdown: false,
       chosenMethod: '',
@@ -212,6 +212,9 @@ export default {
     },
     isSalesClosed() {
       return this.errorMessage === 'Sales are closed';
+    },
+    email() {
+      return Cookies.get('accountEmail') || '';
     },
   },
   watch: {

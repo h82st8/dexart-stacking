@@ -17,6 +17,7 @@ export default {
 
   mounted() {
     Cookies.set('otonUser', 527);
+    Cookies.set('accountEmail', this.$route.query.email);
     window.location.assign('/');
   },
 };
