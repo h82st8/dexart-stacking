@@ -161,6 +161,7 @@
 <script>
 import { isEmpty } from 'rambda'
 import { mapState, mapGetters, mapMutations } from 'vuex'
+import Cookies from 'js-cookie';
 import CommonButton from './CommonButton.vue'
 import CommonLoader from './CommonLoader.vue'
 import {
