@@ -43,10 +43,7 @@ export default {
   methods: {
     beforeOpen() {
       if (Cookies.get('langBeforePurchase')) {
-        this.$router.push({
-          path: Cookies.get('langBeforePurchase') === 'ru' ? 'ru' : '',
-          query: this.$route.query,
-        });
+        this.$i18n.setLocale(Cookies.get('langBeforePurchase'));
         Cookies.remove('langBeforePurchase');
       }
     },
