@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+
 export default {
   name: "ModalPaymentFail",
 
@@ -34,6 +36,14 @@ export default {
           path: this.$route.path,
           query
         });
+      }
+    },
+  },
+  methods: {
+    beforeOpen() {
+      if (Cookies.get('langBeforePurchase')) {
+        this.$i18n.setLocale(Cookies.get('langBeforePurchase'));
+        Cookies.remove('langBeforePurchase');
       }
     },
   }
