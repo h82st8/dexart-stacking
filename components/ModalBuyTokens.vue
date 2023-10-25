@@ -309,6 +309,8 @@ export default {
 
       this.$gtm.push({ event: 'buy_click', ...packagesByGtmKeys })
 
+      Cookies.set('langBeforePurchase', this.$i18n.locale)
+
       if (Cookies.get('otonUser') === '527') {
         this.$store.dispatch('buyPacketsForOton', data)
       } else {

@@ -6,6 +6,7 @@
     content-class="modal-tokens-content"
     :click-to-close="true"
     :lock-scroll="false"
+    @before-open="beforeOpen()"
   >
   <div class="modalSuccess">
     <div class="modalSuccess__title">{{ $t('Вы успешно приобрели Energy Units!') }}</div>
@@ -20,6 +21,8 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+
 export default {
   name: "ModalPaymentSuccess",
 
@@ -36,6 +39,17 @@ export default {
         });
       }
     }
+  },
+  methods: {
+    beforeOpen() {
+      if (Cookies.get('langBeforePurchase')) {
+        this.$router.push({
+          path: Cookies.get('langBeforePurchase') === 'ru' ? 'ru' : '',
+          query: this.$route.query,
+        });
+        Cookies.remove('langBeforePurchase');
+      }
+    },
   }
 }
 </script>
