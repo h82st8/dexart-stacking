@@ -6,6 +6,7 @@
     content-class="modal-tokens-content"
     :click-to-close="true"
     :lock-scroll="false"
+    @before-open="beforeOpen()"
   >
   <div class="modalFail">
     <div class="modalFail__title">{{ $t('A payment error occurred') }}</div>
