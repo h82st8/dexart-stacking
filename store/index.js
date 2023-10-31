@@ -185,6 +185,51 @@ export const actions = {
     }
   },
 
+  async buyPacketsForOton({ commit, state, getters }, payload) {
+    if (getters.isPaymentBlocked) {
+      return
+    }
+
+    if (state.buyState === PENDING) {
+      return
+    }
+
+    try {
+      commit('SET_BUY_STATE', {state: PENDING})
+
+      const headers = {}
+
+      if (state.country === 'RU') {
+        headers['x-price-ru'] = true
+      }
+
+      const response = await this.$axios.$post(
+        `${STACKING_API_URL}/api/orders`,
+        { ...payload, ref: referral.get() },
+        { headers }
+      )
+      commit('SET_ERROR_MESSAGE', response.message);
+
+      if (response.data) {
+        if (response.data.link.includes('https')) {
+          // hach for Google Analutics
+          setTimeout(() => {
+            openMerchant(response)
+            commit('SET_BUY_STATE', {state: FULFILLED, data: response.data.link});
+          }, 500)
+        }
+        setTimeout(() => {
+          commit('SET_BUY_STATE', {state: FULFILLED, data: response.data.link});
+        }, 1000)
+      } else {
+        commit('SET_BUY_STATE', {state: REJECTED})
+      }
+    } catch (e) {
+      commit('SET_BUY_STATE', {state: REJECTED})
+      console.error(e)
+    }
+  },
+
   async checkUser({ commit }, email) {
     try {
       const response = await this.$axios.$get(

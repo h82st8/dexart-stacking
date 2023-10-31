@@ -58,6 +58,7 @@
             v-model="email"
             type="email"
             class="buttonContainer__itemBox"
+            disabled
             required
             :placeholder="$t('Ваш email')"
           />
@@ -161,6 +162,7 @@
 <script>
 import { isEmpty } from 'rambda'
 import { mapState, mapGetters, mapMutations } from 'vuex'
+import Cookies from 'js-cookie';
 import CommonButton from './CommonButton.vue'
 import CommonLoader from './CommonLoader.vue'
 import {
@@ -187,7 +189,6 @@ export default {
 
   data() {
     return {
-      email: '',
       paymentMethods: ['Банковской картой', 'С криптокошелька'],
       showDropdown: false,
       chosenMethod: '',
@@ -211,6 +212,9 @@ export default {
     },
     isSalesClosed() {
       return this.errorMessage === 'Sales are closed';
+    },
+    email() {
+      return Cookies.get('accountEmail') || '';
     },
   },
   watch: {
@@ -305,7 +309,13 @@ export default {
 
       this.$gtm.push({ event: 'buy_click', ...packagesByGtmKeys })
 
-      this.$store.dispatch('buyPackets', data)
+      Cookies.set('langBeforePurchase', this.$i18n.locale)
+
+      if (Cookies.get('otonUser') === '527') {
+        this.$store.dispatch('buyPacketsForOton', data)
+      } else {
+        this.$store.dispatch('buyPackets', data)
+      }
     },
   },
 }

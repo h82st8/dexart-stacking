@@ -16,7 +16,7 @@ export default {
   },
 
   mounted() {
-    Cookies.set('atonUser', 527, { expires: new Date(process.env.NUXT_ENV_DEADLINE) });
+    Cookies.set('otonUser', 527);
     Cookies.set('accountEmail', this.$route.query.email);
     window.location.assign('/');
   },

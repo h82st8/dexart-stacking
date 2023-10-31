@@ -6,6 +6,7 @@
     content-class="modal-tokens-content"
     :click-to-close="true"
     :lock-scroll="false"
+    @before-open="beforeOpen()"
   >
   <div class="modalFail">
     <div class="modalFail__title">{{ $t('A payment error occurred') }}</div>
@@ -20,6 +21,8 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+
 export default {
   name: "ModalPaymentFail",
 
@@ -34,6 +37,14 @@ export default {
           path: this.$route.path,
           query
         });
+      }
+    },
+  },
+  methods: {
+    beforeOpen() {
+      if (Cookies.get('langBeforePurchase')) {
+        this.$i18n.setLocale(Cookies.get('langBeforePurchase'));
+        Cookies.remove('langBeforePurchase');
       }
     },
   }
