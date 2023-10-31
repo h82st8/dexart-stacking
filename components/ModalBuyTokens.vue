@@ -97,8 +97,8 @@
             <div
               v-for="(item, i) in paymentMethods"
               :key="i"
-              class="buttonContainer__chosenMethod"
-              @click="changeChosenMethod(item)"
+              :class="['buttonContainer__chosenMethod', {buttonContainer__chosenMethod_disabled: i === 0 && isDisableOdb}]"
+              @click="changeChosenMethod(item, i)"
             >
               {{ $t(item) }}
             </div>
@@ -195,6 +195,7 @@ export default {
       acceptTermsAndConditions: false,
 
       hasError: false,
+      isDisableOdb: true,
     }
   },
 
@@ -246,9 +247,11 @@ export default {
       setLocStorUtm: 'SET_LOC_STOR_UTM',
       setBuyState: 'SET_BUY_STATE',
     }),
-    changeChosenMethod(method) {
-      this.chosenMethod = method
-      this.showDropdown = false
+    changeChosenMethod(method, i) {
+      if (i === 1 || (i === 0 && !this.isDisableOdb)) {
+        this.chosenMethod = method
+        this.showDropdown = false
+      }
     },
     dividingIntoDigits(count) {
       return String(count).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ')
@@ -516,6 +519,12 @@ export default {
     }
     &:last-child {
       border-radius: 0 0 32px 32px;
+    }
+    &_disabled {
+      cursor: default;
+      background: #57198A;
+      color: $colorBrand;
+      opacity: .4;
     }
   }
   &__accessTermsAndConditions {
