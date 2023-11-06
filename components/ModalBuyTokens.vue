@@ -315,6 +315,7 @@ export default {
       } else {
         this.$store.dispatch('buyPackets', data)
       }
+
     },
   },
 }
