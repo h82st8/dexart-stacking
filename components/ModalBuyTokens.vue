@@ -58,7 +58,6 @@
             v-model="email"
             type="email"
             class="buttonContainer__itemBox"
-            disabled
             required
             :placeholder="$t('Ваш email')"
           />
