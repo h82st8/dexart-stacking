@@ -159,7 +159,7 @@ export const actions = {
       }
 
       const response = await this.$axios.$post(
-        `${STACKING_API_URL}/api/orders/aton`,
+        `${STACKING_API_URL}/api/orders`,
         { ...payload, ref: referral.get() },
         { headers }
       )
