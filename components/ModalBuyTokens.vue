@@ -188,6 +188,7 @@ export default {
 
   data() {
     return {
+      email: Cookies.get('accountEmail'),
       paymentMethods: ['Банковской картой', 'С криптокошелька'],
       showDropdown: false,
       chosenMethod: '',
@@ -211,9 +212,6 @@ export default {
     },
     isSalesClosed() {
       return this.errorMessage === 'Sales are closed';
-    },
-    email() {
-      return Cookies.get('accountEmail') || '';
     },
   },
   watch: {

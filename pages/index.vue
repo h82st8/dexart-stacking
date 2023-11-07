@@ -136,6 +136,9 @@ export default {
     this.$store.dispatch('fetchPacketsList')
     this.$store.dispatch('fetchCountry')
     this.$store.dispatch('getRates')
+    if (this.$route.query.email) {
+      Cookies.set('accountEmail', this.$route.query.email);
+    }
     if (!localStorage.getItem('cookiesPolicies')) {
       this.cookiesModalIsOpen = true;
     };
