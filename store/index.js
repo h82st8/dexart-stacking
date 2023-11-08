@@ -1,4 +1,5 @@
 import { isEmpty } from 'rambda'
+import Cookies from 'js-cookie';
 import {
   FULFILLED,
   INIT,
@@ -140,7 +141,7 @@ export const actions = {
     }
   },
 
-  async buyPackets({ commit, state, getters }, payload, token) {
+  async buyPackets({ commit, state, getters }, payload) {
     if (getters.isPaymentBlocked) {
       return
     }
@@ -153,7 +154,7 @@ export const actions = {
       commit('SET_BUY_STATE', {state: PENDING})
 
       const headers = {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${Cookies.get('accountToken')}`,
       }
 
       if (state.country === 'RU') {

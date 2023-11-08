@@ -312,7 +312,7 @@ export default {
 
       Cookies.set('langBeforePurchase', this.$i18n.locale)
 
-      this.$store.dispatch('buyPackets', data, Cookies.get('accountToken'));
+      this.$store.dispatch('buyPackets', data);
 
     },
   },
