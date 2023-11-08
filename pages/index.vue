@@ -79,6 +79,7 @@ export default {
       cookiesModalIsOpen: false,
       timeToDeadline: -1,
       deadline: new Date(process.env.NUXT_ENV_DEADLINE).getTime(),
+      isShowBuyTokens: false,
     }
   },
 
@@ -131,7 +132,7 @@ export default {
       return Cookies.get('otonUser') === '527';
     },
     hasAccountToken() {
-      return Cookies.get('accountToken');
+      return Cookies.get('accountToken') || this.isShowBuyTokens;
     },
   },
 
@@ -144,6 +145,7 @@ export default {
     }
     if (this.$route.query.token) {
       Cookies.set('accountToken', this.$route.query.token);
+      this.isShowBuyTokens = true;
     }
     if (!localStorage.getItem('cookiesPolicies')) {
       this.cookiesModalIsOpen = true;
