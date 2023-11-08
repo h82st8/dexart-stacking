@@ -8,6 +8,7 @@
     :lock-scroll="false"
     @input="$emit('input', $event)"
     @closed="onClosed"
+    @opened="changeEmail()"
   >
     <div class="modalBuyTokens">
       <div class="modalBuyTokens__yourChoice">
@@ -193,7 +194,7 @@ export default {
 
   data() {
     return {
-      email: this.userEmail || Cookies.get('accountEmail'),
+      email: '',
       paymentMethods: ['Банковской картой', 'С криптокошелька'],
       showDropdown: false,
       chosenMethod: '',
@@ -266,6 +267,10 @@ export default {
     onClosed() {
       this.setBuyState({state: 'INIT'});
       this.paymentMethods = ['Банковской картой', 'С криптокошелька'];
+    },
+
+    changeEmail() {
+      this.email = this.userEmail || Cookies.get('accountEmail')
     },
 
     onBuy() {

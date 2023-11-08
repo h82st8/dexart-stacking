@@ -31,7 +31,7 @@
     <ModalBuyTokens
       v-model="buyTokensModalIsOpen"
       :packet="packet"
-      :userEmail="email"
+      :user-email="email"
       :filtered-packages="filteredPackages"
       :buy-tokens-modal-is-open="buyTokensModalIsOpen"
     />
