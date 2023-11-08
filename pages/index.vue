@@ -15,7 +15,7 @@
       </div>
     </div>
     <PackagesContainer
-      v-if="true"
+      v-if="hasAccountToken"
       id="indexPackagesBuy"
       :is-index-page="true"
       :packets="packets"

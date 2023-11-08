@@ -60,6 +60,7 @@
             class="buttonContainer__itemBox"
             required
             :placeholder="$t('Ваш email')"
+            :disabled="hasAccountToken"
           />
         </div>
         <div class="paymentMethodPicker">
@@ -212,6 +213,9 @@ export default {
     },
     isSalesClosed() {
       return this.errorMessage === 'Sales are closed';
+    },
+    hasAccountToken() {
+      return Cookies.get('accountToken');
     },
   },
   watch: {
