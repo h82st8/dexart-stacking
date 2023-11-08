@@ -140,7 +140,7 @@ export const actions = {
     }
   },
 
-  async buyPackets({ commit, state, getters }, payload) {
+  async buyPackets({ commit, state, getters }, payload, token) {
     if (getters.isPaymentBlocked) {
       return
     }
@@ -152,7 +152,9 @@ export const actions = {
     try {
       commit('SET_BUY_STATE', {state: PENDING})
 
-      const headers = {}
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      }
 
       if (state.country === 'RU') {
         headers['x-price-ru'] = true

@@ -130,6 +130,9 @@ export default {
     isOtonUser() {
       return Cookies.get('otonUser') === '527';
     },
+    hasAccountToken() {
+      return Cookies.get('accountToken');
+    },
   },
 
   mounted() {
@@ -138,6 +141,9 @@ export default {
     this.$store.dispatch('getRates')
     if (this.$route.query.email) {
       Cookies.set('accountEmail', this.$route.query.email);
+    }
+    if (this.$route.query.token) {
+      Cookies.set('accountToken', this.$route.query.token);
     }
     if (!localStorage.getItem('cookiesPolicies')) {
       this.cookiesModalIsOpen = true;

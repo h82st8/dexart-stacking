@@ -308,11 +308,7 @@ export default {
 
       Cookies.set('langBeforePurchase', this.$i18n.locale)
 
-      if (Cookies.get('otonUser') === '527') {
-        this.$store.dispatch('buyPacketsForOton', data)
-      } else {
-        this.$store.dispatch('buyPackets', data)
-      }
+      this.$store.dispatch('buyPackets', data, Cookies.get('accountToken'));
 
     },
   },
