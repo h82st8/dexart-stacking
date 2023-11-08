@@ -31,6 +31,7 @@
     <ModalBuyTokens
       v-model="buyTokensModalIsOpen"
       :packet="packet"
+      :userEmail="email"
       :filtered-packages="filteredPackages"
       :buy-tokens-modal-is-open="buyTokensModalIsOpen"
     />
@@ -80,6 +81,7 @@ export default {
       timeToDeadline: -1,
       deadline: new Date(process.env.NUXT_ENV_DEADLINE).getTime(),
       isShowBuyTokens: false,
+      email: '',
     }
   },
 
@@ -142,6 +144,7 @@ export default {
     this.$store.dispatch('getRates')
     if (this.$route.query.email) {
       Cookies.set('accountEmail', this.$route.query.email);
+      this.email = this.$route.query.email;
     }
     if (this.$route.query.token) {
       Cookies.set('accountToken', this.$route.query.token);

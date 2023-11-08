@@ -184,12 +184,16 @@ export default {
     packet: {
       type: Object,
       required: true
-    }
+    },
+    userEmail: {
+      type: String,
+      required: true,
+    },
   },
 
   data() {
     return {
-      email: Cookies.get('accountEmail'),
+      email: this.userEmail || Cookies.get('accountEmail'),
       paymentMethods: ['Банковской картой', 'С криптокошелька'],
       showDropdown: false,
       chosenMethod: '',
