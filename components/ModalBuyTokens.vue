@@ -8,6 +8,7 @@
     :lock-scroll="false"
     @input="$emit('input', $event)"
     @closed="onClosed"
+    @opened="changeEmail()"
   >
     <div class="modalBuyTokens">
       <div class="modalBuyTokens__yourChoice">
@@ -58,9 +59,9 @@
             v-model="email"
             type="email"
             class="buttonContainer__itemBox"
-            disabled
             required
             :placeholder="$t('Ваш email')"
+            :disabled="hasAccountToken"
           />
         </div>
         <div class="paymentMethodPicker">
@@ -184,11 +185,16 @@ export default {
     packet: {
       type: Object,
       required: true
-    }
+    },
+    userEmail: {
+      type: String,
+      required: true,
+    },
   },
 
   data() {
     return {
+      email: '',
       paymentMethods: ['Банковской картой', 'С криптокошелька'],
       showDropdown: false,
       chosenMethod: '',
@@ -214,8 +220,8 @@ export default {
     isSalesClosed() {
       return this.errorMessage === 'Sales are closed';
     },
-    email() {
-      return Cookies.get('accountEmail') || '';
+    hasAccountToken() {
+      return Cookies.get('accountToken');
     },
   },
   watch: {
@@ -266,6 +272,10 @@ export default {
       this.paymentMethods = ['Банковской картой', 'С криптокошелька'];
     },
 
+    changeEmail() {
+      this.email = this.userEmail || Cookies.get('accountEmail')
+    },
+
     onBuy() {
       this.$store.dispatch('checkUser', this.email);
 
@@ -276,7 +286,6 @@ export default {
       }
 
       const data = {
-        email: this.email,
         packages: this.filteredPackages.map((item) => ({
           id: item.id,
           count: item.count
@@ -314,11 +323,8 @@ export default {
 
       Cookies.set('langBeforePurchase', this.$i18n.locale)
 
-      if (Cookies.get('otonUser') === '527') {
-        this.$store.dispatch('buyPacketsForOton', data)
-      } else {
-        this.$store.dispatch('buyPackets', data)
-      }
+      this.$store.dispatch('buyPackets', data);
+
     },
   },
 }

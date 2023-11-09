@@ -15,7 +15,7 @@
       </div>
     </div>
     <PackagesContainer
-      v-if="(isAtonUser || isOtonUser)"
+      v-if="hasAccountToken"
       id="indexPackagesBuy"
       :is-index-page="true"
       :packets="packets"
@@ -31,6 +31,7 @@
     <ModalBuyTokens
       v-model="buyTokensModalIsOpen"
       :packet="packet"
+      :user-email="email"
       :filtered-packages="filteredPackages"
       :buy-tokens-modal-is-open="buyTokensModalIsOpen"
     />
@@ -79,6 +80,8 @@ export default {
       cookiesModalIsOpen: false,
       timeToDeadline: -1,
       deadline: new Date(process.env.NUXT_ENV_DEADLINE).getTime(),
+      isShowBuyTokens: false,
+      email: '',
     }
   },
 
@@ -130,12 +133,23 @@ export default {
     isOtonUser() {
       return Cookies.get('otonUser') === '527';
     },
+    hasAccountToken() {
+      return Cookies.get('accountToken') || this.isShowBuyTokens;
+    },
   },
 
   mounted() {
     this.$store.dispatch('fetchPacketsList')
     this.$store.dispatch('fetchCountry')
     this.$store.dispatch('getRates')
+    if (this.$route.query.email) {
+      Cookies.set('accountEmail', this.$route.query.email);
+      this.email = this.$route.query.email;
+    }
+    if (this.$route.query.token) {
+      Cookies.set('accountToken', this.$route.query.token);
+      this.isShowBuyTokens = true;
+    }
     if (!localStorage.getItem('cookiesPolicies')) {
       this.cookiesModalIsOpen = true;
     };

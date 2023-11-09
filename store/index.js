@@ -1,4 +1,5 @@
 import { isEmpty } from 'rambda'
+import Cookies from 'js-cookie';
 import {
   FULFILLED,
   INIT,
@@ -152,14 +153,16 @@ export const actions = {
     try {
       commit('SET_BUY_STATE', {state: PENDING})
 
-      const headers = {}
+      const headers = {
+        Authorization: `Bearer ${Cookies.get('accountToken')}`,
+      }
 
       if (state.country === 'RU') {
         headers['x-price-ru'] = true
       }
 
       const response = await this.$axios.$post(
-        `${STACKING_API_URL}/api/orders/aton`,
+        `${STACKING_API_URL}/api/orders`,
         { ...payload, ref: referral.get() },
         { headers }
       )
