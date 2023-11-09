@@ -283,7 +283,6 @@ export default {
       }
 
       const data = {
-        email: this.email,
         packages: this.filteredPackages.map((item) => ({
           id: item.id,
           count: item.count
