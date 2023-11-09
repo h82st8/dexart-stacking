@@ -9,17 +9,14 @@
     <div class="wrapper">
       <div class="modal__text">
         <div class="contentItem">
-          We use first and third party cookies on our platform (including
-          essential cookies, analytics cookies and user experience cookies). To
-          consent to these cookies for these purposes, please click Accept
-          Cookies.
+          {{ $t('cookies-text') }}
         </div>
       </div>
     </div>
 
     <the-button
       :cookiesBtn="true"
-      text="Accept Cookies"
+      :text="$t('Accept Cookies')"
       @click="$emit('closeCookiesModal')"
       class="modalClose"
     />
