@@ -15,7 +15,7 @@
       </div>
     </div>
     <PackagesContainer
-      v-if="hasAccountToken"
+      v-if="hasAccountToken || isShowBuyTokens"
       id="indexPackagesBuy"
       :is-index-page="true"
       :packets="packets"
@@ -36,7 +36,7 @@
       :buy-tokens-modal-is-open="buyTokensModalIsOpen"
     />
     <ModalCookies
-      :cookiesModalIsOpen="cookiesModalIsOpen"
+      :cookies-modal-is-open="cookiesModalIsOpen"
       @closeCookiesModal="closeCookiesModal"
     />
     <ModalPaymentSuccess />
@@ -82,6 +82,7 @@ export default {
       deadline: new Date(process.env.NUXT_ENV_DEADLINE).getTime(),
       isShowBuyTokens: false,
       email: '',
+      hasAccountToken: false,
     }
   },
 
@@ -133,9 +134,6 @@ export default {
     isOtonUser() {
       return Cookies.get('otonUser') === '527';
     },
-    hasAccountToken() {
-      return Cookies.get('accountToken') || this.isShowBuyTokens;
-    },
   },
 
   mounted() {
@@ -153,6 +151,9 @@ export default {
     if (!localStorage.getItem('cookiesPolicies')) {
       this.cookiesModalIsOpen = true;
     };
+    if (Cookies.get('accountToken')) {
+      this.hasAccountToken = Cookies.get('accountToken');
+    }
     this.timeToDeadline = this.deadline - new Date().getTime()
     setInterval(() => {
       this.timeToDeadline = this.deadline - new Date().getTime()
