@@ -58,7 +58,7 @@
           <input
             v-model="email"
             type="email"
-            class="buttonContainer__itemBox"
+            :class="['buttonContainer__itemBox', {buttonContainer__itemBox_disabled: hasAccountToken}]"
             required
             :placeholder="$t('Ваш email')"
             :disabled="hasAccountToken"
@@ -478,6 +478,12 @@ export default {
     }
     &:hover {
       background: linear-gradient(90deg, #7C1DD3 2.02%, #912EEF 49.93%, #EE40FF 96.86%);
+    }
+    &_disabled {
+      opacity: .8;
+      &:hover {
+        background: transparent;
+      }
     }
   }
   &__paymentMethod {
