@@ -34,6 +34,7 @@
       :user-email="email"
       :filtered-packages="filteredPackages"
       :buy-tokens-modal-is-open="buyTokensModalIsOpen"
+      :has-account-token="hasAccountToken"
     />
     <ModalCookies
       :cookies-modal-is-open="cookiesModalIsOpen"

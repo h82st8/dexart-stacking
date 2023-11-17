@@ -190,6 +190,11 @@ export default {
       type: String,
       required: true,
     },
+    hasAccountToken: {
+      type: Boolean || String,
+      required: true,
+      default: false,
+    },
   },
 
   data() {
@@ -199,7 +204,6 @@ export default {
       showDropdown: false,
       chosenMethod: '',
       acceptTermsAndConditions: false,
-      hasAccountToken: false,
       hasError: false,
     }
   },
@@ -242,9 +246,6 @@ export default {
     const locStorUtmQuery = LocalStorageUtm.get();
     if (locStorUtmQuery) {
       this.setLocStorUtm(routerUtmQuery);
-    }
-    if (Cookies.get('accountToken')) {
-      this.hasAccountToken = true;
     }
   },
   methods: {
