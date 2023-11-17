@@ -199,7 +199,7 @@ export default {
       showDropdown: false,
       chosenMethod: '',
       acceptTermsAndConditions: false,
-
+      hasAccountToken: false,
       hasError: false,
     }
   },
@@ -218,9 +218,6 @@ export default {
     },
     isSalesClosed() {
       return this.errorMessage === 'Sales are closed';
-    },
-    hasAccountToken() {
-      return Cookies.get('accountToken');
     },
   },
   watch: {
@@ -245,6 +242,9 @@ export default {
     const locStorUtmQuery = LocalStorageUtm.get();
     if (locStorUtmQuery) {
       this.setLocStorUtm(routerUtmQuery);
+    }
+    if (Cookies.get('accountToken')) {
+      this.hasAccountToken = true;
     }
   },
   methods: {
