@@ -190,6 +190,11 @@ export default {
       type: String,
       required: true,
     },
+    hasAccountToken: {
+      type: Boolean || String,
+      required: true,
+      default: false,
+    },
   },
 
   data() {
@@ -199,7 +204,6 @@ export default {
       showDropdown: false,
       chosenMethod: '',
       acceptTermsAndConditions: false,
-
       hasError: false,
       isDisableOdb: true,
     }
@@ -219,9 +223,6 @@ export default {
     },
     isSalesClosed() {
       return this.errorMessage === 'Sales are closed';
-    },
-    hasAccountToken() {
-      return Cookies.get('accountToken');
     },
   },
   watch: {
